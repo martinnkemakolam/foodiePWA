@@ -1,0 +1,207 @@
+:root{
+    --white: #fff;
+    --light-white: #ccc;
+    --button: #9cf;
+    --text-H1: #333;
+    --text-p: #444;
+
+}
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+section{
+    width: 100%;
+    height: fit-content;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 10px 40px; 
+    background-color: var(--white);
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header h1{
+    font-size: 40px;
+    color: var(--text-H1);
+    text-shadow: green -2px red 2px;
+    font-weight: 900;
+    width: 200px;
+    text-align: center;
+}
+header a{
+    padding: 5px;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 500;
+    background-color: var(--button);
+}
+.categoryBody{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    align-content: center;
+}
+.categoryBody .category{
+    width: 100px;
+    height: 150px;
+    border-radius: 20px;
+    background-color: var(--light-white);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+.category img{
+    width: 100%;
+    height: 60%;
+    border-radius: 20px;
+}
+.category p{
+    color: var(--text-p);
+    margin: 0;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.foodContainer{
+    margin-top: 50px;
+}
+.foodContainer h2{
+    text-transform: capitalize;
+    font-size: 35px;
+    font-weight: 500;
+    color: var(--text-H1);
+}
+.foodGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 40px;
+}
+.foodGrid .food{
+    background-color: var(--food-color);
+    display: flex;
+    flex-direction: column;
+    background-color: #eee;
+    padding: 20px;
+    border-radius: 20px;
+    gap: 20px;
+}
+.food img{
+    width: 100%;
+    border-radius: 20px;
+    align-self: center;
+}
+.food h3{
+    font-size: 30px;
+    margin: 0;
+}
+.food p{
+    font-size: 15px;
+    margin: 0;
+    font-weight: 300;
+}
+.btnHold{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btnHold p{
+    font-size: 25px;
+    margin: 0;
+    font-weight: 700;
+    color: var(--text-p);
+}
+.btnHold button, .cart, .total button{
+    background-color: var(--button);
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+.myCart{
+    background-color: var(--button);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+.shoppingCart{
+    width: 700px;
+    height: fit-content;
+    display: grid;
+    padding: 20px;
+    gap: 30px;
+    background-color: white;
+    border-radius: 20px;
+}
+.shoppingCart .head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.head h1{
+    font-size: 20px;
+    color: var(--text-H1);
+    font-weight: 500;
+}
+.shoppingCart .head button{
+    color: red;
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    outline: none;
+}
+.shoppingCart .body{
+    display: grid;
+}
+.body.remove{
+    position: absolute;
+    left: 100%;
+    transition: all 300ms ;
+}
+.body .obj{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+}
+.obj h1{
+    font-size: 35px;
+    font-weight: 900;
+    color: var(--text-H1);
+}
+.obj p{
+    font-size: 25px;
+    font-weight: 900;
+}
+.obj img{
+    width: 20%;
+}
+.shoppingCart .total{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-self: end;
+}
+.total h2{
+    margin: 0;
+}
+.total p{
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+}
