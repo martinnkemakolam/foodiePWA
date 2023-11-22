@@ -6,14 +6,39 @@ let last = document.querySelector('.shoppingCart')
 let removeAll = document.querySelector('.head button')
 let restImg = document.querySelector('.rest')
 let cartIcon = document.querySelector('.cart')
-let cartRemove = document.querySelector('.icon')
+let cartRemove = document.querySelectorAll('.icon')
 let myCart = document.querySelector('.myCart')
-cartIcon.onclick=()=>{
+let checkoutBtn = document.querySelector('#checkout')
+let orderPage = document.querySelector('.order')
+let showCart = ()=>{
     myCart.classList.remove('left')
 }
-cartRemove.onclick=()=>{
+let removeCart = ()=>{
     myCart.classList.add('left')
 }
+let showForm = ()=>{
+    orderPage.classList.add('show')
+}
+let removeForm = ()=>{
+    orderPage.classList.remove('show')
+}
+
+
+cartIcon.onclick = showCart
+cartRemove.forEach((ele)=>{
+    ele.onclick =()=>{
+        removeForm()
+        removeCart()
+    }
+})
+
+checkoutBtn.onclick =()=>{
+    showForm() 
+    removeCart()
+}
+
+
+
 cartAdder.forEach((btn)=>{
         btn.onclick=(e)=>{
         restImg.classList.add('remove')
@@ -41,9 +66,14 @@ cartAdder.forEach((btn)=>{
     }
 })
 
+
+
+
 function htmlMaker(dataArg) {
     let arr = []
-    data.forEach((object, id)=>{
+
+
+    dataArg.forEach((object, id)=>{
         let body = document.createElement('div')
         body.classList.add('body')
         let obj = document.createElement('div')
@@ -123,7 +153,7 @@ function htmlMaker(dataArg) {
         body.appendChild(obj)
         arr.push(body)
     })
-    console.log(arr.length)
+    
     return arr
 }
 
@@ -144,7 +174,6 @@ function removeData(arg) {
     }
     console.log(data)
 }
-
 function totalFunc() {
     let finalP = 0
     data.forEach((obj)=>{

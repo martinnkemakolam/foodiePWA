@@ -106,11 +106,67 @@
             <div class="total">
                 <h2>total</h2>
                 <p>$0</p>
-                <button>checkout</button>
+                <button id="checkout">checkout</button>
             </div>
         </div>
     </section>
     <section class="order">
+        <img src="./images/images.png" class="icon" alt="">
+        <form>
+            <h1>
+                Fill out this form
+            </h1>
+            <p>
+                The details in this form should be accurate and to be somewhere where you currently reside in order to let our oders reach you in good time.
+            </p>
+            <div>
+                <label for="">
+                    Enter address
+                </label>
+                <input type="text" name="address" placeholder="enter your address"/>
+            </div>
+            <div>
+                <label for="">
+                    Enter city
+                </label>
+                <input type="text" name="address" placeholder="enter your city"/>
+            </div>
+            <div>
+               <label for="">
+                    Enter state
+               </label>
+               <input type="text" name="address" placeholder="enter your state"/> 
+            </div>
+            <div>
+                <label for="">
+                    Enter phone number
+                </label>
+                <input type="text" name="address" placeholder="number"/>
+            </div>
+            <div>
+                <label for="">
+                    Enter your name
+                </label>
+                <input type="text" name="address" placeholder="name"/>
+            </div>
+            <button class="submit">Submit</button>
+        </form>
+    </section>
+    <section class="pending">
+        <div class="pendingHead">
+            <h1>Pending Orders</h1>
+        </div>
+        <div class="pendingBody">
+            <div class="rest">
+                <img src="./images/no food.png" alt="">
+            </div>
+            <template class="pend">
+                <h1>Food/Drink name</h1>
+                <h1>Food/Drink name</h1>
+                <h1>Food/Drink name</h1>
+                <P>cash: $20</P>
+            </template>
+        </div>
     </section>
     <script type="module" src="script.js">
     </script>
