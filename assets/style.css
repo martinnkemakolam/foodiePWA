@@ -15,7 +15,7 @@ section{
     width: 100%;
     height: fit-content;
     box-sizing: border-box;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 10px 40px; 
     background-color: var(--white);
 }
@@ -23,6 +23,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: white;
 }
 header h1{
     font-size: 40px;
@@ -210,7 +211,7 @@ header a{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 400px;
+    max-width: 400px;
     margin: 0 auto;
 }
 .rest.remove{
@@ -301,4 +302,50 @@ label{
 }
 .pending{
     margin-top: 50px
+}
+.scroll{
+    width: 100%;
+    overflow-y: auto;
+}
+@media (max-width: 800px) {
+    section{
+        padding: 0;
+    }
+    header{
+        position: sticky;
+        padding: 0 30px;
+        top: 0px;
+        box-shadow: 0px 10px 50px black;
+    }
+    header h1{
+        font-size: 30px;
+    }
+    .foodContainer{
+        padding: 30px;
+    }
+    .categoryBody{
+        margin-top: 30px;
+    }
+    .foodGrid{
+        grid-template-columns: 1fr;
+    }
+
+    .myCart{
+        padding: 0;
+    }
+    .shoppingCart{
+        height: 100%;
+        overflow: auto;
+    }
+    .icon{
+        width: 30px;
+        height: 30px;
+        top: 50px;
+    }
+    .obj h1, .obj p{
+        font-size: 20px;
+    }
+    .order form{
+        width: fit-content;
+    }
 }
