@@ -10,6 +10,9 @@ let cartRemove = document.querySelectorAll('.icon')
 let myCart = document.querySelector('.myCart')
 let checkoutBtn = document.querySelector('#checkout')
 let orderPage = document.querySelector('.order')
+let SW = await navigator.serviceWorker.register('/sw.js')
+
+
 let showCart = ()=>{
     myCart.classList.remove('left')
 }
@@ -157,6 +160,7 @@ function htmlMaker(dataArg) {
     return arr
 }
 
+
 function removeData(arg) {
     console.log(arg)
     last.children[last.children.length - 3].remove()
@@ -174,6 +178,8 @@ function removeData(arg) {
     }
     console.log(data)
 }
+
+
 function totalFunc() {
     let finalP = 0
     data.forEach((obj)=>{
@@ -181,6 +187,8 @@ function totalFunc() {
     })
     return finalP
 }
+
+
 
 removeAll.onclick=()=>{
     if (data.length > 0) {
@@ -190,3 +198,4 @@ removeAll.onclick=()=>{
     restImg.classList.remove('remove')   
     }
 }
+
