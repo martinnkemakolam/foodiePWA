@@ -11,7 +11,7 @@ let myCart = document.querySelector('.myCart')
 let checkoutBtn = document.querySelector('#checkout')
 let orderPage = document.querySelector('.order')
 let installBtn = document.querySelector('#install')
-let SW = await navigator.serviceWorker.register('/sw.js')
+let SW = await navigator.serviceWorker.register('sw.js')
 let promptObj;
 
 let showCart = ()=>{
