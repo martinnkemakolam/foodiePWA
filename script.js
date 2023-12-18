@@ -10,6 +10,7 @@ let cartRemove = document.querySelectorAll('.icon')
 let myCart = document.querySelector('.myCart')
 let checkoutBtn = document.querySelector('#checkout')
 let orderPage = document.querySelector('.order')
+let installBtn = document.querySelector('#install')
 let SW = await navigator.serviceWorker.register('/sw.js')
 let promptObj;
 
@@ -199,12 +200,25 @@ removeAll.onclick=()=>{
     }
 }
 
-
-
-beforeinstall=(e)=>{
-    e.preventDefault()
-    console.log('called', e)
+let showFooter = (hide)=>{
+    let footer = document.querySelector('footer')
+    footer.style.display = hide ? 'flex' : 'none'
 }
-addEventListener('beforeinstall', (e)=>{
-    console.log('called', e)
+window.addEventListener('beforeinstallprompt', (e)=>{
+    console.log(e)
+    e.preventDefault()
+    promptObj = e
+    showFooter(true)
 })
+// window.onbeforeinstallprompt=(e)=>{
+//     e.preventDefault()
+//     console.log('called', e)
+// }
+// window.addEventListener('beforeinstallprompt', (e)=>{
+//     // console.log('called', e)
+//     promptObj = e
+// })
+
+installBtn.onclick=()=>{
+    console.log('this is', promptObj)
+}
