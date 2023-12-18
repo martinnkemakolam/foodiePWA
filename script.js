@@ -11,7 +11,7 @@ let myCart = document.querySelector('.myCart')
 let checkoutBtn = document.querySelector('#checkout')
 let orderPage = document.querySelector('.order')
 let SW = await navigator.serviceWorker.register('/sw.js')
-
+let promptObj;
 
 let showCart = ()=>{
     myCart.classList.remove('left')
@@ -199,3 +199,12 @@ removeAll.onclick=()=>{
     }
 }
 
+
+
+beforeinstall=(e)=>{
+    e.preventDefault()
+    console.log('called', e)
+}
+addEventListener('beforeinstall', (e)=>{
+    console.log('called', e)
+})
