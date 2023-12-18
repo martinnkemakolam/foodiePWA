@@ -1,7 +1,7 @@
 {
     "name": "food app",
     "short_name": "foodapp",
-    "start_url": "/index.html",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#234fff",
     "theme_color": "#123dee",
@@ -9,12 +9,12 @@
     "orientation": "portrait-primary",
     "icons": [
         {
-          "src": "/images/burger1.png",
+          "src": "./images/burger1.png",
           "sizes": "144x144",
           "type": "image/png"
         },
         {
-          "src": "/images/burger2.png",
+          "src": "./images/burger2.png",
           "sizes": "192x192",
           "type": "image/png"
         }
