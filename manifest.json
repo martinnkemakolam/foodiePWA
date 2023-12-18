@@ -9,8 +9,8 @@
     "orientation": "portrait-primary",
     "icons": [
         {
-          "src": "images/burger.jpg",
-          "sizes": "192x192",
+          "src": "/images/burger.jpg",
+          "sizes": "2532x1688",
           "type": "image/jpg"
         }
       ]
