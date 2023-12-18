@@ -1,5 +1,5 @@
 // let cache = await caches.open('cache1')
-let arrOfRequest = ['index.html', 'script.js', 'manifest.js', '/assets/style.css', '/images/burger.jpg', '/images/images.jpg', '/images/no food.png']
+let arrOfRequest = ['index.html', 'script.js', 'manifest.js', '/images/burger.jpg', '/images/images.jpg', '/images/no food.png']
 let fetchStrategy = async(reqString)=>{
     let cache = await caches.open('cache1')
     let cacheRes = await cache.match(reqString) 
