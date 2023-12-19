@@ -219,6 +219,8 @@ window.addEventListener('beforeinstallprompt', (e)=>{
 //     promptObj = e
 // })
 
-installBtn.onclick=()=>{
-    console.log('this is', promptObj)
+installBtn.onclick= async()=>{
+    promptObj.prompt()
+    let userChoice = await promptObj.userChoice
+    userChoice.outcome === "dismissed" ? showFooter(true) : showFooter(false)
 }
