@@ -11,6 +11,7 @@ let myCart = document.querySelector('.myCart')
 let checkoutBtn = document.querySelector('#checkout')
 let orderPage = document.querySelector('.order')
 let installBtn = document.querySelector('#install')
+let menuBtn = document.querySelectorAll('.category')
 let SW = await navigator.serviceWorker.register('sw.js')
 let promptObj;
 
@@ -29,10 +30,25 @@ let removeForm = ()=>{
 
 
 cartIcon.onclick = showCart
+
+
 cartRemove.forEach((ele)=>{
     ele.onclick =()=>{
         removeForm()
         removeCart()
+    }
+})
+
+
+menuBtn.forEach((ele)=>{
+    ele.onclick =()=>{
+        let title = document.querySelector('.foodContainer h2')
+        let paragarph = document.querySelector('.foodContainer p')
+        // change paragraph text
+        menuBtn.forEach(ele => ele.classList.remove('active'))
+        ele.classList.add('active')
+        title.textContent = ele.querySelector('p').textContent
+
     }
 })
 
@@ -224,3 +240,61 @@ installBtn.onclick= async()=>{
     let userChoice = await promptObj.userChoice
     userChoice.outcome === "dismissed" ? showFooter(true) : showFooter(false)
 }
+
+class foodList extends HTMLElement {
+    constructor() {
+        // Always call super first in constructor
+        super();
+      }
+    static observedAttributes = ['name', 'description', 'price']
+    
+    name = ''
+    description = ''
+    price = ''
+
+    attributeChangedCallback(nameChg, oldVal, newVal){
+        this[nameChg] = newVal
+    }
+
+    connectedCallback(){
+        let root = this.attachShadow({mode: "open"})
+        root.innerHTML = `
+                <style>
+                    .food{
+                        background-color: var(--food-color);
+                        display: flex;
+                        flex-direction: column;
+                        background-color: #eee;
+                        padding: 20px;
+                        border-radius: 20px;
+                        gap: 20px;
+                    }
+                    .food img{
+                        width: 100%;
+                        border-radius: 20px;
+                        align-self: center;
+                    }
+                    .food h3{
+                        font-size: 30px;
+                        margin: 0;
+                    }
+                    .food p{
+                        font-size: 15px;
+                        margin: 0;
+                        font-weight: 300;
+                    }
+                </style>
+                <div class="food">
+                    <img src="./images/burger.jpg" alt="">
+                    <h3>${this.name}</h3>
+                    <p>${this.description}</p>
+                    <div class="btnHold">
+                        <p>$${this.price}</p>
+                        <button class="btn">Add to cart</button>
+                    </div>
+                </div>
+        `
+    }
+}
+// foodListElement.prototype = HTMLElement
+customElements.define('food-list', foodList)

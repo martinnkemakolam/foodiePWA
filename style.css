@@ -319,11 +319,17 @@ footer{
     display: none;
     justify-content: space-between;
 }
+.category.active{
+    scale: 0.9;
+    border: 1px solid #333;
+    /* opacity: 0.7; */
+}
 @media (max-width: 800px) {
     section{
         padding: 0;
     }
     header{
+        z-index: 1;
         position: sticky;
         padding: 0 30px;
         top: 0px;
