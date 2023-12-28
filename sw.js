@@ -3,13 +3,23 @@ let arrOfRequest = ['index.html', 'script.js', 'style.css', '/images/burger.jpg'
 let fetchStrategy = async(reqString)=>{
 
     let cache = await caches.open('cache1')
-    let cacheRes = await cache.match(reqString)
+    let cacheRes = await cache.match(reqString, {
+        ignoreSearch: true
+    })
     if (cacheRes) {
-        let newData = await fetch(reqString)
+        let newData = await fetch(reqString.clone())
         cache.put(reqString, newData.clone())
+        return cacheRes 
     }
+    let reqToCache = reqString.clone()
+    let data = await fetch(reqToCache)
+    if (data.status === 200) {
+        cache.put(reqToCache, data.clone())
+        // return data
+    }
+    return data
     // console.log(cacheRes)
-    return cacheRes || fetch(reqString)
+    // return fetch(reqString)
 }
 
 oninstall=(evt)=>{
