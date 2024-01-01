@@ -12,7 +12,20 @@ let checkoutBtn = document.querySelector('#checkout')
 let orderPage = document.querySelector('.order')
 let installBtn = document.querySelector('#install')
 let menuBtn = document.querySelectorAll('.category')
-let SW = await navigator.serviceWorker.register('sw.js')
+
+navigator.serviceWorker.register('sw.js')
+
+// setting up push notification
+
+
+// let subcription = await SW.pushManager.getSubscription()
+// if (!subcription) {
+//     SW.pushManager.subscribe({
+//         userVisibleOnly: true,
+//         applicationServerKey: ''
+//     })
+// }
+
 let promptObj;
 
 let showCart = ()=>{

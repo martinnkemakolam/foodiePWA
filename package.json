@@ -1,0 +1,23 @@
+{
+  "name": "foodiepwa",
+  "version": "1.0.0",
+  "description": "A PWA for selling food online",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martinnkemakolam/foodiePWA.git"
+  },
+  "author": "Onwukaike Martin Nkemakolam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martinnkemakolam/foodiePWA/issues"
+  },
+  "homepage": "https://github.com/martinnkemakolam/foodiePWA#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "web-push": "^3.6.6"
+  }
+}
