@@ -1,10 +1,12 @@
 // const { response } = require("express");
 
 // let cache = await caches.open('cache1')
-let arrOfRequest = ['index.html', 'script.js', 'style.css', 'sw.js', 'manifest.json', '/images/burger1.png', '/images/burger2.png','/images/burger.jpg', '/images/images.png','/images/no food.png']
+let arrOfRequest = ['/','index.html', 'script.js', 'style.css', 'sw.js', 'manifest.json', '/images/burger1.png', '/images/burger2.png','/images/burger.jpg', '/images/images.png','/images/no food.png']
 let fetchStrategy = async(reqString)=>{
     let openCache = await caches.open('cache1')
-    let matchedCache = await openCache.match(reqString.clone());
+    let matchedCache = await openCache.match(reqString.clone(), {
+        ignoreSearch: true
+    });
     try {
         // let data = await fetch(reqString.clone());
         // if (matchedCache) {
@@ -58,6 +60,14 @@ onactive=(evt)=>{
     self.clients.claim();
 }
 
+onsync=(evt)=>{
+    if(evt.tag === 'place-order'){
+        evt.waitUntil(
+            fetch('/images/burger1.png')
+        )
+    }
+}
+ 
 onfetch= async(evt)=>{
     let req = evt.request
     // let cacheResult = await cache.match(req)

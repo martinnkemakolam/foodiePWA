@@ -1,7 +1,7 @@
 {
     "name": "food app",
     "short_name": "foodapp",
-    "start_url": "/foodiePWA/index.html",
+    "start_url": "./",
     "display": "standalone",
     "background_color": "#234fff",
     "theme_color": "#123dee",

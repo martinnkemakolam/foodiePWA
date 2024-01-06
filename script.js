@@ -12,8 +12,28 @@ let checkoutBtn = document.querySelector('#checkout')
 let orderPage = document.querySelector('.order')
 let installBtn = document.querySelector('#install')
 let menuBtn = document.querySelectorAll('.category')
-
+let submit = document.querySelector('#submit')
+let db = indexedDB.open('syncDatabase')
+db.onupgradeneeded =(e)=>{
+    db.result.createObjectStore('payloads')
+}
 navigator.serviceWorker.register('sw.js')
+.then((sw)=>{
+    if(sw.active = true){
+        submit.onclick=()=>{
+            sw.sync.register('place-order').then(()=>{
+                let payload = {
+                    address: '',
+                    city: '',
+                    state: '',
+                    number: '',
+                    name: '',
+                }
+                localStorage.setItem('place-order', JSON.stringify(payload))
+            })
+        }
+    }
+})
 
 // setting up push notification
 
