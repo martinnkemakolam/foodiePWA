@@ -16,7 +16,7 @@ let fetchStrategy = async(reqString)=>{
 
 
 
-        let cache = await caches.open('cache1')
+        let cache = await caches.open('cache2')
         let cacheRes = await cache.match(reqString, {
             ignoreSearch: true
         })
@@ -49,7 +49,7 @@ let fetchStrategy = async(reqString)=>{
 oninstall=(evt)=>{
     evt.waitUntil(
         (async()=>{
-            let cache = await caches.open('cache1')
+            let cache = await caches.open('cache2')
             return cache.addAll(arrOfRequest)
         })()// setTimeout(()=> console.log('called'), 4000)
     )
