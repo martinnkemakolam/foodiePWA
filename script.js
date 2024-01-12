@@ -17,7 +17,7 @@ let db = indexedDB.open('syncDatabase')
 db.onupgradeneeded =(e)=>{
     db.result.createObjectStore('payloads')
 }
-navigator.serviceWorker.register('sw.js')
+navigator.serviceWorker.register('sw1.js')
 .then((sw)=>{
     if(sw.active = true){
         submit.onclick=()=>{
