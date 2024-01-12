@@ -3,7 +3,7 @@
 // let cache = await caches.open('cache1')
 let arrOfRequest = ['/','index.html', 'script.js', 'style.css', 'sw.js', 'manifest.json', '/images/burger1.png', '/images/burger2.png','/images/burger.jpg', '/images/images.png','/images/no food.png']
 let fetchStrategy = async(reqString)=>{
-    let openCache = await caches.open('cache1')
+    let openCache = await caches.open('cache2')
     let matchedCache = await openCache.match(reqString.clone(), {
         ignoreSearch: true
     });
@@ -57,6 +57,9 @@ oninstall=(evt)=>{
 }
 
 onactive=(evt)=>{
+    // evt.waitUntil(
+    //     caches.open('cache1').then(cache => cache.)
+    // )
     self.clients.claim();
 }
 
