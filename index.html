@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="/images/burger.jpg">
+    <link rel="import" href="./webComponent.html">
 </head>
 <body>
     <section>
@@ -96,6 +97,10 @@
                         <button class="btn">Add to cart</button>
                     </div>
                 </div>
+                <!-- <cart-list count="0" name="a random name" price="$10"></cart-list> -->
+                <!-- <menu-item>
+                    <b class="name">Burger</b>
+                </menu-item> -->
             </div>
         </div>
         <!-- <food-list name="burger" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="10">
@@ -176,6 +181,40 @@
             </template>
         </div>
     </section>
+    <template id="cartList">
+        <style>
+            .obj{
+                width: 100%;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;   
+            }
+            .obj img{
+                width: 50px;
+                height: 40px;
+            }
+            .obj h1{
+                font-size: 35px;
+                font-weight: 900;
+                color: var(--text-H1);
+            }
+            .obj p{
+                font-size: 25px;
+                font-weight: 900;
+            }
+        </style>
+        <div class="obj">
+            <img src="http://127.0.0.1:5500/images/burger.jpg">
+            <h1 id="name">...</h1>
+            <div class="quantity">
+                <button id="addBtn">+</button>
+                <span id="count">0</span>
+                <button id="removeBtn">-</button>
+            </div>
+            <p id="price">0</p>
+        </div>
+    </template>
     <script  src="script.js">
     </script>
 </body>

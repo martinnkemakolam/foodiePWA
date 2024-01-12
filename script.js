@@ -90,11 +90,9 @@ checkoutBtn.onclick =()=>{
     removeCart()
 }
 
-
-
-cartAdder.forEach((btn)=>{
-        btn.onclick=(e)=>{
-        restImg.classList.add('remove')
+function addToCart(e) {
+    console.log('called')
+    restImg.classList.add('remove')
         console.log('added')
         if (data.length > 0) {
             last.children[last.children.length - 3].remove()
@@ -116,6 +114,11 @@ cartAdder.forEach((btn)=>{
         cartBody.insertAdjacentElement('afterend', newCart)
         total.innerHTML = `$${totalFunc()}` 
         console.log(data)
+}
+
+cartAdder.forEach((btn)=>{
+        btn.onclick=(e)=>{
+        addToCart(e)
     }
 })
 
@@ -329,5 +332,73 @@ class foodList extends HTMLElement {
         `
     }
 }
-// foodListElement.prototype = HTMLElement
+
+class cartList extends HTMLElement {
+    constructor(){
+        super()
+    }
+    static observedAttributes = ['name', 'price', 'count']
+    name = ''
+    price = ''
+    count = '0'
+    imgSrc = ''
+    value = ''
+    elementId = ''
+    attributeChangedCallback(name, oldValue, newValue) {
+        this[name] = newValue
+        this.reRender()
+    }
+    shadow = this.attachShadow({mode: 'open'})
+    cartListTmplate = document.querySelector('#cartList').content
+    cartListNode = this.cartListTmplate.cloneNode(true)
+    connectedCallback(){
+        
+        this.cartListNode.querySelector('#count').innerHTML = this.count
+        this.cartListNode.querySelector('#name').innerHTML = this.name
+        this.cartListNode.querySelector('#count').innerHTML = this.price
+        this.cartListNode.querySelector('#addBtn').onclick =()=>{
+            console.log('called')
+            data = data.map((obj, objID)=>{
+                if (objID === this.elementId) {
+                    return {
+                        price: obj.price,
+                        name: obj.name,
+                        imgSrc: obj.imgSrc,
+                        value: obj.value + 1
+                    }
+                }else{
+                    return obj
+                }
+            })
+            this.setAttribute('count', + this.count + 1)
+        }
+        this.cartListNode.querySelector('#removeBtn').onclick =()=>{
+            console.log('called 2')
+            data = data.map((obj, objID)=>{
+                if (objID === this.elementId) {
+                    return {
+                        price: obj.price,
+                        name: obj.name,
+                        imgSrc: obj.imgSrc,
+                        value: obj.value - 1
+                    }
+                }else{
+                    return obj
+                }
+            })
+            this.setAttribute('count', +this.count - 1)
+        }
+        this.shadow.appendChild(this.cartListNode)
+        // console.log(this.querySelector('#addBtn'))
+    }
+    reRender(){
+        if (this.shadowRoot.children.length > 0) {
+            this.shadowRoot.querySelector('#count').innerHTML = this.count
+            this.shadowRoot.querySelector('#price').innerHTML = this.count * this.price
+            this.shadowRoot.querySelector('#count').innerHTML = data[0].name   
+        }
+    }
+}
+
+customElements.define('cart-list', cartList)
 customElements.define('food-list', foodList)
