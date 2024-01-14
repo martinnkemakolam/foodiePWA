@@ -88,23 +88,14 @@
                         <button class="btn">Add to cart</button>
                     </div>
                 </div>
-                <div class="food">
-                    <img src="./images/burger.jpg" alt="">
-                    <h3>coco candy 6</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.</p>
-                    <div class="btnHold">
-                        <p>$15</p>
-                        <button class="btn">Add to cart</button>
-                    </div>
-                </div>
+                <food-list name="burger" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="10">
+                </food-list>
                 <!-- <cart-list count="0" name="a random name" price="$10"></cart-list> -->
                 <!-- <menu-item>
                     <b class="name">Burger</b>
                 </menu-item> -->
             </div>
         </div>
-        <!-- <food-list name="burger" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="10">
-        </food-list> -->
     </section>
     <section class="myCart left">
         <img src="./images/images.png" class="icon" alt="">
@@ -213,6 +204,42 @@
                 <button id="removeBtn">-</button>
             </div>
             <p id="price">0</p>
+        </div>
+    </template>
+    <template id="foodList">
+        <style>
+            .food{
+                background-color: var(--food-color);
+                display: flex;
+                flex-direction: column;
+                background-color: #eee;
+                padding: 20px;
+                border-radius: 20px;
+                gap: 20px;
+            }
+            .food img{
+                width: 100%;
+                border-radius: 20px;
+                align-self: center;
+            }
+            .food h3{
+                font-size: 30px;
+                margin: 0;
+            }
+            .food p{
+                font-size: 15px;
+                margin: 0;
+                font-weight: 300;
+            }
+        </style>
+        <div class="food">
+            <img id="imgSrc" src="" alt="">
+            <h3 id="name"></h3>
+            <p id="description"></p>
+            <div class="btnHold">
+                <p id="price"></p>
+                <button id="addBtn" class="btn">Add to cart</button>
+            </div>
         </div>
     </template>
     <script  src="script.js">

@@ -112,7 +112,7 @@ function addToCart(e) {
             newCart.appendChild(node)
         })
         cartBody.insertAdjacentElement('afterend', newCart)
-        total.innerHTML = `$${totalFunc()}` 
+        total.innerHTML = `$${totalFunc()}`
         console.log(data)
 }
 
@@ -282,54 +282,39 @@ class foodList extends HTMLElement {
         // Always call super first in constructor
         super();
       }
-    static observedAttributes = ['name', 'description', 'price']
+    static observedAttributes = ['name', 'description', 'price', 'img']
     
     name = ''
     description = ''
     price = ''
+    img = ''
 
     attributeChangedCallback(nameChg, oldVal, newVal){
         this[nameChg] = newVal
+        console.log(this[nameChg])
     }
 
     connectedCallback(){
         let root = this.attachShadow({mode: "open"})
-        root.innerHTML = `
-                <style>
-                    .food{
-                        background-color: var(--food-color);
-                        display: flex;
-                        flex-direction: column;
-                        background-color: #eee;
-                        padding: 20px;
-                        border-radius: 20px;
-                        gap: 20px;
-                    }
-                    .food img{
-                        width: 100%;
-                        border-radius: 20px;
-                        align-self: center;
-                    }
-                    .food h3{
-                        font-size: 30px;
-                        margin: 0;
-                    }
-                    .food p{
-                        font-size: 15px;
-                        margin: 0;
-                        font-weight: 300;
-                    }
-                </style>
-                <div class="food">
-                    <img src="./images/burger.jpg" alt="">
-                    <h3>${this.name}</h3>
-                    <p>${this.description}</p>
-                    <div class="btnHold">
-                        <p>$${this.price}</p>
-                        <button class="btn">Add to cart</button>
-                    </div>
-                </div>
-        `
+        let template = document.querySelector('#foodList').content
+        let templateNode = template.cloneNode(true)
+        templateNode.querySelector('#name').innerHTML = this.name
+        templateNode.querySelector('#description').innerHTML = this.description
+        templateNode.querySelector('#imgSrc').src = this.img
+        templateNode.querySelector('#price').innerHTML = this.price
+        templateNode.querySelector('#addBtn').onclick = ()=>{
+            data.push({
+                price: this.price,
+                name: this.name,
+                imgSrc: this.imgSrc,
+                value: 1
+            })
+            let newCart = document.createElement('div')
+            newCart.classList.add('.bodyHold')
+            newCart.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" value="${obj.value} imgSrc="${obj.imgSrc}" elementId="${id}"></cart-list>`)
+            cartBody.appendChild(newCart)
+        }
+        root.appendChild(templateNode)
     }
 }
 
@@ -337,10 +322,10 @@ class cartList extends HTMLElement {
     constructor(){
         super()
     }
-    static observedAttributes = ['name', 'price', 'count']
+    static observedAttributes = ['name', 'price', 'count', 'imgSrc', 'elementId']
     name = ''
     price = ''
-    count = '0'
+    count = '1'
     imgSrc = ''
     value = ''
     elementId = ''
@@ -355,7 +340,7 @@ class cartList extends HTMLElement {
         
         this.cartListNode.querySelector('#count').innerHTML = this.count
         this.cartListNode.querySelector('#name').innerHTML = this.name
-        this.cartListNode.querySelector('#count').innerHTML = this.price
+        this.cartListNode.querySelector('#count').innerHTML = `$${this.price}`
         this.cartListNode.querySelector('#addBtn').onclick =()=>{
             console.log('called')
             data = data.map((obj, objID)=>{
