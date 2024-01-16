@@ -3,6 +3,7 @@ let cartBody = document.querySelector('.head')
 let total = document.querySelector('.total p')
 let cartAdder = document.querySelectorAll('.btn')
 let last = document.querySelector('.shoppingCart')
+let cartContent = document.querySelector('.bodyHold')
 let removeAll = document.querySelector('.head button')
 let restImg = document.querySelector('.rest')
 let cartIcon = document.querySelector('.cart')
@@ -309,10 +310,8 @@ class foodList extends HTMLElement {
                 imgSrc: this.imgSrc,
                 value: 1
             })
-            let newCart = document.createElement('div')
-            newCart.classList.add('.bodyHold')
-            newCart.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" value="${obj.value} imgSrc="${obj.imgSrc}" elementId="${id}"></cart-list>`)
-            cartBody.appendChild(newCart)
+            restImg.classList.add('remove') 
+            cartContent.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" value="${obj.value} imgSrc="${obj.imgSrc}" elementId="${id}"></cart-list>`).join(' ')
         }
         root.appendChild(templateNode)
     }

@@ -152,7 +152,8 @@ header a{
 }
 .shoppingCart{
     width: 700px;
-    height: fit-content;
+    height: 500px;
+    overflow: auto;
     display: grid;
     padding: 20px;
     gap: 30px;
@@ -211,7 +212,8 @@ header a{
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 400px;
+    width: 200px;
+    height: 200px;
     margin: 0 auto;
 }
 .rest.remove{
