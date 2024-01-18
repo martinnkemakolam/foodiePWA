@@ -147,6 +147,22 @@ header a{
     height: 100vh;
     transition: all 200ms;
 }
+
+.notification{
+    width: 100%;
+    padding: 20px 5px;
+    font-size: 20px;
+    font-weight: 500;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    box-sizing: border-box;
+    transition: all 300ms;
+    text-align: center;
+    background-color: #222;
+}
+
+
 .myCart.left{
     right: -1000%;
 }

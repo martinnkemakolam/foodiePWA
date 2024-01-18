@@ -14,6 +14,8 @@ let orderPage = document.querySelector('.order')
 let installBtn = document.querySelector('#install')
 let menuBtn = document.querySelectorAll('.category')
 let submit = document.querySelector('#submit')
+let notification = document.querySelector('#notification')
+
 let db = indexedDB.open('syncDatabase')
 db.onupgradeneeded =(e)=>{
     db.result.createObjectStore('payloads')
@@ -52,6 +54,17 @@ let promptObj;
 let showCart = ()=>{
     myCart.classList.remove('left')
 }
+
+
+const showNotifications = (arg)=>{
+    notification.innerHTML = arg
+    notification.style.left = "0"
+    setTimeout(()=>{
+        notification.style.left = "-100%"
+    }, 3000)
+}
+
+
 let removeCart = ()=>{
     myCart.classList.add('left')
 }
@@ -283,12 +296,13 @@ class foodList extends HTMLElement {
         // Always call super first in constructor
         super();
       }
-    static observedAttributes = ['name', 'description', 'price', 'img']
+    static observedAttributes = ['name', 'description', 'price', 'img', 'uid']
     
     name = ''
     description = ''
     price = ''
     img = ''
+    uid = ''
 
     attributeChangedCallback(nameChg, oldVal, newVal){
         this[nameChg] = newVal
@@ -302,15 +316,21 @@ class foodList extends HTMLElement {
         templateNode.querySelector('#name').innerHTML = this.name
         templateNode.querySelector('#description').innerHTML = this.description
         templateNode.querySelector('#imgSrc').src = this.img
-        templateNode.querySelector('#price').innerHTML = this.price
+        templateNode.querySelector('#price').innerHTML = `$${this.price}`
         templateNode.querySelector('#addBtn').onclick = ()=>{
+            if (data.find((ele)=> ele.uid === this.uid)){
+                showNotifications('Already in cart')
+                return
+            }
             data.push({
                 price: this.price,
                 name: this.name,
                 imgSrc: this.imgSrc,
-                value: 1
+                value: 1,
+                uid: this.uid
             })
-            restImg.classList.add('remove') 
+            restImg.classList.add('remove')
+            showNotifications('Added to cart') 
             cartContent.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" value="${obj.value} imgSrc="${obj.imgSrc}" elementId="${id}"></cart-list>`).join(' ')
         }
         root.appendChild(templateNode)
@@ -339,7 +359,7 @@ class cartList extends HTMLElement {
         
         this.cartListNode.querySelector('#count').innerHTML = this.count
         this.cartListNode.querySelector('#name').innerHTML = this.name
-        this.cartListNode.querySelector('#count').innerHTML = `$${this.price}`
+        this.cartListNode.querySelector('#price').innerHTML = `$${this.price}`
         this.cartListNode.querySelector('#addBtn').onclick =()=>{
             console.log('called')
             data = data.map((obj, objID)=>{
@@ -378,8 +398,8 @@ class cartList extends HTMLElement {
     reRender(){
         if (this.shadowRoot.children.length > 0) {
             this.shadowRoot.querySelector('#count').innerHTML = this.count
-            this.shadowRoot.querySelector('#price').innerHTML = this.count * this.price
-            this.shadowRoot.querySelector('#count').innerHTML = data[0].name   
+            this.shadowRoot.querySelector('#price').innerHTML = `$${this.count * this.price}`
+            // this.shadowRoot.querySelector('#count').innerHTML = data[0].name
         }
     }
 }
