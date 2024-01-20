@@ -228,6 +228,13 @@ checkoutBtn.onclick =()=>{
 // }
 
 
+function cartRender() {
+    cartContent.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" count="${obj.value}" imgSrc="${obj.imgSrc}" elementid="${obj.uid}"></cart-list>`).join(' ')
+    if (data.length === 0) {
+        restImg.classList.remove('remove')
+    }
+}
+ 
 function removeData(arg) {
     console.log(arg)
     last.children[last.children.length - 3].remove()
@@ -249,10 +256,12 @@ function removeData(arg) {
 
 function totalFunc() {
     let finalP = 0
-    data.forEach((obj)=>{
-       finalP += +obj.price.slice(1) * obj.value
+    data.forEach((ele, id)=>{
+        console.log(+ele.price, +ele.value)
+        finalP += (+ele.price * +ele.value)
     })
-    return finalP
+    total.innerHTML = `$${finalP}`
+    // return finalP
 }
 
 
@@ -325,13 +334,15 @@ class foodList extends HTMLElement {
             data.push({
                 price: this.price,
                 name: this.name,
-                imgSrc: this.imgSrc,
+                imgSrc: this.img,
                 value: 1,
                 uid: this.uid
             })
             restImg.classList.add('remove')
-            showNotifications('Added to cart') 
-            cartContent.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" value="${obj.value} imgSrc="${obj.imgSrc}" elementId="${id}"></cart-list>`).join(' ')
+            showNotifications('Added to cart')
+            // totalFunc()
+            cartRender()
+            totalFunc()
         }
         root.appendChild(templateNode)
     }
@@ -341,13 +352,12 @@ class cartList extends HTMLElement {
     constructor(){
         super()
     }
-    static observedAttributes = ['name', 'price', 'count', 'imgSrc', 'elementId']
+    static observedAttributes = ['name', 'price', 'count', 'imgSrc', 'elementid']
     name = ''
     price = ''
-    count = '1'
+    count = ''
     imgSrc = ''
-    value = ''
-    elementId = ''
+    elementid = ''
     attributeChangedCallback(name, oldValue, newValue) {
         this[name] = newValue
         this.reRender()
@@ -361,36 +371,49 @@ class cartList extends HTMLElement {
         this.cartListNode.querySelector('#name').innerHTML = this.name
         this.cartListNode.querySelector('#price').innerHTML = `$${this.price}`
         this.cartListNode.querySelector('#addBtn').onclick =()=>{
-            console.log('called')
-            data = data.map((obj, objID)=>{
-                if (objID === this.elementId) {
+            console.log(this.elementId)
+            data = data.map((obj)=>{
+                if (obj.uid == +this.elementid) {
+                    console.log('reached')
                     return {
                         price: obj.price,
                         name: obj.name,
                         imgSrc: obj.imgSrc,
-                        value: obj.value + 1
+                        value: +this.count + 1,
+                        uid: this.elementid
                     }
                 }else{
                     return obj
                 }
             })
+            console.log(data)
             this.setAttribute('count', + this.count + 1)
+            totalFunc()
         }
         this.cartListNode.querySelector('#removeBtn').onclick =()=>{
             console.log('called 2')
-            data = data.map((obj, objID)=>{
-                if (objID === this.elementId) {
+            if (this.count == 1) {
+                console.log('reached here')
+                data = data.filter((ele)=> this.elementid != ele.uid)
+                cartRender()
+            }
+            data = data.map((obj)=>{
+                if (obj.uid == +this.elementid) {
+                    console.log('reached')
                     return {
                         price: obj.price,
                         name: obj.name,
                         imgSrc: obj.imgSrc,
-                        value: obj.value - 1
+                        value: +this.count - 1,
+                        uid: this.elementid
                     }
                 }else{
                     return obj
                 }
             })
+            console.log(data)
             this.setAttribute('count', +this.count - 1)
+            totalFunc()
         }
         this.shadow.appendChild(this.cartListNode)
         // console.log(this.querySelector('#addBtn'))
