@@ -267,12 +267,9 @@ function totalFunc() {
 
 
 removeAll.onclick=()=>{
-    if (data.length > 0) {
     data = []
-    total.innerHTML = `$0`
-    last.children[last.children.length - 3].remove()
-    restImg.classList.remove('remove')   
-    }
+    cartRender()
+    totalFunc()
 }
 
 let showFooter = (hide)=>{
@@ -427,5 +424,30 @@ class cartList extends HTMLElement {
     }
 }
 
+class foodCategory extends HTMLElement{
+    constructor(){
+        super()
+        state = {
+            selected: false
+        }
+    }
+    customFunction(){
+        let event = new CustomEvent('loadSuccess', {
+            detail: {
+                call: ()=>{
+                    this.state.selected = true
+                    
+                }
+            }
+        })
+    }
+    connectedCallback(){
+        let shadow = this.attachShadow({mode: 'open'}),
+        template = document.querySelector("#cartCategory").content,
+        templateNode = template.cloneNode(true)
+        templateNode.onclick = this.customFunction
+        shadow.appendChild(templateNode)
+    }
+}
 customElements.define('cart-list', cartList)
 customElements.define('food-list', foodList)
