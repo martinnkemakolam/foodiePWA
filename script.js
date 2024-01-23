@@ -427,27 +427,30 @@ class cartList extends HTMLElement {
 class foodCategory extends HTMLElement{
     constructor(){
         super()
-        state = {
-            selected: false
-        }
     }
-    customFunction(){
-        let event = new CustomEvent('loadSuccess', {
-            detail: {
-                call: ()=>{
-                    this.state.selected = true
-                    
-                }
-            }
-        })
+    src = ''
+    name = '' 
+    static observedAttributes = ['src', 'name']
+    attributeChangedCallback(name, oldValue, newValue){
+        this[name] = newValue
     }
     connectedCallback(){
         let shadow = this.attachShadow({mode: 'open'}),
         template = document.querySelector("#cartCategory").content,
         templateNode = template.cloneNode(true)
-        templateNode.onclick = this.customFunction
+        templateNode.querySelector('#name').textContent = this.name
+        templateNode.querySelector('#image').src = this.src
+        templateNode.querySelector('#category').dataset.name = this.name
+        templateNode.querySelector('#category').onclick =(e)=>{
+            let title = document.querySelector('.foodContainer h2')
+            title.textContent = this.name
+            // e.target.classList.add('active')
+            shadow.querySelector('#category').classList.add('active')
+            // fetch data and set to paragraph
+        }
         shadow.appendChild(templateNode)
     }
 }
 customElements.define('cart-list', cartList)
 customElements.define('food-list', foodList)
+customElements.define('food-category', foodCategory)
