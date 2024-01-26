@@ -13,7 +13,10 @@
     <div class="notification" id="notification">
         test notification
     </div>
-    <section>
+
+
+
+    <!-- <section>
         <header>
             <h1>Welcome to Eatland</h1>
             <p class="cart">Cart</p>
@@ -55,14 +58,12 @@
                 </food-list>
                 <food-list name="burger6" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="16" uid="5">
                 </food-list>
-                <!-- <cart-list count="0" name="a random name" price="$10"></cart-list> -->
-                <!-- <menu-item>
-                    <b class="name">Burger</b>
-                </menu-item> -->
             </div>
         </div>
-    </section>
-    <section class="myCart left">
+    </section> -->
+
+
+    <!-- <section class="myCart left">
         <img src="./images/images.png" class="icon" alt="">
         <div class="shoppingCart">
             <div class="head">
@@ -81,8 +82,10 @@
                 <button id="checkout">checkout</button>
             </div>
         </div>
-    </section>
-    <section class="order">
+    </section> -->
+
+
+    <!-- <section class="order">
         <img src="./images/images.png" class="icon" alt="">
         <form>
             <h1>
@@ -123,8 +126,10 @@
             </div>
             <button class="submit" id="submit" type="button">Submit</button>
         </form>
-    </section>
-    <section class="pending">
+    </section> -->
+    
+    
+    <!-- <section class="pending">
         <div class="pendingHead">
             <h1>Pending Orders</h1>
         </div>
@@ -139,7 +144,129 @@
                 <P>cash: $20</P>
             </template>
         </div>
-    </section>
+    </section> -->
+
+    <app-component id="app"></app-component>
+
+    <template id="view1">
+        <section>
+            <header>
+                <h1>Welcome to Eatland</h1>
+                <p class="cart">Cart</p>
+            </header>
+            <footer>
+                <p>Install our application</p>
+                <button id="install">Install</button>
+            </footer>
+            <div class="scroll">
+                <div class="categoryBody">
+                    <food-category name="food" src="./images/burger.jpg"></food-category>
+                    <div class="category">
+                        <img src="./images/burger.jpg" alt="all food">
+                        <p>drink</p>
+                    </div>
+                    <div class="category">
+                        <img src="./images/burger.jpg" alt="all food">
+                        <p>snacks</p>
+                    </div>
+                    <div class="category">
+                        <img src="./images/burger.jpg" alt="all food">
+                        <p>special</p>
+                    </div>
+                </div>
+            </div>
+            <div class="foodContainer">
+                <h2>Food</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus molestiae molestias perferendis sint, aut placeat rem adipisci recusandae illum possimus, vero laboriosam temporibus dolorem. Aliquid recusandae cumque molestiae itaque quaerat? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit, dicta. Dicta maxime dolorum molestias voluptatum id repellat adipisci voluptatibus quasi eveniet. Officiis quas delectus minus blanditiis voluptatem amet, quibusdam asperiores provident iste tempora inventore eum iure vero laudantium sit id, voluptatum similique pariatur! Deleniti, error mollitia minima non sit eligendi.</p>
+                <div class="foodGrid">
+                    <food-list name="burger1" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="11" uid="0">
+                    </food-list>
+                    <food-list name="burger2" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="12" uid="1">
+                    </food-list>
+                    <food-list name="burger3" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="13" uid="2">
+                    </food-list>
+                    <food-list name="burger4" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="14" uid="3">
+                    </food-list>
+                    <food-list name="burger5" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="15" uid="4">
+                    </food-list>
+                    <food-list name="burger6" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="16" uid="5">
+                    </food-list>
+                    <!-- <cart-list count="0" name="a random name" price="$10"></cart-list> -->
+                    <!-- <menu-item>
+                        <b class="name">Burger</b>
+                    </menu-item> -->
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="view2">
+        <section class="myCart">
+            <img src="./images/images.png" class="icon" alt="">
+            <div class="shoppingCart">
+                <div class="head">
+                    <h1>Food Cart</h1>
+                    <button>remove all</button>
+                </div>
+                <div class="rest">
+                    <img src="./images/no food.png" alt="">
+                </div>
+                <div class="bodyHold">
+    
+                </div>
+                <div class="total">
+                    <h2>total</h2>
+                    <p>$0</p>
+                    <button id="checkout">checkout</button>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="view3">
+        <section class="order.show">
+            <img src="./images/images.png" class="icon" alt="">
+            <form>
+                <h1>
+                    Fill out this form
+                </h1>
+                <p>
+                    The details in this form should be accurate and to be somewhere where you currently reside in order to let our oders reach you in good time.
+                </p>
+                <div>
+                    <label for="">
+                        Enter address
+                    </label>
+                    <input type="text" name="address" placeholder="enter your address"/>
+                </div>
+                <div>
+                    <label for="">
+                        Enter city
+                    </label>
+                    <input type="text" name="address" placeholder="enter your city"/>
+                </div>
+                <div>
+                   <label for="">
+                        Enter state
+                   </label>
+                   <input type="text" name="address" placeholder="enter your state"/> 
+                </div>
+                <div>
+                    <label for="">
+                        Enter phone number
+                    </label>
+                    <input type="text" name="address" placeholder="number"/>
+                </div>
+                <div>
+                    <label for="">
+                        Enter your name
+                    </label>
+                    <input type="text" name="address" placeholder="name"/>
+                </div>
+                <button class="submit" id="submit" type="button">Submit</button>
+            </form>
+        </section>
+    </template>
+
+    
     <template id="cartList">
         <style>
             .obj{
@@ -246,7 +373,11 @@
             <p id="name"></p>
         </div>
     </template>
-    <script  src="script.js">
+    <script type="module" src="unitComponent.js"></script>
+    <script type="module" src="appComponent.js"></script>
+    <script type="module" src="viewComponent.js"></script>
+    <script type="module" src="route.js" ></script>
+    <script type="module" src="script.js">
     </script>
 </body>
 </html>
