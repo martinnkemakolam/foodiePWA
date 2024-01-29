@@ -22,19 +22,19 @@ db.onupgradeneeded =(e)=>{
 }
 navigator.serviceWorker.register('sw.js')
 .then((sw)=>{
-    if(sw.active = true){
-        submit.onclick=()=>{
-            sw.sync.register('place-order').then(()=>{
-                let payload = {
-                    address: '',
-                    city: '',
-                    state: '',
-                    number: '',
-                    name: '',
-                }
-                localStorage.setItem('place-order', JSON.stringify(payload))
-            })
-        }
+    if(sw.active === true){
+        // submit.onclick=()=>{
+        //     sw.sync.register('place-order').then(()=>{
+        //         let payload = {
+        //             address: '',
+        //             city: '',
+        //             state: '',
+        //             number: '',
+        //             name: '',
+        //         }
+        //         localStorage.setItem('place-order', JSON.stringify(payload))
+        //     })
+        // }
     }
 })
 
@@ -51,58 +51,58 @@ navigator.serviceWorker.register('sw.js')
 
 let promptObj;
 
-let showCart = ()=>{
-    myCart.classList.remove('left')
-}
+// let showCart = ()=>{
+//     myCart.classList.remove('left')
+// }
 
 
-const showNotifications = (arg)=>{
-    notification.innerHTML = arg
-    notification.style.left = "0"
-    setTimeout(()=>{
-        notification.style.left = "-100%"
-    }, 3000)
-}
+// const showNotifications = (arg)=>{
+//     notification.innerHTML = arg
+//     notification.style.left = "0"
+//     setTimeout(()=>{
+//         notification.style.left = "-100%"
+//     }, 3000)
+// }
 
 
-let removeCart = ()=>{
-    myCart.classList.add('left')
-}
-let showForm = ()=>{
-    orderPage.classList.add('show')
-}
-let removeForm = ()=>{
-    orderPage.classList.remove('show')
-}
+// let removeCart = ()=>{
+//     myCart.classList.add('left')
+// }
+// let showForm = ()=>{
+//     orderPage.classList.add('show')
+// }
+// let removeForm = ()=>{
+//     orderPage.classList.remove('show')
+// }
 
 
-cartIcon.onclick = showCart
+// cartIcon.onclick = showCart
 
 
-cartRemove.forEach((ele)=>{
-    ele.onclick =()=>{
-        removeForm()
-        removeCart()
-    }
-})
+// cartRemove.forEach((ele)=>{
+//     ele.onclick =()=>{
+//         removeForm()
+//         removeCart()
+//     }
+// })
 
 
-menuBtn.forEach((ele)=>{
-    ele.onclick =()=>{
-        let title = document.querySelector('.foodContainer h2')
-        let paragarph = document.querySelector('.foodContainer p')
-        // change paragraph text
-        menuBtn.forEach(ele => ele.classList.remove('active'))
-        ele.classList.add('active')
-        title.textContent = ele.querySelector('p').textContent
+// menuBtn.forEach((ele)=>{
+//     ele.onclick =()=>{
+//         let title = document.querySelector('.foodContainer h2')
+//         let paragarph = document.querySelector('.foodContainer p')
+//         // change paragraph text
+//         menuBtn.forEach(ele => ele.classList.remove('active'))
+//         ele.classList.add('active')
+//         title.textContent = ele.querySelector('p').textContent
 
-    }
-})
+//     }
+// })
 
-checkoutBtn.onclick =()=>{
-    showForm() 
-    removeCart()
-}
+// checkoutBtn.onclick =()=>{
+//     showForm() 
+//     removeCart()
+// }
 
 // function addToCart(e) {
 //     console.log('called')
@@ -228,59 +228,58 @@ checkoutBtn.onclick =()=>{
 // }
 
 
-function cartRender() {
-    cartContent.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" count="${obj.value}" imgSrc="${obj.imgSrc}" elementid="${obj.uid}"></cart-list>`).join(' ')
-    if (data.length === 0) {
-        restImg.classList.remove('remove')
-    }
-}
+// function cartRender() {
+//     cartContent.innerHTML = data.map((obj, id) => `<cart-list name="${obj.name}" price="${obj.price}" count="${obj.value}" imgSrc="${obj.imgSrc}" elementid="${obj.uid}"></cart-list>`).join(' ')
+//     if (data.length === 0) {
+//         restImg.classList.remove('remove')
+//     }
+// }
  
-function removeData(arg) {
-    console.log(arg)
-    last.children[last.children.length - 3].remove()
-    let newDta = data.filter((el, id)=> id !== arg)
-    data = newDta
-    if (data.length === 0) restImg.classList.remove('remove')
-    let newCart = document.createElement('div')
-        newCart.classList.add('.bodyHold')
-        htmlMaker(data).forEach((node)=>{
-            newCart.appendChild(node)
-        })
-        cartBody.insertAdjacentElement('afterend', newCart)
-    if (data.length === 0) {
-        last.children[last.children.length - 3].remove()
-    }
-    console.log(data)
-}
+// function removeData(arg) {
+//     console.log(arg)
+//     last.children[last.children.length - 3].remove()
+//     let newDta = data.filter((el, id)=> id !== arg)
+//     data = newDta
+//     if (data.length === 0) restImg.classList.remove('remove')
+//     let newCart = document.createElement('div')
+//         newCart.classList.add('.bodyHold')
+//         htmlMaker(data).forEach((node)=>{
+//             newCart.appendChild(node)
+//         })
+//         cartBody.insertAdjacentElement('afterend', newCart)
+//     if (data.length === 0) {
+//         last.children[last.children.length - 3].remove()
+//     }
+//     console.log(data)
+// }
 
 
-function totalFunc() {
-    let finalP = 0
-    data.forEach((ele, id)=>{
-        console.log(+ele.price, +ele.value)
-        finalP += (+ele.price * +ele.value)
-    })
-    total.innerHTML = `$${finalP}`
-    // return finalP
-}
+// function totalFunc() {
+//     let finalP = 0
+//     data.forEach((ele, id)=>{
+//         console.log(+ele.price, +ele.value)
+//         finalP += (+ele.price * +ele.value)
+//     })
+//     total.innerHTML = `$${finalP}`
+// }
 
 
 
-removeAll.onclick=()=>{
-    data = []
-    cartRender()
-    totalFunc()
-}
+// removeAll.onclick=()=>{
+//     data = []
+//     cartRender()
+//     totalFunc()
+// }
 
-let showFooter = (hide)=>{
-    let footer = document.querySelector('footer')
-    footer.style.display = hide ? 'flex' : 'none'
-}
+// let showFooter = (hide)=>{
+//     let footer = document.querySelector('footer')
+//     footer.style.display = hide ? 'flex' : 'none'
+// }
 window.addEventListener('beforeinstallprompt', (e)=>{
     console.log(e)
     e.preventDefault()
     promptObj = e
-    showFooter(true)
+    // showFooter(true)
 })
 // window.onbeforeinstallprompt=(e)=>{
 //     e.preventDefault()
@@ -291,166 +290,15 @@ window.addEventListener('beforeinstallprompt', (e)=>{
 //     promptObj = e
 // })
 
-installBtn.onclick= async()=>{
-    promptObj.prompt()
-    let userChoice = await promptObj.userChoice
-    userChoice.outcome === "dismissed" ? showFooter(true) : showFooter(false)
-}
+// installBtn.onclick= async()=>{
+//     promptObj.prompt()
+//     let userChoice = await promptObj.userChoice
+//     userChoice.outcome === "dismissed" ? showFooter(true) : showFooter(false)
+// }
 
-class foodList extends HTMLElement {
-    constructor() {
-        // Always call super first in constructor
-        super();
-      }
-    static observedAttributes = ['name', 'description', 'price', 'img', 'uid']
-    
-    name = ''
-    description = ''
-    price = ''
-    img = ''
-    uid = ''
 
-    attributeChangedCallback(nameChg, oldVal, newVal){
-        this[nameChg] = newVal
-        console.log(this[nameChg])
-    }
 
-    connectedCallback(){
-        let root = this.attachShadow({mode: "open"})
-        let template = document.querySelector('#foodList').content
-        let templateNode = template.cloneNode(true)
-        templateNode.querySelector('#name').innerHTML = this.name
-        templateNode.querySelector('#description').innerHTML = this.description
-        templateNode.querySelector('#imgSrc').src = this.img
-        templateNode.querySelector('#price').innerHTML = `$${this.price}`
-        templateNode.querySelector('#addBtn').onclick = ()=>{
-            if (data.find((ele)=> ele.uid === this.uid)){
-                showNotifications('Already in cart')
-                return
-            }
-            data.push({
-                price: this.price,
-                name: this.name,
-                imgSrc: this.img,
-                value: 1,
-                uid: this.uid
-            })
-            restImg.classList.add('remove')
-            showNotifications('Added to cart')
-            // totalFunc()
-            cartRender()
-            totalFunc()
-        }
-        root.appendChild(templateNode)
-    }
-}
 
-class cartList extends HTMLElement {
-    constructor(){
-        super()
-    }
-    static observedAttributes = ['name', 'price', 'count', 'imgSrc', 'elementid']
-    name = ''
-    price = ''
-    count = ''
-    imgSrc = ''
-    elementid = ''
-    attributeChangedCallback(name, oldValue, newValue) {
-        this[name] = newValue
-        this.reRender()
-    }
-    shadow = this.attachShadow({mode: 'open'})
-    cartListTmplate = document.querySelector('#cartList').content
-    cartListNode = this.cartListTmplate.cloneNode(true)
-    connectedCallback(){
-        
-        this.cartListNode.querySelector('#count').innerHTML = this.count
-        this.cartListNode.querySelector('#name').innerHTML = this.name
-        this.cartListNode.querySelector('#price').innerHTML = `$${this.price}`
-        this.cartListNode.querySelector('#addBtn').onclick =()=>{
-            console.log(this.elementId)
-            data = data.map((obj)=>{
-                if (obj.uid == +this.elementid) {
-                    console.log('reached')
-                    return {
-                        price: obj.price,
-                        name: obj.name,
-                        imgSrc: obj.imgSrc,
-                        value: +this.count + 1,
-                        uid: this.elementid
-                    }
-                }else{
-                    return obj
-                }
-            })
-            console.log(data)
-            this.setAttribute('count', + this.count + 1)
-            totalFunc()
-        }
-        this.cartListNode.querySelector('#removeBtn').onclick =()=>{
-            console.log('called 2')
-            if (this.count == 1) {
-                console.log('reached here')
-                data = data.filter((ele)=> this.elementid != ele.uid)
-                cartRender()
-            }
-            data = data.map((obj)=>{
-                if (obj.uid == +this.elementid) {
-                    console.log('reached')
-                    return {
-                        price: obj.price,
-                        name: obj.name,
-                        imgSrc: obj.imgSrc,
-                        value: +this.count - 1,
-                        uid: this.elementid
-                    }
-                }else{
-                    return obj
-                }
-            })
-            console.log(data)
-            this.setAttribute('count', +this.count - 1)
-            totalFunc()
-        }
-        this.shadow.appendChild(this.cartListNode)
-        // console.log(this.querySelector('#addBtn'))
-    }
-    reRender(){
-        if (this.shadowRoot.children.length > 0) {
-            this.shadowRoot.querySelector('#count').innerHTML = this.count
-            this.shadowRoot.querySelector('#price').innerHTML = `$${this.count * this.price}`
-            // this.shadowRoot.querySelector('#count').innerHTML = data[0].name
-        }
-    }
-}
-
-class foodCategory extends HTMLElement{
-    constructor(){
-        super()
-    }
-    src = ''
-    name = '' 
-    static observedAttributes = ['src', 'name']
-    attributeChangedCallback(name, oldValue, newValue){
-        this[name] = newValue
-    }
-    connectedCallback(){
-        let shadow = this.attachShadow({mode: 'open'}),
-        template = document.querySelector("#cartCategory").content,
-        templateNode = template.cloneNode(true)
-        templateNode.querySelector('#name').textContent = this.name
-        templateNode.querySelector('#image').src = this.src
-        templateNode.querySelector('#category').dataset.name = this.name
-        templateNode.querySelector('#category').onclick =(e)=>{
-            let title = document.querySelector('.foodContainer h2')
-            title.textContent = this.name
-            // e.target.classList.add('active')
-            shadow.querySelector('#category').classList.add('active')
-            // fetch data and set to paragraph
-        }
-        shadow.appendChild(templateNode)
-    }
-}
-customElements.define('cart-list', cartList)
-customElements.define('food-list', foodList)
-customElements.define('food-category', foodCategory)
+// customElements.define('cart-list', cartList)
+// customElements.define('food-list', foodList)
+// customElements.define('food-category', foodCategory)
