@@ -1,8 +1,16 @@
 // const { response } = require("express");
 
 // let cache = await caches.open('cache1')
-let arrOfRequest = ['./','./index.html', './script.js', './style.css', './manifest.json','./images/burger.jpg', './images/images.png','./images/no food.png']
+let arrOfRequest = ['./','./index.html', './unitComponent.js', './appComponent.js', './viewComponent.js','./script.js', './style.css', './manifest.json','./images/burger.jpg', './images/images.png','./images/no food.png']
 let fetchStrategy = async(reqString)=>{
+    if (reqString.destination === 'script') {
+        try {
+            // console.log(reqString.clone())
+            reqString.headers['Content-Type'] = 'application/javascript'   
+        } catch (error) {
+            console.log('this is an', error.message)
+        }
+    }
     let openCache = await caches.open('cache2')
     let matchedCache = await openCache.match(reqString.clone(), {
         ignoreSearch: true
@@ -40,6 +48,12 @@ let fetchStrategy = async(reqString)=>{
         // if (req.method === 'GET' && req.headers.get('accept').includes('text/html')) {
         //             return caches.match('index.html')
         //         }
+        // let reg = new RegExp(`https?://(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z]+)*(?:\/[^\/\s]*)?\.js$`)
+        // console.log(matchedCache.url)
+        // if (reg.test(matchedCache.url)) {
+        //     matchedCache.headers.set('content-type', 'application/javascript')   
+        //     console.log(matchedCache,  ...matchedCache.headers)
+        // }
         return matchedCache || new Response()
     }
     // console.log(cacheRes)
@@ -62,6 +76,7 @@ onactive=(evt)=>{
     // )
     self.clients.claim();
 }
+
 
 onsync=(evt)=>{
     if(evt.tag === 'place-order'){
