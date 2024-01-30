@@ -1,3 +1,58 @@
+let observed = []
+
+function elementCreator(name, observedArry, templateString) {
+    class test extends HTMLElement {
+        constructor(){
+            super()
+        }
+        static observedAttributes = [...observedArry]
+        value = {}
+        populateValue=(()=>{
+            observedArry.forEach((name)=>{
+                this.value[name] = ''
+            })
+        })()
+        attributeChangedCallback(name, oldValue, newValue){
+            this.value[name] = newValue
+            console.log('called')
+            this.render()
+        }
+        render(){
+            console.log(this.value)
+            this.innerHTML = ''
+            let temp = document.querySelector(`${templateString}`).content
+            console.log(temp)
+            let clone  = temp.cloneNode(true)
+            clone.childNodes.forEach(child=>{
+                let findNode =(arg)=> {
+                    if(arg.hasChildNodes()){
+                        arg.childNodes.forEach(node=> findNode(node))
+                    }else{
+                        console.log(arg.dataset)
+                        observedArry.forEach((ele)=>{
+                            console.log(ele)
+                            if( arg.dataset && ele in arg.dataset){
+                                console.log(arg)
+                                arg.innerHTML = this.value[ele]
+                            }
+                        })
+                        return
+                    }
+                }
+                findNode(child)
+            })
+            this.appendChild(clone)
+        }
+        connectedCallback(){
+            this.render()
+        }
+    }
+    customElements.define(name, test)
+}
+
+elementCreator('test-element', ['one'], '#testTemp')
+
+
 class foodCategory extends HTMLElement{
     constructor(){
         super()
@@ -43,7 +98,7 @@ class foodList extends HTMLElement {
 
     attributeChangedCallback(nameChg, oldVal, newVal){
         this[nameChg] = newVal
-        console.log(this[nameChg])
+        // console.log(this[nameChg])
     }
 
     connectedCallback(){
@@ -158,6 +213,27 @@ class cartList extends HTMLElement {
 }
 
 
+class foodCategoryDetails extends HTMLElement {
+    constructor(){
+        super()
+    }
+    static observedAttributes = ["htext", "ptext"]
+    htext = ''
+    ptext = ''
+    attributeChangedCallback(name, oldValue, newValue){
+        this[name] = newValue
+    }
+    connectedCallback(){
+        const temp = document.querySelector('#foodCategoryDetails').content,
+        tempClone = temp.cloneNode(true)
+        tempClone.querySelector('.header').innerHTML = this.htext
+        tempClone.querySelector('.details').innerHTML = this.ptext
+        this.appendChild(tempClone)
+    }
+}
+
+
 customElements.define('cart-list', cartList)
 customElements.define('food-list', foodList)
 customElements.define('food-category', foodCategory)
+customElements.define('food-category-detail', foodCategoryDetails)

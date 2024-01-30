@@ -3,14 +3,14 @@
 // let cache = await caches.open('cache1')
 let arrOfRequest = ['./','./index.html', './unitComponent.js', './appComponent.js', './viewComponent.js','./script.js', './style.css', './manifest.json','./images/burger.jpg', './images/images.png','./images/no food.png']
 let fetchStrategy = async(reqString)=>{
-    if (reqString.destination === 'script') {
-        try {
-            // console.log(reqString.clone())
-            reqString.headers['Content-Type'] = 'application/javascript'   
-        } catch (error) {
-            console.log('this is an', error.message)
-        }
-    }
+    // if (reqString.destination === 'script') {
+    //     try {
+    //         // console.log(reqString.clone())
+    //         reqString.headers['Content-Type'] = 'application/javascript'   
+    //     } catch (error) {
+    //         console.log('this is an', error.message)
+    //     }
+    // }
     let openCache = await caches.open('cache2')
     let matchedCache = await openCache.match(reqString.clone(), {
         ignoreSearch: true
