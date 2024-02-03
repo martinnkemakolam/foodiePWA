@@ -1,14 +1,14 @@
 let observed = []
 
-function elementCreator(name, observedArry, templateString) {
+function elementCreator({name,atr,template,func,imgSrc}) {
     class test extends HTMLElement {
         constructor(){
             super()
         }
-        static observedAttributes = [...observedArry]
+        static observedAttributes = atr
         value = {}
         populateValue=(()=>{
-            observedArry.forEach((name)=>{
+            atr.forEach((name)=>{
                 this.value[name] = ''
             })
         })()
@@ -18,22 +18,38 @@ function elementCreator(name, observedArry, templateString) {
             this.render()
         }
         render(){
-            console.log(this.value)
+            // console.log(this.value)
             this.innerHTML = ''
-            let temp = document.querySelector(`${templateString}`).content
-            console.log(temp)
+            let temp = document.querySelector(`${template}`).content
+            // console.log(temp)
             let clone  = temp.cloneNode(true)
             clone.childNodes.forEach(child=>{
                 let findNode =(arg)=> {
                     if(arg.hasChildNodes()){
                         arg.childNodes.forEach(node=> findNode(node))
                     }else{
-                        console.log(arg.dataset)
-                        observedArry.forEach((ele)=>{
-                            console.log(ele)
+                        // console.log(arg.dataset)
+                        atr.forEach((ele)=>{
+                            // console.log(ele)
                             if( arg.dataset && ele in arg.dataset){
-                                console.log(arg)
+                                // console.log(arg)
                                 arg.innerHTML = this.value[ele]
+                            }
+                        })
+                        func.forEach(({event, target, callback})=>{
+                            if( arg.dataset && target in arg.dataset){
+                                // console.log(arg)
+                                arg.addEventListener(event, callback)
+                            }
+                        })
+                        // let {src} = arg
+                        // console.log(src)
+
+                        imgSrc.forEach(({src, tag})=>{
+                            if (arg.dataset && tag in arg.dataset) {
+                                // console.log('img')
+                                console.log(arg)
+                                arg.src = src
                             }
                         })
                         return
@@ -50,7 +66,25 @@ function elementCreator(name, observedArry, templateString) {
     customElements.define(name, test)
 }
 
-elementCreator('test-element', ['one'], '#testTemp')
+elementCreator({
+    name: 'test-element',
+    atr: ['ptext'],
+    template: '#testTemp',
+    func: [{
+        event: 'click',
+        callback: ()=>{
+            console.log('worked')
+        },
+        target: 'func1'
+    }],
+    imgSrc: [{
+        src: './images/burger.jpg',
+        tag: 'img1'
+    }, {
+        src: './images/no food.png',
+        tag: 'img2'
+    }]
+})
 
 
 class foodCategory extends HTMLElement{
