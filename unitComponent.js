@@ -1,6 +1,6 @@
 let observed = []
 
-function elementCreator({name,atr,template,func,imgSrc}) {
+function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
     class test extends HTMLElement {
         constructor(){
             super()
@@ -18,7 +18,7 @@ function elementCreator({name,atr,template,func,imgSrc}) {
             this.render()
         }
         render(){
-            // console.log(this.value)
+            populateCalls.call(this)
             this.innerHTML = ''
             let temp = document.querySelector(`${template}`).content
             // console.log(temp)
@@ -30,10 +30,16 @@ function elementCreator({name,atr,template,func,imgSrc}) {
                     }else{
                         // console.log(arg.dataset)
                         atr.forEach((ele)=>{
-                            // console.log(ele)
+                            // console.log(ele
+                            if (arg.dataset && ele.includes('src') && ele in arg.dataset && arg.tagName === 'IMG') {
+                                console.log('reached 2')
+                                arg.src = this.value[ele]
+                                return
+                            }
                             if( arg.dataset && ele in arg.dataset){
-                                // console.log(arg)
+                                console.log('reached 1')
                                 arg.innerHTML = this.value[ele]
+                                return
                             }
                         })
                         func.forEach(({event, target, callback})=>{
@@ -68,7 +74,7 @@ function elementCreator({name,atr,template,func,imgSrc}) {
 
 elementCreator({
     name: 'test-element',
-    atr: ['ptext'],
+    atr: ['ptext', 'imgsrc'],
     template: '#testTemp',
     func: [{
         event: 'click',
@@ -83,9 +89,11 @@ elementCreator({
     }, {
         src: './images/no food.png',
         tag: 'img2'
-    }]
+    }],
+    populateCalls: function(){
+        console.log(this)
+    } 
 })
-
 
 class foodCategory extends HTMLElement{
     constructor(){

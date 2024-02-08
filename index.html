@@ -144,7 +144,7 @@
     </section> -->
 
     <app-component id="app"></app-component>
-    <test-element ptext="test"></test-element>
+    <test-element ptext="test" imgsrc="./images/burger.jpg"></test-element>
     <template id="view1">
         <section>
             
@@ -249,12 +249,22 @@
             </form>
         </section>
     </template>
-
-
+    
+    
+    <template>
+        
+    </template>
+    <template>
+        <div class="foodGrid">
+            no food available
+        </div>
+    </template>
+    
+    
     <template id="testTemp">
         <div>
             <h1 data-ptext data-func1></h1>
-            <img data-img2>
+            <img data-imgsrc>
         </div>
     </template>
     <template id="cartList">
@@ -369,6 +379,9 @@
             <p class="details"></p>
         </div>
     </template>
+
+
+
     <script src="unitComponent.js"></script>
     <script src="appComponent.js"></script>
     <script src="viewComponent.js"></script>
