@@ -300,5 +300,5 @@ window.addEventListener('beforeinstallprompt', (e)=>{
 
 
 // customElements.define('cart-list', cartList)
-// customElements.define('food-list', foodList)
+// customElements.define('card-element', foodList)
 // customElements.define('food-category', foodCategory)

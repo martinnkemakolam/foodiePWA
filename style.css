@@ -63,6 +63,10 @@ select option{
     font-size: 20px;
     margin: 10px 0 ;
 }
+.header .searchbar .line{
+    width: 2px;
+    background-color: white;
+}
 .header .searchbar input::placeholder{
     color: white;
 }
@@ -116,13 +120,13 @@ select option{
     gap: 40px;
 }
 .foodGrid .food{
-    background-color: var(--food-color);
     display: flex;
     flex-direction: column;
-    background-color: #eee;
-    padding: 20px;
-    border-radius: 20px;
-    gap: 20px;
+    gap: 14px;
+    height: 400px;
+    width: 350px;
+    background-color: white;
+    border: 1px solid #6e6767;
 }
 .food img{
     width: 100%;
