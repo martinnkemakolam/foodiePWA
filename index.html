@@ -147,7 +147,7 @@
     <test-element ptext="test" imgsrc="./images/burger.jpg"></test-element>
     <template id="view1">
         <section>
-            
+            <header-element></header-element>
             <footer>
                 <p>Install our application</p>
                 <button id="install">Install</button>
@@ -251,8 +251,23 @@
     </template>
     
     
-    <template>
-        
+    <template id="header">
+        <div class="header">
+            <div class="links">
+                <a href="./#/">Product</a>
+                <a href="./#/about">About</a>
+                <a href="./#/cart">Cart</a>
+            </div>
+            <div class="searchbar">
+                <img width="30px" height="30px" src="images/icons/search.png"/>
+                <input data-input placeholder="Search"/>
+                <div data-option >
+                    <option data-option value="food" selected>Food</option>
+                    <option value="food 1">Food 1</option>
+                    <option value="food 2">Food 2</option>
+                </div>
+            </div>
+        </div>
     </template>
     <template>
         <div class="foodGrid">

@@ -18,7 +18,7 @@ function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
             this.render()
         }
         render(){
-            populateCalls.call(this)
+            populateCalls && populateCalls.call(this)
             this.innerHTML = ''
             let temp = document.querySelector(`${template}`).content
             // console.log(temp)
@@ -44,8 +44,9 @@ function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
                         })
                         func.forEach(({event, target, callback})=>{
                             if( arg.dataset && target in arg.dataset){
-                                // console.log(arg)
+                                // console.log(arg)/
                                 arg.addEventListener(event, callback)
+                                console.log(arg)
                             }
                         })
                         // let {src} = arg
@@ -58,7 +59,7 @@ function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
                                 arg.src = src
                             }
                         })
-                        return
+                        
                     }
                 }
                 findNode(child)
@@ -73,26 +74,24 @@ function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
 }
 
 elementCreator({
-    name: 'test-element',
-    atr: ['ptext', 'imgsrc'],
-    template: '#testTemp',
+    name: 'header-element',
+    atr: [],
+    template: '#header',
     func: [{
-        event: 'click',
-        callback: ()=>{
-            console.log('worked')
+        event: 'input',
+        callback: (e)=>{
+            console.log('worked', e.target.value);
         },
-        target: 'func1'
-    }],
-    imgSrc: [{
-        src: './images/burger.jpg',
-        tag: 'img1'
+        target: 'input'
     }, {
-        src: './images/no food.png',
-        tag: 'img2'
+        event: 'click',
+        callback: (e)=>{
+            console.log('worked', e.target.value);
+        },
+        target: 'option'
     }],
-    populateCalls: function(){
-        console.log(this)
-    } 
+    imgSrc: [],
+    populateCalls: null
 })
 
 class foodCategory extends HTMLElement{
