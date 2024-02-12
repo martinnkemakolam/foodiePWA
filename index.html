@@ -155,17 +155,15 @@
             <div class="foodContainer">
                 <food-category-detail htext="food" ptext="Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Id perferendis sequi optio. Possimus et assumenda ipsa ipsum laboriosam libero ullam dignissimos mollitia natus. Libero quia nulla et dolores accusantium repellendus?"></food-category-detail>
                 <div class="foodGrid">
-                    <card-element name="burger1" foodsrc="/images/burger.jpg" detail="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="11" uid="0">
+                    <card-element name="burger1" foodsrc="/images/burger.jpg" detail="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="$11">
                     </card-element>
-                    <card-element name="burger2" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="12" uid="1">
+                    <card-element name="burger1" foodsrc="/images/burger.jpg" detail="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="$11">
                     </card-element>
-                    <card-element name="burger3" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="13" uid="2">
+                    <card-element name="burger1" foodsrc="/images/burger.jpg" detail="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="$11">
                     </card-element>
-                    <card-element name="burger4" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="14" uid="3">
+                    <card-element name="burger1" foodsrc="/images/burger.jpg" detail="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="$11">
                     </card-element>
-                    <card-element name="burger5" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="15" uid="4">
-                    </card-element>
-                    <card-element name="burger6" img="/images/burger.jpg" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="16" uid="5">
+                    <card-element name="burger1" foodsrc="/images/burger.jpg" detail="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="$11">
                     </card-element>
                     <!-- <cart-list count="0" name="a random name" price="$10"></cart-list> -->
                     <!-- <menu-item>
@@ -315,21 +313,20 @@
     </template>
     <template id="foodcard">
         <div class="food">
-            <img data-foodsrc/>
+            <img data-foodsrc class="product"/>
             <h1 data-name></h1>
             <p data-detail></p>
-            <div>
-                <div>
+            <div class="bottom">
+                <div class="amount">
                     <div>-</div>
                     <div>0</div>
                     <div>+</div>
                 </div>
-                <div>
-                    <h2 data-price>
-                    </h2>
+                <div class="cartBtn">
+                    <h2 data-price></h2>
                     <button>
-                        <img/>
-                        <p data-addtocart="">Add to cart</p>
+                        <img width="30px" height="30px" data-carticon>
+                        <p data-addtocart>Add to cart</p>
                     </button>
                 </div>
             </div>

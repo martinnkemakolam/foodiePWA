@@ -118,42 +118,81 @@ select option{
     justify-content: center;
     margin-top: 50px;
     gap: 40px;
+    max-width: 2000px;
 }
 .foodGrid .food{
     display: flex;
     flex-direction: column;
     gap: 14px;
-    height: 400px;
-    width: 350px;
+    height: 100%;
+    width: 100%;
     background-color: white;
     border: 1px solid #6e6767;
+    border-radius: 30px;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
 }
-.food img{
+.food .product{
     width: 100%;
-    border-radius: 20px;
-    align-self: center;
 }
-.food h3{
-    font-size: 30px;
+.food h1{
+    font-size: 40px;
     margin: 0;
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+.food h2{
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 700;
 }
 .food p{
     font-size: 15px;
     margin: 0;
-    font-weight: 300;
+    font-weight: 400;
+    text-align: center;
 }
-.btnHold{
+.food .bottom{
     display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+.food .cartBtn{
+    display: flex;
+    gap: 5px;
+}
+.bottom .amount{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
+.cartBtn button{
+    display: flex;
+    width: max-content;
+    background-color: #ebb569;
+    border: none;
+    border-radius: 10px;
     align-items: center;
     justify-content: space-between;
 }
-.btnHold p{
-    font-size: 25px;
+
+.cartBtn button p{
+    font-size: 15px;
     margin: 0;
     font-weight: 700;
     color: var(--text-p);
+    /* color: white; */
+    width: 100%;
 }
-.btnHold button, .cart, .total button, footer button{
+ .cart, .total button, footer button{
     background-color: var(--button);
     padding: 15px 20px;
     border: none;

@@ -106,5 +106,6 @@ elementCreator({
             console.log('worked')
         },
         target: 'addtocart'
-    }]
+    }],
+    imgSrc: [{src: './images/icons/cart.png', tag: 'carticon'}]
 })
