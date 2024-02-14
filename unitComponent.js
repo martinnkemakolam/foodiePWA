@@ -1,5 +1,10 @@
-let observed = []
-
+// state management
+let state = {
+    cart: []
+}
+addtocart=(arg)=>{
+    state.cart.push(arg)
+}
 function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
     class test extends HTMLElement {
         constructor(){
@@ -14,7 +19,7 @@ function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
         })()
         attributeChangedCallback(name, oldValue, newValue){
             this.value[name] = newValue
-            console.log('called')
+            // console.log('called')
             this.render()
         }
         render(){
@@ -23,41 +28,40 @@ function elementCreator({name,atr,template,func,imgSrc,populateCalls}) {
             let temp = document.querySelector(`${template}`).content
             // console.log(temp)
             let clone  = temp.cloneNode(true)
+            func.forEach(({event,callback})=>{
+                this.addEventListener(event, callback, false)
+            })
             clone.childNodes.forEach(child=>{
                 let findNode =(arg)=> {
                     // console.log(arg)
-                    if(arg.tagName !== 'SELECT' && arg.hasChildNodes()){
+                    if(arg.tagName !== 'SELECT' && arg.tagName !== 'BUTTON' && arg.hasChildNodes()){
                         arg.childNodes.forEach(node=> findNode(node))
                     }else{
                         // console.log(arg.dataset)
+                        // console.log(arg.tagName)
                         atr.forEach((ele)=>{
                             // console.log(ele
                             if (arg.dataset && ele.includes('src') && ele in arg.dataset && arg.tagName === 'IMG') {
-                                console.log('reached 2')
+                                // console.log('reached 2')
                                 arg.src = this.value[ele]
                                 return
                             }
                             if( arg.dataset && ele in arg.dataset){
-                                console.log('reached 1')
+                                // console.log('reached 1')
                                 arg.innerHTML = this.value[ele]
                                 return
                             }
                         })
-                        func.forEach(({event, target, callback})=>{
-                            if( arg.dataset && target in arg.dataset ){
-                                // console.log(arg)/
-                                console.log('reached', target, arg.dataset, arg)
-                                arg.addEventListener(event, callback)
-                                // console.log(arg)
-                            }
-                        })
-                        // let {src} = arg
-                        // console.log(src)
+                        // func && func.forEach(()=>{
+                            
+                        //     if( arg.dataset && target in arg.dataset ){
+                        //         console.log('reached', target, arg.dataset, arg)
+                        //         arg.addEventListener(event, callback)
+                        //     }
+                        // })
 
                         imgSrc && imgSrc.forEach(({src, tag})=>{
                             if (arg.dataset && tag in arg.dataset) {
-                                // console.log('img')
-                                console.log(arg)
                                 arg.src = src
                             }
                         })
@@ -82,15 +86,17 @@ elementCreator({
     func: [{
         event: 'input',
         callback: (e)=>{
-            console.log('worked', e.target.value);
+            if ('input' in e.target.dataset) {
+                console.log('worked', e.target.value);   
+            }
         },
-        target: 'input'
     }, {
         event: 'change',
         callback: (e)=>{
-            console.log('worked', e.target.value);
-        },
-        target: 'option'
+            if ('option' in e.target.dataset) {
+                console.log('worked', e.target.value);   
+            }
+        }
     }],
     imgSrc: [],
     populateCalls: null
@@ -102,10 +108,11 @@ elementCreator({
     atr: ['foodsrc', 'name', 'detail', 'price'],
     func: [{
         event: 'click',
-        callback: ()=>{
-            console.log('worked')
-        },
-        target: 'addtocart'
+        callback: (e)=>{
+            if('addtocart' in e.target.dataset) {
+                console.log('called', e.target.dataset)
+            }    
+        }
     }],
     imgSrc: [{src: './images/icons/cart.png', tag: 'carticon'}]
 })
