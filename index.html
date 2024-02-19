@@ -154,9 +154,8 @@
             </footer>
             <div class="foodContainer">
                 <food-category-detail htext="food" ptext="Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Id perferendis sequi optio. Possimus et assumenda ipsa ipsum laboriosam libero ullam dignissimos mollitia natus. Libero quia nulla et dolores accusantium repellendus?"></food-category-detail>
-                <div class="foodGrid">
-                    <card-element name="burger1" foodsrc="/images/burger.jpg" detail="Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum." price="$11">
-                    </card-element>
+                <holder-element>
+                </holder-element>
                     <!-- <cart-list count="0" name="a random name" price="$10"></cart-list> -->
                     <!-- <menu-item>
                         <b class="name">Burger</b>
@@ -256,9 +255,8 @@
     </template>
 
 
-    <template>
-        <div class="foodGrid">
-            no food available
+    <template id="container">
+        <div class="foodGrid" data-product>
         </div>
     </template>
     
@@ -310,9 +308,9 @@
             <p data-detail></p>
             <div class="bottom">
                 <div class="amount">
-                    <div>-</div>
-                    <div>0</div>
-                    <div>+</div>
+                    <div data-minus>-</div>
+                    <div data-count>0</div>
+                    <div data-plus>+</div>
                 </div>
                 <div class="cartBtn">
                     <h2 data-price></h2>
@@ -372,7 +370,6 @@
     <script src="unitComponent.js"></script>
     <script src="appComponent.js"></script>
     <script src="viewComponent.js"></script>
-    <script type="module" src="route.js" ></script>
     <script src="script.js">
     </script>
 </body>
