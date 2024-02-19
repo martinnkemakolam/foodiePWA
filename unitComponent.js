@@ -10,7 +10,8 @@ let model = {
         foodsrc: '/images/burger.jpg',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '10',
-        count: '0'
+        count: '0',
+        uid: '001'
     }]
 }
 // 'foodsrc', 'name', 'detail', 'price', 'count'
@@ -20,13 +21,21 @@ let controlller = {
     addToCart: (arg, element)=>{
         model.cart.push(arg)
         element.render()
+    },
+    editProductCount: (increment, uid, element)=>{
+        let currentProduct = model.product.find((value, index)=> value.uid === uid)
+        if (currentProduct){
+            if (increment) {
+                currentProduct.count = +currentProduct.count + 1
+            }else{
+                currentProduct.count = +currentProduct.count - 1
+            }
+        }
+        element.render()
     }
 }
 // have each function call a render on element in mention
-addtocart=(arg, ele)=>{
-    state.cart.push(arg)
-    ele.render()
-}
+
 function elementCreator({name,atr = [],template,func = [],imgSrc = [],populateCalls}) {
     class test extends HTMLElement {
         constructor(){
@@ -43,7 +52,6 @@ function elementCreator({name,atr = [],template,func = [],imgSrc = [],populateCa
             this.value[name] = newValue
             // console.log('called')
             this.render()
-            populateCalls && populateCalls.call(this)
         }
         render(){
             this.innerHTML = ''
@@ -93,8 +101,10 @@ function elementCreator({name,atr = [],template,func = [],imgSrc = [],populateCa
                 findNode(child)
             })
             this.appendChild(clone)
+            populateCalls && populateCalls.call(this)
         }
         connectedCallback(){
+            console.log('connected', this)
             this.render()
         }
     }
@@ -128,29 +138,36 @@ elementCreator({
 elementCreator({
     name: 'card-element',
     template: '#foodcard',
-    atr: ['foodsrc', 'name', 'detail', 'price', 'count'],
+    atr: ['foodsrc', 'name', 'detail', 'price', 'count', 'uid'],
     func: [{
         event: 'click',
         callback: function (e) {
             if('addtocart' in e.target.dataset) {
-                let argument = {
-                    name: this.value.name,
-                    foodsrc: this.value.foodsrc,
-                    detail: this.value.detail,
-                    price: this.value.price,
-                    count: 1
-                }
-                controlller.addToCart(argument, document.querySelector())
+                // let argument = {
+                //     name: this.value.name,
+                //     foodsrc: this.value.foodsrc,
+                //     detail: this.value.detail,
+                //     price: this.value.price,
+                //     count: 1,
+                //     uid: this.value.uid
+                // }
+                // controlller.addToCart(argument, document.querySelector('.foodGrid').parentElement)
+                controlller.editProductCount(true, this.value.uid, document.querySelector('.foodGrid').parentElement)
+                console.log(model.product)
             } else if ('minus' in e.target.dataset) {
-                console.log('called minus', e.target.dataset)
+                controlller.editProductCount(false, this.value.uid, document.querySelector('.foodGrid').parentElement)
+                console.log(model.product)
             }else if ('plus' in e.target.dataset){
-                console.log('called plus', e.target.dataset)
+                // console.log('called plus', e.target.dataset)
+                controlller.editProductCount(true, this.value.uid, document.querySelector('.foodGrid').parentElement)
+                console.log(model.product)
             }        
         }
     }],
     imgSrc: [{src: './images/icons/cart.png', tag: 'carticon'}],
     populateCalls: function(){
         // this.setAttribute('count', '1')
+        // console.log('called too')
     }
 })
 
@@ -159,10 +176,11 @@ elementCreator({
 
     template: '#container',
     populateCalls: function(){
-        // if (model.product.length > 0) {
-        //     this.querySelector('.foodGrid').innerHTML = model.product.map(ele => `<card-element name="${ele.name}" foodsrc="${ele.foodsrc}" detail="${ele.detail}" price="$${ele.price}" count="${ele.count}">
-        //     </card-element>`).join(' ')
-        // }
-        console.log(document.querySelector('.foodGrid'))
+        // console.log('called')
+        if (model.product.length > 0) {
+            console.log(model.product)
+            this.querySelector('.foodGrid').innerHTML = model.product.map(ele => `<card-element name="${ele.name}" foodsrc="${ele.foodsrc}" detail="${ele.detail}" price="$${ele.price}" count="${ele.count}" uid="${ele.uid}">
+            </card-element>`).join(' ')
+        }
     }
 })

@@ -126,6 +126,7 @@ select option{
     gap: 14px;
     height: 100%;
     width: 100%;
+    cursor:context-menu;
     background-color: white;
     border: 1px solid #6e6767;
     border-radius: 30px;
@@ -172,6 +173,7 @@ select option{
     gap: 5px;
     align-items: center;
     padding: 20px;
+    cursor: pointer;
     gap: 10px;
 }
 .cartBtn button{
@@ -182,6 +184,7 @@ select option{
     border-radius: 10px;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .cartBtn button p{
