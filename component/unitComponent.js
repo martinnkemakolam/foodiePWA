@@ -58,7 +58,6 @@ elementCreator({
 
 elementCreator({
     name: 'holder-element',
-
     template: '#container',
     populateCalls: function(){
         let model = view()

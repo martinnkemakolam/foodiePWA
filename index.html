@@ -166,22 +166,54 @@
     </template>
     <template id="view2">
         <section class="myCart">
-            <img src="./images/images.png" class="icon" alt="">
-            <div class="shoppingCart">
-                <div class="head">
-                    <h1>Food Cart</h1>
-                    <button>remove all</button>
-                </div>
-                <div class="rest">
-                    <img src="./images/no food.png" alt="">
-                </div>
-                <div class="bodyHold">
-    
-                </div>
-                <div class="total">
-                    <h2>total</h2>
-                    <p>$0</p>
-                    <button id="checkout">checkout</button>
+            <h1>Cart</h1>
+            <div class="cartContainer">
+                <table>
+                    <tr>
+                        <th>Product details</th>
+                        <th>Quality</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                    <div>
+                        <tr>
+                            <td>
+                                <img data-imgSrc>
+                                <div>
+                                    <h1 data-name></h1>
+                                    <p data-number></p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="amount">
+                                    <div data-minus>-</div>
+                                    <div data-count></div>
+                                    <div data-plus>+</div>
+                                </div>
+                            </td>
+                            <td data-price></td>
+                            <td data-total></td>
+                            <button data-remove>
+                                x
+                            </button>
+                        </tr>
+                    </div>
+                </table>
+                <div>
+                    <h1></h1>
+                    <div>
+                        <p>
+                            Sub-total
+                        </p>
+                        <p data-subtotal=""></p>
+                    </div>
+                    <div>
+                        <p>Delivery</p>
+                        <img>
+                    </div>
+                    <button>
+                        check Out
+                    </button>
                 </div>
             </div>
         </section>
@@ -253,13 +285,31 @@
             </div>
         </div>
     </template>
-
-
     <template id="container">
         <div class="foodGrid" data-product>
         </div>
     </template>
-    
+    <template id="foodcard">
+        <div class="food">
+            <img data-foodsrc class="product"/>
+            <h1 data-name></h1>
+            <p data-detail></p>
+            <div class="bottom">
+                <div class="amount">
+                    <div data-minus>-</div>
+                    <div data-count></div>
+                    <div data-plus>+</div>
+                </div>
+                <div class="cartBtn">
+                    <h2 data-price></h2>
+                    <button data-addtocart>
+                        <img width="30px" height="30px" data-addtocart data-carticon>
+                        <p data-addtocart>Add to cart</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
     
     <template id="testTemp">
         <div>
@@ -299,27 +349,6 @@
                 <button id="removeBtn">-</button>
             </div>
             <p id="price">0</p>
-        </div>
-    </template>
-    <template id="foodcard">
-        <div class="food">
-            <img data-foodsrc class="product"/>
-            <h1 data-name></h1>
-            <p data-detail></p>
-            <div class="bottom">
-                <div class="amount">
-                    <div data-minus>-</div>
-                    <div data-count></div>
-                    <div data-plus>+</div>
-                </div>
-                <div class="cartBtn">
-                    <h2 data-price></h2>
-                    <button data-addtocart>
-                        <img width="30px" height="30px" data-addtocart data-carticon>
-                        <p data-addtocart>Add to cart</p>
-                    </button>
-                </div>
-            </div>
         </div>
     </template>
     <template id="cartCategory">
@@ -370,7 +399,7 @@
     <script src="unitComponent.js"></script>
     <script src="appComponent.js"></script>
     <script src="viewComponent.js"></script> -->
-    <script src="script.js">
-    </script>
+    <!-- <script src="script.js">
+    </script> -->
 </body>
 </html>
