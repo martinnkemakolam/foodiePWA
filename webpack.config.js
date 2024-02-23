@@ -3,13 +3,32 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: {
-        app: path.Join(__dirname, 'appComponent.js')
+        app: path.join(__dirname, 'appComponent.js')
     },
     output: {
-        path: path.Join(__dirname, 'dist'),
-        filename: '[name].js'
+        path: path.join(__dirname, 'dist'),
+        filename: '[name].js',
+        assetModuleFilename: '[name][ext]'
     },
-    devtool: 'source map',
+    devtool: 'inline-source-map',
+    module: {
+        rules: [
+            // {
+            //     test: /\.js$/,
+            //     exclude: '/node_modules/',
+            //     use: {
+            //         loader: 'babel-loader',
+            //         option: {
+            //             presets: ['@babel-preset-env']
+            //         }
+            //     }
+            // }
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: "asset/resource"
+            }
+        ]
+    },
     devServer: {
         static: {
             directory: path.join(__dirname, 'dist')

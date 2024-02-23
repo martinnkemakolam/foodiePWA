@@ -1,3 +1,4 @@
+export default 
 class view1 extends HTMLElement{
     connectedCallback(){
         this.render()

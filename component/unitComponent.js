@@ -5,7 +5,8 @@ import { controlller, view } from "../stateManager";
 
 
 // have each function call a render on element in mention
-
+let data = {}
+export default data
 elementCreator({
     name: 'header-element',
     atr: [],

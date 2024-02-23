@@ -1,4 +1,4 @@
-export default router = ()=>{
+export let router = ()=>{
     let views = []
     let addRoute=(url, htmlString)=>{
         views.push({url, htmlString})

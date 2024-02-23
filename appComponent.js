@@ -1,5 +1,6 @@
-import router from "./router"
-
+import {router} from "./router"
+import view1 from "./view/viewComponent"
+import data from "./component/unitComponent"
 // we can't seem to work with offline files and importing files 
 let route = router()
 class app extends HTMLElement{
@@ -15,3 +16,15 @@ class app extends HTMLElement{
 }
 
 customElements.define('app-component', app)
+
+// register SW
+navigator.serviceWorker.register('sw.js')
+
+let promptObj;
+
+window.addEventListener('beforeinstallprompt', (e)=>{
+    console.log(e)
+    e.preventDefault()
+    promptObj = e
+    // showFooter(true)
+})
