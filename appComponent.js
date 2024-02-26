@@ -1,7 +1,7 @@
 import {router} from "./router"
 import view1 from "./view/viewComponent"
 import data from "./component/unitComponent"
-import './style.css'
+// import './style.css'
 // we can't seem to work with offline files and importing files 
 let route = router()
 class app extends HTMLElement{

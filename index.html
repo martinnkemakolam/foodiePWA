@@ -166,50 +166,50 @@
     </template>
     <template id="view2">
         <section class="myCart">
+            <header-element></header-element>
             <h1>Cart</h1>
             <div class="cartContainer">
                 <table>
-                    <tr>
-                        <th>Product details</th>
-                        <th>Quality</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                    </tr>
-                    <div>
+                    <tbody>
                         <tr>
-                            <td>
-                                <img data-imgSrc>
-                                <div>
-                                    <h1 data-name></h1>
-                                    <p data-number></p>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="amount">
-                                    <div data-minus>-</div>
-                                    <div data-count></div>
-                                    <div data-plus>+</div>
-                                </div>
-                            </td>
-                            <td data-price></td>
-                            <td data-total></td>
-                            <button data-remove>
-                                x
-                            </button>
+                            <th class="wide">Product details</th>
+                            <th class="medium">Quality</th>
+                            <th class="medium">Price</th>
+                            <th class="medium">Total</th>
+                            <th class="medium"></th>
                         </tr>
-                    </div>
+                        <tr class="border">
+                            <td class="wide">
+                                <img data-imgSrc src="./images/burger1.png">
+                                <div>
+                                    <h1 data-name class="name">Burger 1</h1>
+                                    <p data-number>001103</p>
+                                </div>
+                            </td>
+                            <td class="medium">
+                                <div data-minus>-</div>
+                                <div data-count class="border">3</div>
+                                <div data-plus>+</div>
+                            </td>
+                            <td class="medium" data-price>13</td>
+                            <td class="medium" data-total>39</td>
+                            <td class="medium" data-remove>
+                                <img src="./images/icons/trash.png" >
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-                <div>
-                    <h1></h1>
-                    <div>
-                        <p>
+                <div class="checkOut">
+                    <h1>Total</h1>
+                    <div class="flex">
+                        <p class="bold">
                             Sub-total
                         </p>
-                        <p data-subtotal=""></p>
+                        <p data-subtotal>$330</p>
                     </div>
-                    <div>
+                    <div class="flex">
                         <p>Delivery</p>
-                        <img>
+                        <img width="15px" height="15px" src="./images/icons/information.png">
                     </div>
                     <button>
                         check Out
@@ -297,7 +297,7 @@
             <div class="bottom">
                 <div class="amount">
                     <div data-minus>-</div>
-                    <div data-count></div>
+                    <div data-count class="border"></div>
                     <div data-plus>+</div>
                 </div>
                 <div class="cartBtn">
