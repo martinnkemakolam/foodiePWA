@@ -68,3 +68,70 @@ elementCreator({
         }
     }
 })
+
+elementCreator({
+    name: 'table-element',
+    template: '#table-element',
+    populateCalls: function(){
+        let model = view()
+        let data = model.product.filter((ele)=>ele.count > 0)
+        console.log(data)
+        if (model.product.length > 0) {
+            this.querySelector('tbody').innerHTML = `
+            <tr>
+                <th class="wide">Product details</th>
+                <th class="medium">Quality</th>
+                <th class="medium">Price</th>
+                <th class="medium">Total</th>
+                <th class="medium"></th>
+            </tr>
+            ${
+                data.map(ele => `<roll-element imgSrc="${ele.foodsrc}" number="${ele.uid}" name="${ele.name}" count="${ele.count}" price="$${ele.price}" total="$${ele.price * ele.count}"></roll-element>`).join(' ')
+            }
+            `
+        }
+    }
+})
+
+elementCreator({
+    name: 'roll-element',
+    template: '#roll-element',
+    atr: ['imgsrc', 'name', 'number', 'count', 'price', 'total'],
+    func: [{
+        event: 'click',
+        callback: function(e){
+            if ('plus' in e.target.dataset) {
+                controlller.editProductCount(true, this.value.number, [document.querySelector('table-element'), document.querySelector('checkout-element')])   
+            }else if('minus' in e.target.dataset) {
+                controlller.editProductCount(false, this.value.number, [document.querySelector('table-element'), document.querySelector('checkout-element')])   
+            }else if ('remove' in e.target.dataset){
+                controlller.removeFromCart(this.value.number, [document.querySelector('table-element'), document.querySelector('checkout-element')])
+            }
+        }
+    }]
+})
+
+elementCreator({
+    name: 'checkout-element',
+    template: '#checkout-element',
+    func: [
+        {
+            event: 'click',
+            callback: function (e){
+                if ('checkout' in e.target.dataset) {
+                    alert('Checkout')
+                }
+            }
+        }
+    ],
+    populateCalls: function(e){
+        let model = view()
+        let data = model.product.filter((ele)=>ele.count > 0)
+        let sum = 0
+        data.forEach((ele)=>{
+            sum += +ele.count * +ele.price
+        })
+        // let sum = data.map(e => e.price).reduce((sum, a)=> +sum + a, 0)
+        this.querySelector('.subtotal').innerHTML = `$${sum}`      
+    }
+})

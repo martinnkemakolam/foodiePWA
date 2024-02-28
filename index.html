@@ -169,52 +169,8 @@
             <header-element></header-element>
             <h1>Cart</h1>
             <div class="cartContainer">
-                <table>
-                    <tbody>
-                        <tr>
-                            <th class="wide">Product details</th>
-                            <th class="medium">Quality</th>
-                            <th class="medium">Price</th>
-                            <th class="medium">Total</th>
-                            <th class="medium"></th>
-                        </tr>
-                        <tr class="border">
-                            <td class="wide">
-                                <img data-imgSrc src="./images/burger1.png">
-                                <div>
-                                    <h1 data-name class="name">Burger 1</h1>
-                                    <p data-number>001103</p>
-                                </div>
-                            </td>
-                            <td class="medium">
-                                <div data-minus>-</div>
-                                <div data-count class="border">3</div>
-                                <div data-plus>+</div>
-                            </td>
-                            <td class="medium" data-price>13</td>
-                            <td class="medium" data-total>39</td>
-                            <td class="medium" data-remove>
-                                <img src="./images/icons/trash.png" >
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="checkOut">
-                    <h1>Total</h1>
-                    <div class="flex">
-                        <p class="bold">
-                            Sub-total
-                        </p>
-                        <p data-subtotal>$330</p>
-                    </div>
-                    <div class="flex">
-                        <p>Delivery</p>
-                        <img width="15px" height="15px" src="./images/icons/information.png">
-                    </div>
-                    <button>
-                        check Out
-                    </button>
-                </div>
+                <table-element></table-element>
+                <checkout-element></checkout-element>
             </div>
         </section>
     </template>
@@ -310,7 +266,51 @@
             </div>
         </div>
     </template>
-    
+    <template id="table-element">
+        <table>
+            <tbody>
+            </tbody>
+        </table>
+    </template>
+    <template id="roll-element">
+        <tr class="border">
+            <td class="wide">
+                <img data-imgSrc>
+                <div>
+                    <h1 data-name class="name"></h1>
+                    <p data-number></p>
+                </div>
+            </td>
+            <td class="medium">
+                <div data-minus>-</div>
+                <div data-count class="border"></div>
+                <div data-plus>+</div>
+            </td>
+            <td class="medium" data-price></td>
+            <td class="medium" data-total></td>
+            <td class="medium" data-remove>
+                <img src="./images/icons/trash.png" data-remove>
+            </td>
+        </tr>
+    </template>
+    <template id="checkout-element">
+        <div class="checkOut">
+            <h1>Total</h1>
+            <div class="flex">
+                <p class="bold">
+                    Sub-total
+                </p>
+                <p class="subtotal"></p>
+            </div>
+            <div class="flex">
+                <p>Delivery</p>
+                <img width="15px" height="15px" src="./images/icons/information.png">
+            </div>
+            <button data-checkout>
+                check out
+            </button>
+        </div>
+    </template>
     <template id="testTemp">
         <div>
             <h1 data-ptext data-func1></h1>

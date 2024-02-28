@@ -31,11 +31,16 @@ let cloneDeep=(x)=>{
 export let view =()=> model
 
 export let controlller = {
-    addToCart: (arg, element)=>{
+    addToCart: (arg, elements)=>{
         model.cart.push(arg)
-        element.render()
+        if(elements.length > 0) {
+            elements.forEach( element=> element.render())
+        }else{
+            elements.render()
+        }
     },
-    editProductCount: (increment, uid, element)=>{
+    editProductCount: (increment, uid, elements)=>{
+
         let currentProduct = model.product.find((value, index)=> value.uid === uid)
         if (currentProduct){
             if (increment) {
@@ -44,6 +49,21 @@ export let controlller = {
                 currentProduct.count = +currentProduct.count - 1
             }
         }
-        element.render()
+        if(elements.length > 0) {
+            elements.forEach( element=> element.render())
+        }else{
+            elements.render()
+        }
+    },
+    removeFromCart: (uid, elements)=>{
+        let currentProduct = model.product.find((value, index)=> value.uid === uid)
+        if (currentProduct) {
+            currentProduct.count = 0
+        }
+        if(elements.length > 0) {
+            elements.forEach( element=> element.render())
+        }else{
+            elements.render()
+        }
     }
 }
