@@ -20,11 +20,9 @@ elementCreator({
         },
     }, {
         event: 'change',
-        callback: function(){
-            return (e)=>{
-                if ('option' in e.target.dataset) {
-                    console.log('worked', e.target.value);   
-                }
+        callback: function(e){
+            if ('option' in e.target.dataset) {
+                console.log('worked', e.target.value);   
             }
         }
     }],
@@ -51,7 +49,7 @@ elementCreator({
             }        
         }
     }],
-    imgSrc: [{src: './images/icons/cart.png', tag: 'carticon'}],
+    // imgSrc: [{src: './images/icons/cart.png', tag: 'carticon'}],
     populateCalls: function(){
     }
 })

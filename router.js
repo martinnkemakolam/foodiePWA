@@ -5,12 +5,13 @@ export let router = ()=>{
     }
     
     let currentRoute =()=>{
+        let app = document.querySelector('#app')
         let {hash} = window.location
         let current = views.find((e)=> e.url === hash)
         if (current) {
-            document.querySelector('#app').render(current.htmlString)
+            app.render(current.htmlString)
         }else{
-            document.querySelector('#app').render('no page found')
+            app.render('no page found')
         }
     }
     let start=()=>{

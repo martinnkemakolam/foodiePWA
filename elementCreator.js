@@ -22,28 +22,39 @@ export default function elementCreator({name,atr = [],template,func = [],imgSrc 
             func.forEach(({event,callback})=>{
                 this.addEventListener(event, callback, false)
             })
+            let atributeAdder=(atr=[], arg)=>{
+                atr.forEach((ele)=>{
+                    // console.log(ele
+                    if (arg.dataset && ele.includes('src') && ele in arg.dataset && arg.tagName === 'IMG') {
+                        // console.log('reached 2')
+                        arg.src = this.value[ele]
+                        return
+                    }
+                    if( arg.dataset && ele in arg.dataset){
+                        // console.log('reached 1')
+                        arg.innerHTML = this.value[ele]
+                        return
+                    }
+                })
+            }
+            let imageAdder=(imgSrc=[], arg)=>{
+                imgSrc.forEach(({src, tag})=>{
+                    if (arg.dataset && tag in arg.dataset) {
+                        arg.src = src
+                    }
+                })
+            }
             let clone  = temp.cloneNode(true)
             clone.childNodes.forEach(child=>{
                 let findNode =(arg)=> {
                     // console.log(arg)
                     if(arg.tagName !== 'SELECT' && arg.tagName !== 'BUTTON' && arg.hasChildNodes()){
+                        atributeAdder(atr, arg)
                         arg.childNodes.forEach(node=> findNode(node))
                     }else{
                         // console.log(arg.dataset)
                         // console.log(arg.tagName)
-                        atr.forEach((ele)=>{
-                            // console.log(ele
-                            if (arg.dataset && ele.includes('src') && ele in arg.dataset && arg.tagName === 'IMG') {
-                                // console.log('reached 2')
-                                arg.src = this.value[ele]
-                                return
-                            }
-                            if( arg.dataset && ele in arg.dataset){
-                                // console.log('reached 1')
-                                arg.innerHTML = this.value[ele]
-                                return
-                            }
-                        })
+                        atributeAdder(atr, arg)           
                         // func && func.forEach(()=>{
                             
                         //     if( arg.dataset && target in arg.dataset ){
@@ -51,13 +62,7 @@ export default function elementCreator({name,atr = [],template,func = [],imgSrc 
                         //         arg.addEventListener(event, callback)
                         //     }
                         // })
-
-                        imgSrc && imgSrc.forEach(({src, tag})=>{
-                            if (arg.dataset && tag in arg.dataset) {
-                                arg.src = src
-                            }
-                        })
-                        
+                        imageAdder(imgSrc, arg)
                     }
                 }
                 findNode(child)
