@@ -1,3 +1,5 @@
+import { view } from "./stateManager"
+
 export default function elementCreator({name,atr = [],template,func = [],imgSrc = [],populateCalls}) {
     class test extends HTMLElement {
         constructor(){
@@ -10,10 +12,13 @@ export default function elementCreator({name,atr = [],template,func = [],imgSrc 
                 this.value[name] = ''
             })
         })()
+
         attributeChangedCallback(name, oldValue, newValue){
             this.value[name] = newValue
             // console.log('called')
-            this.render()
+            if (oldValue !== newValue) {
+                this.render()   
+            }
         }
         render(){
             this.innerHTML = ''
@@ -68,10 +73,13 @@ export default function elementCreator({name,atr = [],template,func = [],imgSrc 
                 findNode(child)
             })
             this.appendChild(clone)
-            populateCalls && populateCalls.call(this)
+            if (populateCalls){
+                let call = populateCalls.call(this)
+                call(view(), (arg)=> this.querySelector(arg))
+            }
         }
         connectedCallback(){
-            console.log('connected', this)
+            // console.log('connected', this)
             this.render()
         }
     }

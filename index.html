@@ -175,11 +175,30 @@
         </section>
     </template>
     <template id="view3">
+        <section class="myCart">
+            <header-element></header-element>
+        </section>
+    </template>
+    
+    <template id="cms-element">
         <div>
+            <img data-imgsrc/>
+            <div>
+                <p data-name></p>
+                <p data-extra></p>
+            </div>
+            <div>
+                <button data-edit>Edit</button>
+                <button data-delete>Delete</button>
+            </div>
         </div>
     </template>
     
-    
+    <template id="cmsholder-element">
+        <div class="holder">
+        </div>
+    </template>
+
     <template id="header">
         <div class="header">
             <div class="links">
@@ -205,17 +224,25 @@
         <div class="foodGrid" data-product>
         </div>
     </template>
+    <template id="amount-element"> 
+        <div class="amount">
+            <div data-minus>-</div>
+            <div data-count class="border"></div>
+            <div data-plus>+</div>
+        </div>
+    </template>
     <template id="foodcard">
         <div class="food">
             <img data-foodsrc class="product"/>
             <h1 data-name></h1>
             <p data-detail></p>
             <div class="bottom">
-                <div class="amount">
+                <!-- <div class="amount">
                     <div data-minus>-</div>
                     <div data-count class="border"></div>
                     <div data-plus>+</div>
-                </div>
+                </div> -->
+                <amount-element count="0"></amount-element>
                 <div class="cartBtn">
                     <h2 data-price></h2>
                     <button data-addtocart>
@@ -242,9 +269,7 @@
                 </div>
             </td>
             <td class="medium">
-                <div data-minus>-</div>
-                <div data-count class="border"></div>
-                <div data-plus>+</div>
+                <amount-element count="0"></amount-element>
             </td>
             <td class="medium" data-price></td>
             <td class="medium" data-total></td>
