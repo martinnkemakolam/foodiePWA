@@ -1,6 +1,10 @@
 import elementCreator from "../elementCreator";
 import {controlller} from "../stateManager";
-
+import header from "./pug/header.pug"
+import card from "./pug/card.pug"
+import cardHolder from "./pug/cardHolder.pug"
+import table from "./pug/table.pug"
+import roll from "./pug/roll.pug"
 // state management
 
 
@@ -10,7 +14,7 @@ export default data
 elementCreator({
     name: 'header-element',
     atr: [],
-    template: '#header',
+    pugFunc: header,
     func: [{
         event: 'input',
         callback: function(e){
@@ -31,8 +35,8 @@ elementCreator({
 })
 elementCreator({
     name: 'card-element',
-    template: '#foodcard',
-    atr: ['foodsrc', 'name', 'detail', 'count', 'uid', 'price'],
+    pugFunc: card,
+    atr: ['src', 'name', 'detail', 'count', 'uid', 'price'],
     func: [{
         event: 'click',
         callback: function (e) {
@@ -50,57 +54,22 @@ elementCreator({
         }
     }],
     // imgSrc: [{src: './images/icons/cart.png', tag: 'carticon'}],
-    populateCalls: function(){
-        // console.log(this)
-        return(state, element)=>{
-            console.log(this.value.count)
-            element('amount-element').setAttribute('count', this.value.count)
-        }
-    }
 })
 
 elementCreator({
     name: 'holder-element',
-    template: '#container',
-    populateCalls: function(){
-        return (state, element)=>{
-            if (state.product.length > 0) {
-                // console.log(model.product)
-                element('.foodGrid').innerHTML = state.product.map(ele => `<card-element name="${ele.name}" foodsrc="${ele.foodsrc}" detail="${ele.detail}" price="$${ele.price}" count="${ele.count}" uid="${ele.uid}">
-                </card-element>`).join(' ')
-            }
-        }
-    }
+    pugFunc: cardHolder
+
 })
 
 elementCreator({
     name: 'table-element',
-    template: '#table-element',
-    populateCalls: function(){
-        return (state, element)=>{
-            let data = state.product.filter((ele)=>ele.count > 0)
-            // console.log(data)
-            if (state.product.length > 0) {
-                element('tbody').innerHTML = `
-                <tr>
-                    <th class="wide">Product details</th>
-                    <th class="medium">Quality</th>
-                    <th class="medium">Price</th>
-                    <th class="medium">Total</th>
-                    <th class="medium"></th>
-                </tr>
-                ${
-                    data.map(ele => `<roll-element imgSrc="${ele.foodsrc}" number="${ele.uid}" name="${ele.name}" count="${ele.count}" price="$${ele.price}" total="$${ele.price * ele.count}"></roll-element>`).join(' ')
-                }
-                `
-            }
-        }
-    }
+    pugFunc: table
 })
 
 elementCreator({
     name: 'roll-element',
-    template: '#roll-element',
+    pugFunc: roll,
     atr: ['imgsrc', 'name', 'number', 'count', 'price', 'total'],
     func: [{
         event: 'click',
@@ -113,72 +82,69 @@ elementCreator({
                 controlller.removeFromCart(this.value.number, [document.querySelector('table-element'), document.querySelector('checkout-element')])
             }
         }
-    }],
-    populateCalls: function (){
-        return (state, element)=>{
-            element('amount-element').setAttribute('count', this.value.count)
-        }
-    }
-})
-
-elementCreator({
-    name: 'checkout-element',
-    template: '#checkout-element',
-    func: [
-        {
-            event: 'click',
-            callback: function (e){
-                if ('checkout' in e.target.dataset) {
-                    alert('Checkout')
-                }
-            }
-        }
-    ],
-    populateCalls: function(){
-        return (state, element)=>{
-            let data = state.product.filter((ele)=>ele.count > 0)
-            let sum = 0
-            data.forEach((ele)=>{
-                sum += +ele.count * +ele.price
-            })
-            // let sum = data.map(e => e.price).reduce((sum, a)=> +sum + a, 0)
-            element('.subtotal').innerHTML = `$${sum}`
-    
-        }    
-    }
-})
-
-
-
-elementCreator({
-    name: "amount-element",
-    template: "#amount-element",
-    atr: ['count']
-})
-
-
-elementCreator({
-    name: "cms-element",
-    template: "#cms-element",
-    atr: ['imgsrc', 'name', 'extra'],
-    func: [{
-        event: "click",
-        callback: function(e){
-            if ('delete' in e.target.dataset) {
-            }else if ('edit' in e.target.dataset) {
-            }
-        }
     }]
+    // ,
+    // populateCalls: function (){
+    //     return (state, element)=>{
+    //         element('amount-element').setAttribute('count', this.value.count)
+    //     }
+    // }
 })
 
-elementCreator({
-    name: "cmsholder-element",
-    template: "#cmsholder-element",
-    populateCalls: function(){
-        return (state, element)=>{
-            element('holder').innerHTML = `
-            ${state.product.map(()=> `<cms-element></csm-element>`).join(' ')}
-            `
-        }
-    }
-})
+// elementCreator({
+//     name: 'checkout-element',
+//     pugFunc:
+//     func: [
+//         {
+//             event: 'click',
+//             callback: function (e){
+//                 if ('checkout' in e.target.dataset) {
+//                     alert('Checkout')
+//                 }
+//             }
+//         }
+//     ],
+//     populateCalls: function(){
+//         return (state, element)=>{
+            
+//             // let sum = data.map(e => e.price).reduce((sum, a)=> +sum + a, 0)
+//             element('.subtotal').innerHTML = `$${sum}`
+    
+//         }    
+//     }
+// })
+
+
+
+// elementCreator({
+//     name: "amount-element",
+//     pugFunc:
+//     atr: ['count']
+// })
+
+
+// elementCreator({
+//     name: "cms-element",
+//     pugFunc:
+//     atr: ['imgsrc', 'name', 'extra'],
+//     func: [{
+//         event: "click",
+//         callback: function(e){
+//             if ('delete' in e.target.dataset) {
+//             }else if ('edit' in e.target.dataset) {
+//             }
+//         }
+//     }]
+// })
+
+// elementCreator({
+//     name: "cmsholder-element",
+//     pugFunc:
+//     populateCalls: function(){
+//         return (state, element)=>{
+//             element('holder').innerHTML = `
+//             ${state.product.map(()=> `<cms-element></csm-element>`).join(' ')}
+//             `
+//         }
+//     }
+// })

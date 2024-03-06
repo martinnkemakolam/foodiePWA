@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     mode: 'development',
     entry: {
@@ -30,8 +31,16 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: "asset/resource"
+            },{
+                test: /\.pug$/,
+                use: ['pug-loader']
             }
         ]
+    },
+    resolve: {
+        fallback: {
+            fs: false
+        }
     },
     devServer: {
         static: {

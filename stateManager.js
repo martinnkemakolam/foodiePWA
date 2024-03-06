@@ -1,7 +1,7 @@
 let model = {
     product: [{
         name: 'Burger 1',
-        foodsrc: '/images/burger.jpg',
+        foodsrc: './images/burger.jpg',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '10',
         count: '0',

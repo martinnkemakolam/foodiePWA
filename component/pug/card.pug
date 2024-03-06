@@ -1,0 +1,11 @@
+div.food
+    img(src= prop.src).product
+    h1= prop.name
+    p= prop.detail
+    div.bottom
+        amount-element(count= prop.count)
+        div.cartBtn
+            h2= prop.price
+            button(data-addtocart)
+                img( width="30px" height="30px" src="./images/icons/cart.png" data-addtocart)
+                p(data-addtocart) Add to cart
