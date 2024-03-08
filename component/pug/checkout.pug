@@ -4,7 +4,7 @@ div.checkOut
         - let data = state.product.filter((ele)=>ele.count > 0)
         - let sum = 0
         each value, index in data
-            sum += +value.count * +value.price
+            sum = +sum + +value.count * +value.price
         p.bold Sub-total
         p.subtotal= sum
     div.flex

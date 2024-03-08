@@ -1,13 +1,12 @@
 import {router} from "./router"
-import view1 from "./view/viewComponent"
 import data from "./component/unitComponent"
 // import './style.css'
 // we can't seem to work with offline files and importing files 
 let route = router()
 class app extends HTMLElement{
     connectedCallback(){
-        route.addRoute('#/',`<view1-component></view1-component>`)
-        route.addRoute('#/cart',`<view2-component></view2-component>`)
+        route.addRoute('#/',`<product-page></product-page>`)
+        route.addRoute('#/cart',`<cart-page></cart-page>`)
         route.addRoute('#/cms',`<view3-component></view3-component>`)
         route.start()
     }

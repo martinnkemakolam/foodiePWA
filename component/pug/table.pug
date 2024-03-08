@@ -1,11 +1,13 @@
-table
-    tbody
-        tr
-            th.wide Product details
-            th.medium Quality
-            th.medium Price
-            th.medium Total
-            th.medium
-        each value, index in state.products
-            if value.count > 0
+mixin rows()
+    each value, index in state.product
+        if value.count > 0
+            tr
                 roll-element(imgsrc= value.foodsrc, number= value.uid ,name= value.name ,count= value.count, price= value.price ,total= value.price * value.count)
+table
+    tr
+        th.wide Product details
+        th.medium Quality
+        th.medium Price
+        th.medium Total
+        th.medium
+    +rows()
