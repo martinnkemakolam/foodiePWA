@@ -1,13 +1,17 @@
+- let prod = state.model.product.filter((ele)=> ele.count>0)
 mixin rows()
-    each value, index in state.product
-        if value.count > 0
-            tr
+    if prod.length > 0
+        each value, index in prod
                 roll-element(imgsrc= value.foodsrc, number= value.uid ,name= value.name ,count= value.count, price= value.price ,total= value.price * value.count)
-table
-    tr
-        th.wide Product details
-        th.medium Quality
-        th.medium Price
-        th.medium Total
-        th.medium
-    +rows()
+    else
+        div No product in cart
+div.tableBody
+    div
+        .row
+            .wide Product details
+            .medium Quality
+            .medium Price
+            .medium Total
+            .medium
+    div
+        +rows()

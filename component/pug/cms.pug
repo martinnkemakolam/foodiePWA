@@ -1,8 +1,13 @@
-div
-    img(src= imgsrc)
-    div
-        p= name
-        p= extra
-    div
-        button(data-edit) Edit
-        button(data-delete) Delete
+div.cmsCard
+    img(src= prop.imgsrc).proImg
+    div.detail
+        p #{prop.name}
+        p #{prop.extra}
+        p $#{prop.price}
+    div.button
+        button(data-edit)
+            img(src="./images/icons/edit.png").icon
+            p Edit
+        button(data-delete)
+            img(src="./images/icons/trash.png").icon
+            P Delete

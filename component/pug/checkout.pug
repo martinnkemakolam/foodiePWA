@@ -1,12 +1,8 @@
 div.checkOut
     h1 Total
     div.flex
-        - let data = state.product.filter((ele)=>ele.count > 0)
-        - let sum = 0
-        each value, index in data
-            sum = +sum + +value.count * +value.price
         p.bold Sub-total
-        p.subtotal= sum
+        p.subtotal $#{state.sum}
     div.flex
         p Delivery
         img( width="15px",height="15px",src="./images/icons/information.png")

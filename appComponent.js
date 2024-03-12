@@ -7,7 +7,9 @@ class app extends HTMLElement{
     connectedCallback(){
         route.addRoute('#/',`<product-page></product-page>`)
         route.addRoute('#/cart',`<cart-page></cart-page>`)
-        route.addRoute('#/cms',`<view3-component></view3-component>`)
+        route.addRoute('#/cms',`<cms-page></cms-page>`)
+        route.addRoute('#/cms/add', `<add-page></add-page>`)
+        route.addRoute('#/cms/edit/:id', `<edit-page></edit>`)
         route.start()
     }
     render=(str)=>{

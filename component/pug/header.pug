@@ -4,11 +4,20 @@ div.header
         a(href="./#/cms") CMS
         a(href="./#/cart") Cart
         a(href="./#/orders") Orders
-    div.searchbar
-        img(width="30px" height="30px" src="images/icons/search.png")
-        input(data-input placeholder="Search")
-        div.line
-        select(data-option)
-            option( data-option value="food" selected) Food
-            option(data-option value="food 1") Food 1
-            option(data-option value="food 2") Food 2
+
+    if url === '#/'
+        div.searchbar
+                img(width="30px" height="30px" src="images/icons/search.png")
+                input(data-input placeholder="Search")
+                div.line
+                select(data-option)
+                    option( data-option value="food" selected) Food
+                    option(data-option value="food 1") Food 1
+                    option(data-option value="food 2") Food 2
+    if url === '#/cms'
+        div.searchbar
+                img(width="30px" height="30px" src="images/icons/search.png")
+                input(data-input placeholder="Search")
+                div.line
+                button
+                    a(href="./#/cms/add") Add a product

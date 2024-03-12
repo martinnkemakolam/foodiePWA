@@ -11,6 +11,10 @@ import cms from "./pug/cms.pug"
 import cmsholder from "./pug/cmsholder.pug"
 import product from "./pug/product.pug"
 import cart from "./pug/cart.pug"
+import cmspage from "./pug/cmspage.pug"
+import add from "./pug/add.pug"
+import img from "./pug/img.pug"
+import form from "./pug/form.pug"
 // state management
 
 
@@ -117,7 +121,7 @@ elementCreator({
 elementCreator({
     name: "cms-element",
     pugFunc: cms,
-    atr: ['imgsrc', 'name', 'extra'],
+    atr: ['imgsrc', 'name', 'extra', 'price'],
     func: [{
         event: "click",
         callback: function(e){
@@ -133,6 +137,16 @@ elementCreator({
     pugFunc: cmsholder
 })
 
+elementCreator({
+    name: 'addimage-element',
+    pugFunc: img,
+    atr: ['imgsrc']
+})
+
+elementCreator({
+    name: 'form-element',
+    pugFunc: form,
+})
 
 // for views 
 
@@ -144,4 +158,14 @@ elementCreator({
 elementCreator({
     name: 'cart-page',
     pugFunc: cart
+})
+
+elementCreator({
+    name: 'cms-page',
+    pugFunc: cmspage
+})
+
+elementCreator({
+    name: 'add-page',
+    pugFunc: add
 })

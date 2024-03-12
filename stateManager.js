@@ -7,21 +7,21 @@ let model = {
         count: '0',
         uid: '001'
      }, 
-    //  {
-    //     name: 'Burger 1',
-    //     foodsrc: '/images/burger.jpg',
-    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-    //     price: '30',
-    //     count: '0',
-    //     uid: '002'
-    // }, {
-    //     name: 'Burger 1',
-    //     foodsrc: '/images/burger.jpg',
-    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-    //     price: '15',
-    //     count: '0',
-    //     uid: '003'
-    //} 
+     {
+        name: 'Burger 1',
+        foodsrc: '/images/burger.jpg',
+        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+        price: '30',
+        count: '0',
+        uid: '002'
+    }, {
+        name: 'Burger 1',
+        foodsrc: '/images/burger.jpg',
+        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+        price: '15',
+        count: '0',
+        uid: '003'
+    } 
     ]
 }
 // 'foodsrc', 'name', 'detail', 'price', 'count'
@@ -29,8 +29,14 @@ let model = {
 let cloneDeep=(x)=>{
     return JSON.parse(JSON.stringify(x))
 }
-
-export let view =()=> model
+let checkoutPrice =()=> {
+    let sum = 0
+    model.product.forEach((ele)=>{
+        sum = sum + +ele.count * +ele.price 
+    })
+    return sum
+}
+export let view =()=> ({model,sum: checkoutPrice()})
 
 export let controlller = {
     addToCart: (arg, elements)=>{

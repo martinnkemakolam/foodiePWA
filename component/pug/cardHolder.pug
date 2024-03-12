@@ -1,3 +1,6 @@
 div.foodGrid
-    each value, index in state.product
-        card-element(amount= value.amount, name= value.name ,count= value.count, src= value.foodsrc, detail= value.detail, uid= value.uid)
+    if state.model.product.length > 0
+        each value, index in state.model.product
+            card-element(amount= value.amount, name= value.name ,count= value.count, src= value.foodsrc, detail= value.detail, uid= value.uid)
+    else
+        div No product currently available

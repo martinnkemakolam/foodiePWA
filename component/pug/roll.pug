@@ -1,12 +1,12 @@
-
-td.wide
-    img(src= prop.imgsrc, width= "50px", height= "50px")
-    div
-        h1.name= prop.name
-        p= prop.number
-td.medium
-    amount-element(count=prop.count)
-td.medium  $#{prop.price}
-td.medium $#{prop.total}
-td.medium(data-remove)
-    img(src="./images/icons/trash.png", width="30px" height="30px" data-remove)
+.row.border
+    div.wide
+        img(src= prop.imgsrc, width= "50px", height= "50px")
+        div
+            h1.name= prop.name
+            p= prop.number
+    div.medium
+        amount-element(count=prop.count)
+    div.medium  $#{prop.price}
+    div.medium $#{prop.total}
+    div.medium(data-remove)
+        img(src="./images/icons/trash.png", width="30px" height="30px" data-remove)
