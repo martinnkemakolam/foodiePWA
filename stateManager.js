@@ -36,7 +36,14 @@ let checkoutPrice =()=> {
     })
     return sum
 }
-export let view =()=> ({model,sum: checkoutPrice()})
+export let view =()=> ({
+    model,
+    sum: checkoutPrice(),
+    isLoggedin: false,
+    isAuthenticated: false,
+    loginForm: true,
+    showOverlay: true
+})
 
 export let controlller = {
     addToCart: (arg, elements)=>{

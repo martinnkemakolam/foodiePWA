@@ -15,6 +15,9 @@ import cmspage from "./pug/cmspage.pug"
 import add from "./pug/add.pug"
 import img from "./pug/img.pug"
 import form from "./pug/form.pug"
+import overlay from "./pug/overlay.pug"
+import checkoutform from "./pug/checkoutform.pug"
+import signin from "./pug/signin.pug"
 // state management
 
 
@@ -148,6 +151,20 @@ elementCreator({
     pugFunc: form,
 })
 
+elementCreator({
+    name: 'overlay-element',
+    pugFunc: overlay
+})
+
+elementCreator({
+    name: 'checkoutform-element',
+    pugFunc: checkoutform
+})
+
+elementCreator({
+    name: 'signin-element',
+    pugFunc: signin
+})
 // for views 
 
 elementCreator({

@@ -1,3 +1,6 @@
 section
     header-element
-    cmsholder-element
+    if state.isAuthenticated
+        cmsholder-element
+    else
+        signin-element

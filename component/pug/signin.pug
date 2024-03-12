@@ -1,0 +1,28 @@
+div
+    div
+        if state.loginForm
+            p Don't have an account?
+            span Sign up.
+        else
+            p Already have an account?
+            span Sign in.
+    if state.loginForm
+        h1 Sign in
+    else
+        h1 Sign up
+    div
+        form
+            div
+                p Email:
+                input(type="email")
+            div
+                p Password:
+                input(type="password") 
+            if state.loginForm
+                div
+                    input(type="checkbox")
+                    p I've read and agreed with the terms and conditions
+            if state.loginForm
+                button Sign in
+            else
+                button Sign up

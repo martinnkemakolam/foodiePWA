@@ -4,6 +4,8 @@ div.header
         a(href="./#/cms") CMS
         a(href="./#/cart") Cart
         a(href="./#/orders") Orders
+        if !state.isLoggedin && url !== '#/cms'
+            p Signin/Signup
 
     if url === '#/'
         div.searchbar
@@ -14,7 +16,7 @@ div.header
                     option( data-option value="food" selected) Food
                     option(data-option value="food 1") Food 1
                     option(data-option value="food 2") Food 2
-    if url === '#/cms'
+    if url === '#/cms' && state.isAuthenticated
         div.searchbar
                 img(width="30px" height="30px" src="images/icons/search.png")
                 input(data-input placeholder="Search")
