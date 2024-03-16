@@ -1,6 +1,5 @@
-import { view } from "./stateManager"
-// import pug from "pug"
-export default function elementCreator({name,atr = [],pugFunc,func = [],populateCalls}) {
+import { view } from "./stateManager.js"
+export default function elementCreator({name,atr = [],pugFunc,func = []}) {
     class test extends HTMLElement {
         constructor(){
             super()
@@ -12,7 +11,6 @@ export default function elementCreator({name,atr = [],pugFunc,func = [],populate
                 this.value[name] = ''
             })
         })()
-
         attributeChangedCallback(name, oldValue, newValue){
             this.value[name] = newValue
         }
@@ -23,10 +21,6 @@ export default function elementCreator({name,atr = [],pugFunc,func = [],populate
             func.forEach(({event,callback})=>{
                 this.addEventListener(event, callback, false)
             })
-            if (populateCalls){
-                let call = populateCalls.call(this)
-                call(view(), (arg)=> this.querySelector(arg))
-            }
         }
         connectedCallback(){
             this.render()

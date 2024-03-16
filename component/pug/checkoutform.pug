@@ -1,15 +1,14 @@
 div
+    h1 Check out form
+    p Enter your detail bellow to order 
+form
     div
-        h1 Check output
-        p Enter your detail bellow to order 
-    form
-        div
-            p Card number
-            input(type="number")
-        div
-            p CVV number
-            input(type="number")
-        div
-            p Expire date
-            input(type="number")
-        button Pay #{state.sum} now
+        p Card number
+        input(type="number")
+    div
+        p CVV number
+        input(type="number")
+    div
+        p Expire date
+        input(type="number")
+    button Pay #{state.model.sum} now

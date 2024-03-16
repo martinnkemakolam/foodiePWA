@@ -1,6 +1,8 @@
-if state.showOverlay
-    div
-        if state.isLoggedin
-            checkoutform-element
-        else
-            signin-element 
+if state.model.showOverlay
+    div.overlay
+        div.checkOutOverlay
+            div(data-close).close close
+            if state.model.isLoggedin
+                checkoutform-element
+            else
+                signin-element 

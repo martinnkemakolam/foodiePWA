@@ -21,41 +21,40 @@ let model = {
         price: '15',
         count: '0',
         uid: '003'
-    } 
-    ]
+    },
+    ],
+    isLoggedin: false,
+    isAuthenticated: false,
+    loginForm: false,
+    showOverlay: false,
+    sum: 0
 }
 // 'foodsrc', 'name', 'detail', 'price', 'count'
-
-let cloneDeep=(x)=>{
-    return JSON.parse(JSON.stringify(x))
-}
-let checkoutPrice =()=> {
+ let checkoutPrice=(model)=>{
     let sum = 0
     model.product.forEach((ele)=>{
         sum = sum + +ele.count * +ele.price 
     })
-    return sum
+    model.sum = sum
+    return {model}
 }
-export let view =()=> ({
-    model,
-    sum: checkoutPrice(),
-    isLoggedin: false,
-    isAuthenticated: false,
-    loginForm: true,
-    showOverlay: true
-})
+
+let render = (elements)=>{
+    if(elements?.length > 0) {
+        elements.forEach( element=> element.render())
+    }else{
+        elements.render()
+    }
+}
+
+export let view =()=> (checkoutPrice(model))
 
 export let controlller = {
     addToCart: (arg, elements)=>{
         model.cart.push(arg)
-        if(elements.length > 0) {
-            elements.forEach( element=> element.render())
-        }else{
-            elements.render()
-        }
+        render(elements)
     },
     editProductCount: (increment, uid, elements)=>{
-
         let currentProduct = model.product.find((value, index)=> value.uid === uid)
         if (currentProduct){
             if (increment) {
@@ -64,21 +63,21 @@ export let controlller = {
                 currentProduct.count = +currentProduct.count - 1
             }
         }
-        if(elements.length > 0) {
-            elements.forEach( element=> element.render())
-        }else{
-            elements.render()
-        }
+        render(elements)
     },
     removeFromCart: (uid, elements)=>{
         let currentProduct = model.product.find((value, index)=> value.uid === uid)
         if (currentProduct) {
             currentProduct.count = 0
         }
-        if(elements.length > 0) {
-            elements.forEach( element=> element.render())
-        }else{
-            elements.render()
-        }
+        render(elements)
+    },
+    showOverlay: (elements)=>{
+        model.showOverlay = !model.showOverlay
+        render(elements)
+    },
+    switchForm: (elements)=>{
+        model.loginForm = !model.loginForm
+        render(elements)
     }
 }

@@ -1,11 +1,12 @@
 div.header
     div.links
         a(href="./#/") Product
-        a(href="./#/cms") CMS
+        if state.model.isAuthenticated
+            a(href="./#/cms") CMS
         a(href="./#/cart") Cart
         a(href="./#/orders") Orders
-        if !state.isLoggedin && url !== '#/cms'
-            p Signin/Signup
+        if !state.model.isLoggedin && url !== '#/cms'
+            p(data-login) Signin/Signup
 
     if url === '#/'
         div.searchbar
@@ -16,7 +17,7 @@ div.header
                     option( data-option value="food" selected) Food
                     option(data-option value="food 1") Food 1
                     option(data-option value="food 2") Food 2
-    if url === '#/cms' && state.isAuthenticated
+    if url === '#/cms' && state.model.isAuthenticated
         div.searchbar
                 img(width="30px" height="30px" src="images/icons/search.png")
                 input(data-input placeholder="Search")

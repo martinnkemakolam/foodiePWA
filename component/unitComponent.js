@@ -1,5 +1,5 @@
-import elementCreator from "../elementCreator";
-import {controlller} from "../stateManager";
+import elementCreator from "../elementCreator.js";
+import {controlller} from "../stateManager.js";
 import header from "./pug/header.pug"
 import card from "./pug/card.pug"
 import cardHolder from "./pug/cardHolder.pug"
@@ -18,10 +18,6 @@ import form from "./pug/form.pug"
 import overlay from "./pug/overlay.pug"
 import checkoutform from "./pug/checkoutform.pug"
 import signin from "./pug/signin.pug"
-// state management
-
-
-// have each function call a render on element in mention
 let data = {}
 export default data
 elementCreator({
@@ -42,9 +38,14 @@ elementCreator({
                 console.log('worked', e.target.value);   
             }
         }
-    }],
-    imgSrc: [],
-    populateCalls: null
+    },{
+        event: 'click',
+        callback: function(e){
+            if('login' in e.target.dataset) {
+                controlller.showOverlay(document.querySelector('overlay-element'))
+            }
+        }
+    }]
 })
 elementCreator({
     name: 'card-element',
@@ -71,7 +72,6 @@ elementCreator({
 elementCreator({
     name: 'holder-element',
     pugFunc: cardHolder
-
 })
 
 elementCreator({
@@ -105,7 +105,7 @@ elementCreator({
             event: 'click',
             callback: function (e){
                 if ('checkout' in e.target.dataset) {
-                    alert('Checkout')
+                    controlller.showOverlay(document.querySelector('cart-page'))
                 }
             }
         }
@@ -148,12 +148,20 @@ elementCreator({
 
 elementCreator({
     name: 'form-element',
-    pugFunc: form,
+    pugFunc: form
 })
 
 elementCreator({
     name: 'overlay-element',
-    pugFunc: overlay
+    pugFunc: overlay,
+    func: [{
+            event: 'click',
+            callback: function(e){
+                if ('close' in e.target.dataset) {
+                    controlller.showOverlay(this)
+                }
+            }
+        }]
 })
 
 elementCreator({
@@ -163,7 +171,15 @@ elementCreator({
 
 elementCreator({
     name: 'signin-element',
-    pugFunc: signin
+    pugFunc: signin,
+    func: [{
+        event: 'click',
+        callback: function(e){
+            if('toggle' in e.target.dataset){
+                controlller.switchForm(this)
+            }
+        }
+    }]
 })
 // for views 
 

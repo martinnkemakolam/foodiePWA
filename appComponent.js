@@ -1,5 +1,5 @@
-import {router} from "./router"
-import data from "./component/unitComponent"
+import {router} from "./router.js"
+import data from "./component/unitComponent.js"
 // import './style.css'
 // we can't seem to work with offline files and importing files 
 let route = router()
