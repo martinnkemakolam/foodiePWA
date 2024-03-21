@@ -1,6 +1,6 @@
 div.imgAdder
     h1 Thumbnail 
-    img(src="./images/burger.jpg")
+    img(src= prop.imgsrc)
     p Set the product thumbnail image. Only *.png, *.jpg and *.jpeg files are supported
-    input(type="file", id="selector", accept= 'image/*').nodisplay
+    input(type="file", id="selector", accept= 'image/*', data-file).nodisplay
     label(for="selector") Select image

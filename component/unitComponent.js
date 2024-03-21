@@ -18,7 +18,11 @@ import form from "./pug/form.pug"
 import overlay from "./pug/overlay.pug"
 import checkoutform from "./pug/checkoutform.pug"
 import signin from "./pug/signin.pug"
-let data = {}
+import { objHasAnEmptyValue } from "../utility/utility.js";
+import { getValue } from "../utility/utility.js";
+let data = {
+    imgsrc: undefined
+}
 export default data
 elementCreator({
     name: 'header-element',
@@ -129,7 +133,9 @@ elementCreator({
         event: "click",
         callback: function(e){
             if ('delete' in e.target.dataset) {
+                controlller.deleteProduct(this.value.uid)
             }else if ('edit' in e.target.dataset) {
+                // route to edit page
             }
         }
     }]
@@ -143,12 +149,53 @@ elementCreator({
 elementCreator({
     name: 'addimage-element',
     pugFunc: img,
-    atr: ['imgsrc']
+    atr: ['imgsrc'],
+    func: [
+        {
+            event: "change",
+            callback: function(e){
+                if('file' in e.target.dataset){
+                    let file = e.target.files[0]
+                    let fileReader = new FileReader()
+                    fileReader.onload=(e)=>{
+                        let result = e.target.result
+                        this.value.imgsrc = result
+                        data.imgsrc = result
+                        this.render()
+                    }
+                    fileReader.readAsDataURL(file)
+                }
+            }
+        }
+    ]
 })
 
 elementCreator({
     name: 'form-element',
-    pugFunc: form
+    pugFunc: form,
+    func: [
+        {
+            event: "click",
+            callback: function(e){
+                if ('add' in e.target.dataset) {
+                    e.preventDefault();
+                    
+                    let payload = {
+                        name: getValue.bind(this)("#name"),
+                        detail: getValue.bind(this)("#detail"),
+                        foodsrc: data.imgsrc,
+                        price: getValue.bind(this)("#price")
+                    }
+                    
+                    if (objHasAnEmptyValue(payload)){
+                        alert('cant have an empty field')
+                        return
+                    }
+                    controlller.addProduct(payload)
+                }
+            }
+        },
+    ]
 })
 
 elementCreator({
@@ -181,8 +228,7 @@ elementCreator({
         }
     }]
 })
-// for views 
-
+// for view
 elementCreator({
     name: 'product-page',
     pugFunc: product

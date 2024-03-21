@@ -1,30 +1,31 @@
 let model = {
-    product: [{
-        name: 'Burger 1',
-        foodsrc: './images/burger.jpg',
-        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-        price: '10',
-        count: '0',
-        uid: '001'
-     }, 
-     {
-        name: 'Burger 1',
-        foodsrc: '/images/burger.jpg',
-        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-        price: '30',
-        count: '0',
-        uid: '002'
-    }, {
-        name: 'Burger 1',
-        foodsrc: '/images/burger.jpg',
-        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-        price: '15',
-        count: '0',
-        uid: '003'
-    },
+    product: [
+    //     {
+    //     name: 'Burger 1',
+    //     foodsrc: './images/burger.jpg',
+    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+    //     price: '10',
+    //     count: '0',
+    //     uid: '001'
+    //  }, 
+    //  {
+    //     name: 'Burger 1',
+    //     foodsrc: '/images/burger.jpg',
+    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+    //     price: '30',
+    //     count: '0',
+    //     uid: '002'
+    // }, {
+    //     name: 'Burger 1',
+    //     foodsrc: '/images/burger.jpg',
+    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+    //     price: '15',
+    //     count: '0',
+    //     uid: '003'
+    // },
     ],
     isLoggedin: false,
-    isAuthenticated: false,
+    isAuthenticated: true,
     loginForm: false,
     showOverlay: false,
     sum: 0
@@ -47,7 +48,7 @@ let render = (elements)=>{
     }
 }
 
-export let view =()=> (checkoutPrice(model))
+export let view =()=> Object.freeze(checkoutPrice(model))
 
 export let controlller = {
     addToCart: (arg, elements)=>{
@@ -79,5 +80,22 @@ export let controlller = {
     switchForm: (elements)=>{
         model.loginForm = !model.loginForm
         render(elements)
+    },
+    addProduct: (payload)=>{
+        //post data to api
+        model.product.push({
+            ...payload, count: 0, uid: Math.floor(Math.random() * 1000) 
+        })
+    },
+    editProduct: (payload)=>{
+        let uid = payload.uid
+        model.product = model.product.map((ele)=>{
+            if (ele.uid === uid) {
+                return payload
+            }
+        })
+    },
+    deleteProduct: (uid)=>{
+        model.product = model.product.filter((ele)=> ele.uid !== uid)
     }
 }

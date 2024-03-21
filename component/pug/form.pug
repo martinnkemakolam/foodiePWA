@@ -3,12 +3,12 @@ div.imgAdder
     form
         div
             p Product name
-            input(type="text" placeholder="Enter product name")
+            input(type="text" placeholder="Enter product name" id="name")
             p Product names is recommended to be unique
         div
             p Product description
-            textarea
+            textarea(id="detail")
         div
             p Product price
-            input(type="number" placeholder="Enter product price")
-        button Submit
+            input(type="number" placeholder="Enter product price" id="price")
+        button(data-add) Submit
