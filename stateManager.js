@@ -1,28 +1,28 @@
 let model = {
     product: [
-    //     {
-    //     name: 'Burger 1',
-    //     foodsrc: './images/burger.jpg',
-    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-    //     price: '10',
-    //     count: '0',
-    //     uid: '001'
-    //  }, 
-    //  {
-    //     name: 'Burger 1',
-    //     foodsrc: '/images/burger.jpg',
-    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-    //     price: '30',
-    //     count: '0',
-    //     uid: '002'
-    // }, {
-    //     name: 'Burger 1',
-    //     foodsrc: '/images/burger.jpg',
-    //     detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-    //     price: '15',
-    //     count: '0',
-    //     uid: '003'
-    // },
+        {
+        name: 'Burger 1',
+        foodsrc: './images/burger.jpg',
+        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+        price: '10',
+        count: '0',
+        uid: '001'
+     }, 
+     {
+        name: 'Burger 1',
+        foodsrc: '/images/burger.jpg',
+        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+        price: '30',
+        count: '0',
+        uid: '002'
+    }, {
+        name: 'Burger 1',
+        foodsrc: '/images/burger.jpg',
+        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+        price: '15',
+        count: '0',
+        uid: '003'
+    },
     ],
     isLoggedin: false,
     isAuthenticated: true,
@@ -40,23 +40,22 @@ let model = {
     return {model}
 }
 
-let render = (elements)=>{
-    if(elements?.length > 0) {
-        elements.forEach( element=> element.render())
-    }else{
-        elements.render()
-    }
+let render = ()=>{
+    // loop through all elements and call a render method
+    document.querySelector('product-page').render()
 }
 
 export let view =()=> Object.freeze(checkoutPrice(model))
+ 
 
 export let controlller = {
-    addToCart: (arg, elements)=>{
+    addToCart: (arg)=>{
         model.cart.push(arg)
-        render(elements)
+        render()
     },
-    editProductCount: (increment, uid, elements)=>{
-        let currentProduct = model.product.find((value, index)=> value.uid === uid)
+    editProductCount: (increment, uid)=>{
+        let currentProduct = model.product.find((value, index)=> +value.uid === +uid)
+        console.log(uid, currentProduct, model.product)
         if (currentProduct){
             if (increment) {
                 currentProduct.count = +currentProduct.count + 1
@@ -64,22 +63,22 @@ export let controlller = {
                 currentProduct.count = +currentProduct.count - 1
             }
         }
-        render(elements)
+        render()
     },
-    removeFromCart: (uid, elements)=>{
+    removeFromCart: (uid)=>{
         let currentProduct = model.product.find((value, index)=> value.uid === uid)
         if (currentProduct) {
             currentProduct.count = 0
         }
-        render(elements)
+        render()
     },
-    showOverlay: (elements)=>{
+    showOverlay: ()=>{
         model.showOverlay = !model.showOverlay
-        render(elements)
+        render()
     },
-    switchForm: (elements)=>{
+    switchForm: ()=>{
         model.loginForm = !model.loginForm
-        render(elements)
+        render()
     },
     addProduct: (payload)=>{
         //post data to api
@@ -94,8 +93,10 @@ export let controlller = {
                 return payload
             }
         })
+        render()
     },
     deleteProduct: (uid)=>{
         model.product = model.product.filter((ele)=> ele.uid !== uid)
+        render()
     }
 }
