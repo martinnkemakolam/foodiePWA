@@ -41,8 +41,35 @@ let model = {
 }
 
 let render = ()=>{
-    // loop through all elements and call a render method
-    document.querySelector('product-page').render()
+    // loop through all elements and call a render method\
+    let count = 0
+    // function lopper(ele) {
+    //     count++
+    //     if (ele.hasChildNodes()){
+    //         if (ele.render && count > 1) {
+    //             ele.render()
+    //         }
+    //         ele.childNodes.forEach(e => lopper(e))
+    //     }else{
+    //         if (ele.render) {
+    //             ele.render()
+    //         }
+    //         return
+    //     }
+    // }
+    function renderPage() {
+        renderPage.pages = ['add-page', 'cms-page', 'cart-page', 'product-page']
+        renderPage.pages.forEach((page)=>{
+            let isAvailable = document.querySelector(page)
+            if (isAvailable) {
+                isAvailable.render()
+            }else{
+                return
+            }
+        })
+    }
+    renderPage()
+
 }
 
 export let view =()=> Object.freeze(checkoutPrice(model))

@@ -9,7 +9,7 @@ class app extends HTMLElement{
         route.addRoute('#/cart',`<cart-page></cart-page>`)
         route.addRoute('#/cms',`<cms-page></cms-page>`)
         route.addRoute('#/cms/add', `<add-page></add-page>`)
-        route.addRoute('#/cms/edit/:id', `<edit-page></edit>`)
+        route.addRoute('#/cms/edit/:id', `<edit-page></edit-page>`)
         route.start()
     }
     render=(str)=>{
