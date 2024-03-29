@@ -4,8 +4,10 @@ export default function elementCreator({name,atr = [],pugFunc,func = []}) {
         constructor(){
             super()
         }
-        static observedAttributes = atr
-        value = {}
+        static observedAttributes = [...atr, 'param']
+        value = {
+            param: undefined 
+        }
         populateValue=(()=>{
             atr.forEach((name)=>{
                 this.value[name] = ''

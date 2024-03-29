@@ -5,11 +5,11 @@ import data from "./component/unitComponent.js"
 let route = router()
 class app extends HTMLElement{
     connectedCallback(){
-        route.addRoute('#/',`<product-page></product-page>`)
-        route.addRoute('#/cart',`<cart-page></cart-page>`)
-        route.addRoute('#/cms',`<cms-page></cms-page>`)
-        route.addRoute('#/cms/add', `<add-page></add-page>`)
-        route.addRoute('#/cms/edit/:id', `<edit-page></edit-page>`)
+        route.addRoute('#/',(param)=>`<product-page param=${param}></product-page>`)
+        route.addRoute('#/cart',(param)=>`<cart-page param=${param}></cart-page>`)
+        route.addRoute('#/cms',(param)=>`<cms-page param=${param}></cms-page>`)
+        route.addRoute('#/cms/add',(param)=>`<add-page param=${param}></add-page>`)
+        route.addRoute('#/cms/edit/:id',(param)=>`<edit-page param=${param}></edit-page>`)
         route.start()
     }
     render=(str)=>{

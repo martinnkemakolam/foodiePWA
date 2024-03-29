@@ -9,20 +9,27 @@ let model = {
         uid: '001'
      }, 
      {
-        name: 'Burger 1',
+        name: 'Burger 2',
         foodsrc: '/images/burger.jpg',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '30',
         count: '0',
         uid: '002'
     }, {
-        name: 'Burger 1',
+        name: 'Burger 3',
         foodsrc: '/images/burger.jpg',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '15',
         count: '0',
         uid: '003'
-    },
+    },{
+        name: 'Burger 12',
+        foodsrc: '/images/burger.jpg',
+        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
+        price: '15',
+        count: '0',
+        uid: '0012'
+    }
     ],
     isLoggedin: false,
     isAuthenticated: true,

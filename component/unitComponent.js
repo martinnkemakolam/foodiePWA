@@ -18,6 +18,7 @@ import form from "./pug/form.pug"
 import overlay from "./pug/overlay.pug"
 import checkoutform from "./pug/checkoutform.pug"
 import signin from "./pug/signin.pug"
+import edit from "./pug/edit.pug"
 import { objHasAnEmptyValue } from "../utility/utility.js";
 import { getValue } from "../utility/utility.js";
 let data = {
@@ -174,6 +175,7 @@ elementCreator({
 elementCreator({
     name: 'form-element',
     pugFunc: form,
+    atr: ['name', 'detail', 'price'],
     func: [
         {
             event: "click",
@@ -248,4 +250,9 @@ elementCreator({
 elementCreator({
     name: 'add-page',
     pugFunc: add
+})
+
+elementCreator({
+    name: 'edit-page',
+    pugFunc: edit
 })
