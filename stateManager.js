@@ -125,6 +125,8 @@ export let controlller = {
         model.product = model.product.map((ele)=>{
             if (ele.uid === uid) {
                 return payload
+            }else{
+                return ele
             }
         })
         render()

@@ -162,7 +162,7 @@ elementCreator({
                     fileReader.onload=(e)=>{
                         let result = e.target.result
                         this.value.imgsrc = result
-                        data.imgsrc = result
+                        document.querySelector('form-element').setAttribute('imgsrc', result)
                         this.render()
                     }
                     fileReader.readAsDataURL(file)
@@ -175,29 +175,42 @@ elementCreator({
 elementCreator({
     name: 'form-element',
     pugFunc: form,
-    atr: ['name', 'detail', 'price'],
+    atr: ['name', 'detail', 'price', 'imgsrc', 'edit', 'uid'],
     func: [
         {
             event: "click",
             callback: function(e){
+                e.preventDefault()
                 if ('add' in e.target.dataset) {
-                    e.preventDefault();
-                    
                     let payload = {
                         name: getValue.bind(this)("#name"),
                         detail: getValue.bind(this)("#detail"),
-                        foodsrc: data.imgsrc,
+                        foodsrc: this.value.imgsrc,
                         price: getValue.bind(this)("#price")
                     }
-                    
                     if (objHasAnEmptyValue(payload)){
                         alert('cant have an empty field')
                         return
                     }
                     controlller.addProduct(payload)
+                }else if ('edit' in e.target.dataset) {
+                    let payload = {
+                        name: getValue.call(this, ["#name"]),
+                        detail: getValue.call(this, ["#detail"]),
+                        foodsrc: this.value.imgsrc,
+                        count: 0,
+                        price: getValue.call(this, ["#price"]),
+                        uid: this.value.uid
+                    }
+                    if (objHasAnEmptyValue(payload)) {
+                        console.log(payload)
+                        alert('cant have an empty field')
+                        return
+                    }
+                    controlller.editProduct(payload)
                 }
             }
-        },
+        }
     ]
 })
 

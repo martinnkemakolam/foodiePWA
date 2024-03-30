@@ -1,11 +1,11 @@
 section
-- let val = state.model.product.filter(e=> e.uid === prop.param)
+- let val = state.model.product.filter(e=> +e.uid === +prop.param)
     header-element
     if val.length > 0
         section.add
             .left
                 addimage-element(imgsrc= val[0].foodsrc)
             .right
-                form-element(name= val[0].name, detail= val[0].detail, price= val[0].price)
+                form-element(name= val[0].name, detail= val[0].detail, price= val[0].price, imgsrc= val[0].foodsrc, uid= val[0].uid, edit= "true")
     else
         h1 Product doesn't exist 

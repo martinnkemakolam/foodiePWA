@@ -11,4 +11,7 @@ div.imgAdder
         div
             p Product price
             input(type="number" placeholder="Enter product price" id="price", value= prop.price)
-        button(data-add) Submit
+        if prop.edit
+            button(data-edit) Edit
+        else
+            button(data-add) Submit
