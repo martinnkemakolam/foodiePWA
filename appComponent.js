@@ -10,6 +10,7 @@ class app extends HTMLElement{
         route.addRoute('#/cms',(param)=>`<cms-page param=${param}></cms-page>`)
         route.addRoute('#/cms/add',(param)=>`<add-page param=${param}></add-page>`)
         route.addRoute('#/cms/edit/:id',(param)=>`<edit-page param=${param}></edit-page>`)
+        route.addRoute('#/orders', (param)=> `<order-page></order-page>`)
         route.start()
     }
     render=(str)=>{

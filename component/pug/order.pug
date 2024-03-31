@@ -1,0 +1,25 @@
+mixin row()
+    div
+        if state.model.order > 1
+            each value, index in state.model.order
+                div 
+                    p
+                    p
+                    p
+                    p
+                    p
+                    p
+        else
+            h1 No product
+section
+    header-element
+    h1 Order
+    div
+        div
+            p Order
+            p Amount
+            p Price
+            p Order number
+            p Order date
+            p Delivery date 
+        +row()

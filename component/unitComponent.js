@@ -19,6 +19,7 @@ import overlay from "./pug/overlay.pug"
 import checkoutform from "./pug/checkoutform.pug"
 import signin from "./pug/signin.pug"
 import edit from "./pug/edit.pug"
+import order from "./pug/order.pug"
 import { objHasAnEmptyValue } from "../utility/utility.js";
 import { getValue } from "../utility/utility.js";
 let data = {
@@ -268,4 +269,9 @@ elementCreator({
 elementCreator({
     name: 'edit-page',
     pugFunc: edit
+})
+
+elementCreator({
+    name: 'order-page',
+    pugFunc: order
 })
