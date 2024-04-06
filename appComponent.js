@@ -1,16 +1,41 @@
 import {router} from "./router.js"
 import data from "./component/unitComponent.js"
-// import './style.css'
-// we can't seem to work with offline files and importing files 
+import { controlller } from "./stateManager.js"
+
 let route = router()
 class app extends HTMLElement{
     connectedCallback(){
-        route.addRoute('#/',(param)=>`<product-page param=${param}></product-page>`)
-        route.addRoute('#/cart',(param)=>`<cart-page param=${param}></cart-page>`)
-        route.addRoute('#/cms',(param)=>`<cms-page param=${param}></cms-page>`)
-        route.addRoute('#/cms/add',(param)=>`<add-page param=${param}></add-page>`)
-        route.addRoute('#/cms/edit/:id',(param)=>`<edit-page param=${param}></edit-page>`)
-        route.addRoute('#/orders', (param)=> `<order-page></order-page>`)
+        route.addRoute('#/',(param)=>`
+        <notification-element></notification-element>
+        <product-page param=${param}></product-page>
+        <footer-element></footer-element>
+        `)
+        route.addRoute('#/cart',(param)=>`
+        <notification-element></notification-element>
+        <cart-page param=${param}></cart-page>
+        <footer-element></footer-element>
+        `)
+        route.addRoute('#/cms',(param)=>`
+        <notification-element></notification-element>
+        <cms-page param=${param}></cms-page>
+        <footer-element></footer-element>
+        `)
+        route.addRoute('#/cms/add',(param)=>`
+        <notification-element></notification-element>
+        <add-page param=${param}></add-page>
+        <footer-element></footer-element>
+        `)
+        route.addRoute('#/cms/edit/:id',(param)=>`
+        <notification-element></notification-element>
+        <edit-page param=${param}></edit-page>
+        <footer-element></footer-element>`)
+        route.addRoute('#/orders', (param)=> `
+        <order-page param=${param}></order-page>
+        <footer-element></footer-element>`)
+        route.addRoute('#/product/:id', (param)=>`
+        <notification-element></notification-element>
+        <dynamicproduct-page param=${param}></dynamicproduct-page>
+        <footer-element></footer-element>`)
         route.start()
     }
     render=(str)=>{
@@ -28,6 +53,7 @@ let promptObj;
 window.addEventListener('beforeinstallprompt', (e)=>{
     console.log(e)
     e.preventDefault()
-    promptObj = e
-    // showFooter(true)
+    promptObj= e
+    // controlller.showFoater(e)
 })
+

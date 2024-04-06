@@ -1,25 +1,27 @@
 mixin row()
     div
-        if state.model.order > 1
+        if state.model.order
             each value, index in state.model.order
-                div 
-                    p
-                    p
-                    p
-                    p
-                    p
-                    p
+                div(class="flex justify-between items-center gap-5")
+                        div(class="w-50 flex gap-2 text-xl")
+                            img(src="", alt="" class="w-20 h-20")
+                            p Order name
+                        p(class="w-30 text-xl flex") 2
+                        p(class="w-30 text-xl") $20
+                        p(class="w-30 text-xl") 1233445
+                        p(class="w-30 text-xl") March, 2 2024
+                        p(class="w-30 text-xl") March, 10 2024
         else
             h1 No product
 section
     header-element
-    h1 Order
+    h1(class="text-4xl my-20") Order
     div
-        div
-            p Order
-            p Amount
-            p Price
-            p Order number
-            p Order date
-            p Delivery date 
+        div(class="flex justify-between mb-10 gap-5")
+            p(class="w-40 text-2xl") Order
+            p(class="w-30 text-2xl") Amount
+            p(class="w-30 text-2xl") Price
+            p(class="w-30 text-2xl") Order number
+            p(class="w-30 text-2xl") Order date
+            p(class="w-30 text-2xl") Delivery date 
         +row()

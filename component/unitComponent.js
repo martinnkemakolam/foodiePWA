@@ -20,6 +20,9 @@ import checkoutform from "./pug/checkoutform.pug"
 import signin from "./pug/signin.pug"
 import edit from "./pug/edit.pug"
 import order from "./pug/order.pug"
+import footer from "./pug/footer.pug"
+import notification from "./pug/notification.pug"
+import dynproduct from "./pug/product[id].pug"
 import { objHasAnEmptyValue } from "../utility/utility.js";
 import { getValue } from "../utility/utility.js";
 let data = {
@@ -245,6 +248,16 @@ elementCreator({
         }
     }]
 })
+
+elementCreator({
+    name: "notification-element",
+    pugFunc: notification
+})
+
+elementCreator({
+    name: "footer-element",
+    pugFunc: footer
+})
 // for view
 elementCreator({
     name: 'product-page',
@@ -274,4 +287,9 @@ elementCreator({
 elementCreator({
     name: 'order-page',
     pugFunc: order
+})
+
+elementCreator({
+    name: "dynamicproduct-page",
+    pugFunc: dynproduct
 })

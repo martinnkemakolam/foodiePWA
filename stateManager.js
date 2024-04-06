@@ -2,33 +2,42 @@ let model = {
     product: [
         {
         name: 'Burger 1',
-        foodsrc: './images/burger.jpg',
+        foodsrc: './images/burger1.webp',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '10',
         count: '0',
-        uid: '001'
+        uid: '001',
+        review: [
+        ]
+
      }, 
      {
         name: 'Burger 2',
-        foodsrc: '/images/burger.jpg',
+        foodsrc: './images/burger1.webp',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '30',
         count: '0',
-        uid: '002'
+        uid: '002',
+        review: [
+        ]
     }, {
         name: 'Burger 3',
-        foodsrc: '/images/burger.jpg',
+        foodsrc: './images/burger1.webp',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '15',
         count: '0',
-        uid: '003'
+        uid: '003',
+        review: [
+        ]
     },{
         name: 'Burger 12',
-        foodsrc: '/images/burger.jpg',
+        foodsrc: './images/burger1.webp',
         detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
         price: '15',
         count: '0',
-        uid: '0012'
+        uid: '0012',
+        review: [
+        ]
     }
     ],
     isLoggedin: false,

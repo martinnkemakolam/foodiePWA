@@ -3,7 +3,7 @@ div.food
     h1= prop.name
     p= prop.detail
     div.bottom
-        amount-element(count= prop.count)
+        a(href=`.#/product/${prop.uid}`) view product 
         div.cartBtn
             h2= prop.price
             button(data-addtocart)
