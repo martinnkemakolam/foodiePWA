@@ -44,7 +44,14 @@ let model = {
     isAuthenticated: true,
     loginForm: false,
     showOverlay: false,
-    sum: 0
+    sum: 0,
+    notification: {
+        show: false,
+        title: '',
+        msg: '',
+        src: ''
+    },
+    showFooter: false,
 }
 // 'foodsrc', 'name', 'detail', 'price', 'count'
  let checkoutPrice=(model)=>{

@@ -1,3 +1,6 @@
-footer(class="w-full align-center gap-20  flex")
-    img(src="./images/burger1.webp" width="40" height="40" alt="" class="w-50 h-50" )
-    p(class="w-full") Download our application on your devices
+if state.model.showFooter
+    footer(class="w-full bg-neutral-800 items-center gap-20  flex h-20")
+        img(src="./images/burger1.webp" class="w-20 h-20" )
+        p(class="w-full mb-0") Download our application on your devices
+        button(type="button" class="close" aria-label="Close")
+          span(aria-hidden="true") &times;
