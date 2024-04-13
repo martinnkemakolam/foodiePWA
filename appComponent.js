@@ -6,36 +6,24 @@ let route = router()
 class app extends HTMLElement{
     connectedCallback(){
         route.addRoute('#/',(param)=>`
-        <notification-element></notification-element>
         <product-page param=${param}></product-page>
-        <footer-element></footer-element>
         `)
         route.addRoute('#/cart',(param)=>`
-        <notification-element></notification-element>
         <cart-page param=${param}></cart-page>
-        <footer-element></footer-element>
         `)
         route.addRoute('#/cms',(param)=>`
-        <notification-element></notification-element>
         <cms-page param=${param}></cms-page>
-        <footer-element></footer-element>
         `)
         route.addRoute('#/cms/add',(param)=>`
-        <notification-element></notification-element>
         <add-page param=${param}></add-page>
-        <footer-element></footer-element>
         `)
         route.addRoute('#/cms/edit/:id',(param)=>`
-        <notification-element></notification-element>
-        <edit-page param=${param}></edit-page>
-        <footer-element></footer-element>`)
+        <edit-page param=${param}></edit-page>`)
         route.addRoute('#/orders', (param)=> `
-        <order-page param=${param}></order-page>
-        <footer-element></footer-element>`)
+        <order-page param=${param}></order-page>`)
         route.addRoute('#/product/:id', (param)=>`
-        <notification-element></notification-element>
         <dynamicproduct-page param=${param}></dynamicproduct-page>
-        <footer-element></footer-element>`)
+        `)
         route.start()
     }
     render=(str)=>{
@@ -51,9 +39,24 @@ navigator.serviceWorker.register('sw.js')
 let promptObj;
 
 window.addEventListener('beforeinstallprompt', (e)=>{
-    console.log(e)
     e.preventDefault()
-    promptObj= e
-    // controlller.showFoater(e)
+    promptObj = e
+    controlller.showBanner()
+})
+window.addEventListener('appinstalled', ()=>{
+    console.log('called')
+    controlller.hideBanner()
 })
 
+export let promptEvent= ()=>{
+    promptObj.userChoice.then((choice)=>{
+        if (choice === 'accepted'){
+            controlller.hideBanner()
+        }else{
+            controlller.showBanner()
+        }
+    })
+    return {
+        installFunc:()=> promptObj.prompt(),
+    }
+}

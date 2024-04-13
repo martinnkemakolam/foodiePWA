@@ -1,6 +1,9 @@
 if state.model.showFooter
-    footer(class="w-full bg-neutral-800 items-center gap-20  flex h-20")
-        img(src="./images/burger1.webp" class="w-20 h-20" )
-        p(class="w-full mb-0") Download our application on your devices
-        button(type="button" class="close" aria-label="Close")
-          span(aria-hidden="true") &times;
+    footer(class="w-full bg-neutral-800 items-center gap-2 flex ")
+        img(src="./images/icons/market place.png" class="w-20 h-20" )
+        div(class="w-full")
+          p(class="w-full mb-0").
+            Download our application on your devices for easy access to our store
+          button(class="p-2 bg-white text-black rounded" data-install) Install
+        button(type="button" class="close" aria-label="Close" data-close)
+          span(aria-hidden="true" data-close) &times;

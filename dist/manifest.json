@@ -9,13 +9,18 @@
     "orientation": "portrait-primary",
     "icons": [
         {
-          "src": "./images/burger1.png",
+          "src": "./images/icons/manifest/market place1.png",
+          "sizes": "244x244",
+          "type": "image/png"
+        },
+        {
+          "src": "./images/icons/manifest/market place2.png",
           "sizes": "144x144",
           "type": "image/png"
         },
         {
-          "src": "./images/burger2.png",
-          "sizes": "192x192",
+          "src": "./images/icons/manifest/market place3.png",
+          "sizes": "418x382",
           "type": "image/png"
         }
       ]

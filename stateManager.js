@@ -150,5 +150,27 @@ export let controlller = {
     deleteProduct: (uid)=>{
         model.product = model.product.filter((ele)=> ele.uid !== uid)
         render()
+    },
+    showBanner: ()=>{
+        model.showFooter = true
+        render()
+    },
+    hideBanner: ()=>{
+        model.showFooter = false
+        render()
+    },
+    showNotifications: (title, msg, src)=>{
+        model.notification.show = true
+        model.notification.title = title
+        model.notification.msg = msg
+        model.notification.src = src
+        render()
+        setTimeout(()=>{
+            model.notification.show = false
+            model.notification.title = ""
+            model.notification.msg = ""
+            model.notification.src = ""
+            render()
+        }, 2000)
     }
 }

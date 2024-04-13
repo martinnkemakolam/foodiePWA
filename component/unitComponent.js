@@ -25,6 +25,7 @@ import notification from "./pug/notification.pug"
 import dynproduct from "./pug/product[id].pug"
 import { objHasAnEmptyValue } from "../utility/utility.js";
 import { getValue } from "../utility/utility.js";
+import { promptEvent } from "../appComponent.js";
 let data = {
     imgsrc: undefined
 }
@@ -65,15 +66,8 @@ elementCreator({
         callback: function (e) {
             if('addtocart' in e.target.dataset) {
                 controlller.editProductCount(true, this.value.uid, document.querySelector('.foodGrid').parentElement)
-                // console.log(model.product)
-            } else if ('minus' in e.target.dataset) {
-                controlller.editProductCount(false, this.value.uid, document.querySelector('.foodGrid').parentElement)
-                // console.log(model.product)
-            }else if ('plus' in e.target.dataset){
-                // console.log('called plus', e.target.dataset)
-                controlller.editProductCount(true, this.value.uid, document.querySelector('.foodGrid').parentElement)
-                // console.log(model.product)
-            }        
+                controlller.showNotifications('Added to cart', `${this.value.name + ' at '+ this.value.price} has been added to your cart`, this.value.src)
+            }
         }
     }],
 })
@@ -256,7 +250,21 @@ elementCreator({
 
 elementCreator({
     name: "footer-element",
-    pugFunc: footer
+    pugFunc: footer,
+    func: [
+        {
+            event: "click",
+            callback: function(e){
+                if ("install" in e.target.dataset) {
+                    let prompt = promptEvent()
+                    prompt.installFunc()
+                }
+                if("close" in e.target.dataset) {
+                    controlller.hideBanner()
+                }
+            }
+        }
+    ]
 })
 // for view
 elementCreator({
