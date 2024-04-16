@@ -3,14 +3,14 @@ div.imgAdder
     form
         div
             p Product name
-            input(type="text" placeholder="Enter product name" id="name" value= prop.name)
+            input(type="text" placeholder="Enter product name" id="name" value= prop.name class="border")
             p Product names is recommended to be unique
         div
             p Product description
-            textarea(id="detail")= prop.detail
+            textarea(id="detail" class="border")= prop.detail
         div
             p Product price
-            input(type="number" placeholder="Enter product price" id="price", value= prop.price)
+            input(type="number" placeholder="Enter product price" id="price" class="border" value= prop.price)
         if prop.edit
             button(data-edit) Edit
         else

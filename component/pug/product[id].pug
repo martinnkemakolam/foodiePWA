@@ -3,36 +3,31 @@ section
     notification-element
     header-element
     if val.length > 0
-        div(class="flex gap-20")
-            img(src= val[0].foodsrc class="h-500 m-400")
-            div(class="flex flex-col gap-4 p-4")
-                h1(class="text-7xl mb-5")= val[0].name
-                p(class="text-xl")= val[0].detail
-                p(class="text-xl") Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui corrupti suscipit ad dicta incidunt obcaecati nihil maiores impedit tenetur quibusdam. Quo esse excepturi impedit velit molestiae sit neque repellendus tempora.
-                h2(class="text-3xl") $#{val[0].price}
-                div(class="flex h-auto cartBtn items-center") 
-                    amount-element(count= val[0].count)
-                    button(data-addtocart)
-                        img( width="30px" height="30px" src="./images/icons/cart.png" data-addtocart)
-                        p(data-addtocart) Add to cart
-        div(class="flex flex-col gap-4")
-            h2(class="text-3xl") Review
-            if  true 
-                div(class="flex flex-col gap-10")
-                    div(class="flex gap-4") 
-                        img(src="./images/icons/avatar.png", alt="")
-                        div 
-                            h3 Name
-                            star-component(count=3)
-                            p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit animi quia recusandae totam accusamus
-                    div(class="flex gap-4")
-                        img(src="./images/icons/avatar.png", alt="")
-                        div 
-                            h3 Name
-                            star-component(count=3)
-                            p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit animi quia recusandae totam accusamus
-            else
-                h1 No reviews
+        productdetail-element(name=val[0].name, src=val[0].foodsrc, detail= val[0].detail, price=val[0].price, count=val[0].count, uid=val[0].uid, extradetail= "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui corrupti suscipit ad dicta incidunt obcaecati nihil maiores impedit tenetur quibusdam. Quo esse excepturi impedit velit molestiae sit neque repellendus tempora.")
+        //- div
+            h2(class="text-3xl mb-5") Review
+            div(class="flex gap-4")
+                div(class="w-full flex flex-col gap-4")
+                    if  true 
+                        div(class="flex flex-col gap-10")
+                            div(class="flex gap-4") 
+                                img(src="./images/icons/avatar.png", alt="" class="w-10 h-10")
+                                div 
+                                    h3 Name
+                                    star-element(count=3)
+                                    p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit animi quia recusandae totam accusamus
+                            div(class="flex gap-4")
+                                img(src="./images/icons/avatar.png", alt="" class="w-10 h-10")
+                                div 
+                                    h3 Name
+                                    star-element(count=3)
+                                    p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit animi quia recusandae totam accusamus
+                    else
+                        h1 No reviews
+                form(class="bg-orange")
+                    h1 Add your review
+                    input(type="text", placeholder="Add your review")
+                    input(type="number", placeholder="Add stars") 
     else
         h1 Product doesn't exist 
     footer-element

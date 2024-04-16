@@ -4,10 +4,10 @@ div.cmsCard
         p #{prop.name}
         p #{prop.extra}
         p $#{prop.price}
-    div.button
-        button(data-edit)
-            img(src="./images/icons/edit.png").icon
-            a(href=`.#/cms/edit/${prop.uid}`)  Edit
-        button(data-delete)
-            img(src="./images/icons/trash.png").icon
-            P Delete
+    div(class="flex gap-2 items-center")
+        //- button(data-edit)
+            //- img(src="./images/icons/edit.png").icon
+        a(href=`.#/cms/edit/${prop.uid}`)  Edit
+        button(data-delete class="px-4 py-2")
+            //- img(src="./images/icons/trash.png", data-delete).icon
+            span(data-delete) Delete

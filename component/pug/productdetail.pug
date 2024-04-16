@@ -1,0 +1,12 @@
+div(class="flex gap-20")
+    img(src= prop.src class="h-500 m-400")
+    div(class="flex flex-col gap-4 p-4")
+        h1(class="text-7xl mb-5")= prop.name
+        p(class="text-xl")= prop.detail
+        p(class="text-xl")= prop.extradetail
+        h2(class="text-3xl") $#{prop.price}
+        div(class="flex h-auto cartBtn items-center") 
+            amount-element(count= prop.count)
+            button(data-addtocart, class="px-4 py-2")
+                //- img( width="30px" height="30px" src="./images/icons/cart.png" data-addtocart)
+                p(data-addtocart) Add to cart

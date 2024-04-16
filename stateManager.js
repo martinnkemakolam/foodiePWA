@@ -27,8 +27,12 @@ let model = {
         price: '15',
         count: '0',
         uid: '003',
-        review: [
-        ]
+        review: [{
+            name: "Dummy user",
+            review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.",
+            star: 3,
+            
+        }]
     },{
         name: 'Burger 12',
         foodsrc: './images/burger1.webp',
@@ -81,7 +85,7 @@ let render = ()=>{
     //     }
     // }
     function renderPage() {
-        renderPage.pages = ['add-page', 'cms-page', 'cart-page', 'product-page']
+        renderPage.pages = ['add-page', 'cms-page', 'cart-page', 'product-page', 'dynamicproduct-page']
         renderPage.pages.forEach((page)=>{
             let isAvailable = document.querySelector(page)
             if (isAvailable) {

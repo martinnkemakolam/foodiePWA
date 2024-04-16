@@ -1,26 +1,28 @@
 div.header
-    div.links
-        a(href="./#/") Product
-        if state.model.isAuthenticated
-            a(href="./#/cms") CMS
-        a(href="./#/cart") Cart
-        a(href="./#/orders") Orders
+    div(class=" flex flex-col")
+        div(class="w-[300px] flex gap-4")
+            a(href="./#/") Product
+            if state.model.isAuthenticated
+                a(href="./#/cms") CMS
+            a(href="./#/cart") Cart
+            a(href="./#/orders") Orders
         if !state.model.isLoggedin && url !== '#/cms'
-            p(data-login) Signin/Signup
+            button(data-login) Signin/Signup
 
-    if url === '#/'
-        div.searchbar
-                img(width="30px" height="30px" src="images/icons/search.png")
-                input(data-input placeholder="Search")
-                div.line
-                select(data-option)
-                    option( data-option value="food" selected) Food
-                    option(data-option value="food 1") Food 1
-                    option(data-option value="food 2") Food 2
+    //- if url === '#/'
+    //-     div.searchbar
+    //-         //- div
+    //-         //-     <i class="bi bi-search"></i>
+    //-         input(data-input placeholder="Search")
+    //-         //- div.line
+    //-         //- select(data-option)
+    //-         //-     option( data-option value="food" selected) Food
+    //-         //-     option(data-option value="food 1") Food 1
+    //-         //-     option(data-option value="food 2") Food 2
     if url === '#/cms' && state.model.isAuthenticated
-        div.searchbar
-                img(width="30px" height="30px" src="images/icons/search.png")
-                input(data-input placeholder="Search")
-                div.line
-                button
-                    a(href="./#/cms/add") Add a product
+        div
+            //- <i class="bi bi-search"></i>
+            //- input(data-input placeholder="Search")
+            //- div.line
+            //- button
+            a(href="./#/cms/add") Add a product

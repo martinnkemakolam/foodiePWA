@@ -23,6 +23,7 @@ import order from "./pug/order.pug"
 import footer from "./pug/footer.pug"
 import notification from "./pug/notification.pug"
 import dynproduct from "./pug/product[id].pug"
+import productdetail from "./pug/productdetail.pug"
 import { objHasAnEmptyValue } from "../utility/utility.js";
 import { getValue } from "../utility/utility.js";
 import { promptEvent } from "../appComponent.js";
@@ -41,7 +42,7 @@ elementCreator({
                     console.log('worked', document.querySelector('.foodGrid'), this);
                 }
         },
-    }, {
+    }, { 
         event: 'change',
         callback: function(e){
             if ('option' in e.target.dataset) {
@@ -66,7 +67,7 @@ elementCreator({
         callback: function (e) {
             if('addtocart' in e.target.dataset) {
                 controlller.editProductCount(true, this.value.uid, document.querySelector('.foodGrid').parentElement)
-                controlller.showNotifications('Added to cart', `${this.value.name + ' at '+ this.value.price} has been added to your cart`, this.value.src)
+                controlller.showNotifications('Added to cart', `${this.value.name + ' at $'+ this.value.price} has been added to your cart`, this.value.src)
             }
         }
     }],
@@ -187,7 +188,7 @@ elementCreator({
                         price: getValue.bind(this)("#price")
                     }
                     if (objHasAnEmptyValue(payload)){
-                        alert('cant have an empty field')
+                        controlller.showNotifications('Error message', 'All fields are required to be filled', './images/icons/error.jpeg')
                         return
                     }
                     controlller.addProduct(payload)
@@ -201,8 +202,7 @@ elementCreator({
                         uid: this.value.uid
                     }
                     if (objHasAnEmptyValue(payload)) {
-                        console.log(payload)
-                        alert('cant have an empty field')
+                        controlller.showNotifications('Error message', 'All fields are required to be filled', './images/icons/error.jpeg')
                         return
                     }
                     controlller.editProduct(payload)
@@ -261,6 +261,30 @@ elementCreator({
                 }
                 if("close" in e.target.dataset) {
                     controlller.hideBanner()
+                }
+            }
+        }
+    ]
+})
+elementCreator({
+    name: "productdetail-element",
+    atr: ["name", "detail", "extradetail", "count", "price", "src", "uid"],
+    pugFunc: productdetail,
+    func: [
+        {
+            event: 'click',
+            callback: function(e){
+                if ('plus' in e.target.dataset) {
+                    controlller.editProductCount(true, this.value.uid)
+                    controlller.showNotifications('Added to cart', `${this.value.name + ' at $'+ this.value.price} has been added to your cart`, this.value.src)
+                }
+                if ('minus' in e.target.dataset) {
+                    controlller.editProductCount(false, this.value.uid)
+                    controlller.showNotifications('Removed from cart', `${this.value.name + ' at $'+ this.value.price} has been removed to your cart`, this.value.src)
+                }
+                if ('addtocart' in e.target.dataset) {
+                    controlller.editProductCount(true, this.value.uid)
+                    controlller.showNotifications('Added to cart', `${this.value.name + ' at $'+ this.value.price} has been added to your cart`, this.value.src)
                 }
             }
         }
