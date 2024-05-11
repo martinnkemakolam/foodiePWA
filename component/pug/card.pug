@@ -1,7 +1,8 @@
 div.food
     img(src= prop.src).product
-    h1= prop.name
-    p= prop.detail
+    div(class="h-[250px] overflow-hidden")
+        h1= prop.name
+        p(class="text-ellipsis overflow-hidden")= prop.detail
     div.bottom
         a(href=`.#/product/${prop.uid}`) view product 
         div.cartBtn

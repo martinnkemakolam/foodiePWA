@@ -13,17 +13,19 @@ mixin row()
                         p(class="w-30 text-xl") March, 10 2024
         else
             h1 No product
-section
+section(class="bg-[#123411] flex flex-col px-[40px] gap-[20px]")
     notification-element
+    overlay-element
     header-element
-    h1(class="text-4xl my-20") Order
-    div
-        div(class="flex justify-between mb-10 gap-5")
-            p(class="w-40 text-2xl") Order
-            p(class="w-30 text-2xl") Amount
-            p(class="w-30 text-2xl") Price
-            p(class="w-30 text-2xl") Order number
-            p(class="w-30 text-2xl") Order date
-            p(class="w-30 text-2xl") Delivery date 
-        +row()
+    div(class="bg-white p-[20px]")
+        h1(class="text-4xl my-20") Order
+        div()
+            div(class="flex justify-between mb-10 gap-5")
+                p(class="w-40 text-2xl") Order
+                p(class="w-30 text-2xl") Amount
+                p(class="w-30 text-2xl") Price
+                p(class="w-30 text-2xl") Order number
+                p(class="w-30 text-2xl") Order date
+                p(class="w-30 text-2xl") Delivery date 
+            +row()
     footer-element

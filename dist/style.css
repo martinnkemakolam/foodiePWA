@@ -14,21 +14,8 @@ body{
 h1, p{
     margin: 0;
 }
-a{
-    text-decoration: none;
-    color: #222;
-}
-section{
-    width: 100%;
-    height: fit-content;
-    box-sizing: border-box;
-    /* overflow: hidden; */
-    /* display: flex; */
-    flex-direction: column;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 10px 40px; 
-    background-color: var(--white);
+.a{
+    @apply decoration-none
 }
 .header{
     display: flex;
@@ -113,9 +100,6 @@ select option{
     font-weight: 500;
     text-transform: capitalize;
 }
-.foodContainer{
-    margin-top: 50px;
-}
 .foodContainer h2{
     text-transform: capitalize;
     font-size: 35px;
@@ -127,15 +111,19 @@ select option{
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     gap: 40px;
+    padding: 20px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    background-color: white;
     max-width: 2000px;
 }
 .foodGrid .food{
     display: flex;
     flex-direction: column;
     gap: 14px;
-    height: 100%;
+    height: 500px;
     width: 100%;
     cursor:context-menu;
     background-color: white;
@@ -146,10 +134,11 @@ select option{
     box-sizing: border-box;
 }
 .food .product{
-    width: 100%;
+    width: 300px;
+    height: 250px;
 }
 .food h1{
-    font-size: 40px;
+    font-size: 30px;
     margin: 0;
     text-align: center;
     text-transform: capitalize;
@@ -167,6 +156,7 @@ select option{
     margin: 0;
     font-weight: 400;
     text-align: center;
+    
 }
 .food .bottom{
     display: flex;
@@ -253,12 +243,10 @@ label, form button{
 .cartContainer{
     display: flex;
     gap: 20px;
+    background-color: white;
+    margin-top: 10px;
     width: 100%;
-    margin-top: 40px;
-    justify-content: center;
-}
-.cartContainer .table{
-    flex: 1 0 0;
+    justify-content: space-between;
 }
 .row{
     display: flex;
@@ -267,10 +255,13 @@ label, form button{
     align-items: center;
     justify-content: space-between;
 }
+
 .tableBody{
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 .border{
     padding: 5px 10px;
@@ -281,7 +272,7 @@ label, form button{
     height: 30px;
 }
 .wide{
-    width: 150px;
+    width: 100px;
 }
 .medium{
     width: 75px;
@@ -319,6 +310,10 @@ td{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: white;
+    padding: 20px;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
 }
 .cmsCard{
     /* background-color: rgb(223, 220, 220); */

@@ -30,6 +30,9 @@ module.exports = {
     resolve: {
         fallback: {
             fs: false
+        },
+        alias:{
+            tailwindcss: path.resolve(__dirname, "tailwind.config.js")
         }
     },
     devServer: {

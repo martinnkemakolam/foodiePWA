@@ -1,6 +1,7 @@
 - let val = state.model.product.filter(e=> +e.uid === +prop.param)
-section
+section(class="bg-[#123411] flex flex-col px-[40px] gap-[20px]")
     notification-element
+    overlay-element
     header-element
     if val.length > 0
         productdetail-element(name=val[0].name, src=val[0].foodsrc, detail= val[0].detail, price=val[0].price, count=val[0].count, uid=val[0].uid, extradetail= "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui corrupti suscipit ad dicta incidunt obcaecati nihil maiores impedit tenetur quibusdam. Quo esse excepturi impedit velit molestiae sit neque repellendus tempora.")

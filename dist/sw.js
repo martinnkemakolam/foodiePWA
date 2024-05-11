@@ -1,5 +1,5 @@
 let cacheName = 'marketplace'
-let resourcesToCache = ['index.html', 'app.js', 'style.css', 'manifest.json', 'sw.js']
+let resourcesToCache = ['index.html', 'app.js', 'style.css', 'manifest.json', 'sw.js', 'https://cdn.tailwindcss.com']
 
 let fetchStrategy =async(request)=>{
     
