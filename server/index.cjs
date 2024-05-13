@@ -14,7 +14,7 @@ app.all('*', (req, res, next)=>{
 
 let server = http.createServer(app)
 function LoadServer(){
-    server.listen( app.get('port'),()=>{
+    server.listen(app.get('port'),()=>{
         console.log('listening on port', app.get('port'));
     })
 }

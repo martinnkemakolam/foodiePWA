@@ -1,7 +1,11 @@
 import {router} from "./router.js"
-import data from "./component/unitComponent.js"
 import { controlller } from "./stateManager.js"
+// import { files } from "./utility/nodeUtility.js";
 
+
+// import('./component/container/auth').then((val)=>{
+//     console.log(val)
+// })
 let route = router()
 class app extends HTMLElement{
     connectedCallback(){
@@ -31,7 +35,6 @@ class app extends HTMLElement{
     }
 }
 
-customElements.define('app-component', app)
 
 // register SW
 navigator.serviceWorker.register('sw.js')
@@ -60,3 +63,10 @@ export let promptEvent= ()=>{
         installFunc:()=> promptObj.prompt(),
     }
 }
+
+
+// files.forEach((file)=>{
+//     import(file).then(()=>{
+//         customElements.define('app-component', app)
+//     })
+// })
