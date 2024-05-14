@@ -1,5 +1,5 @@
 import checkoutform from './checkoutform.pug'
-import elementCreator from "../../../elementCreator";
+import elementCreator from "../../../elementCreator.js";
 
 elementCreator({
     name: 'checkoutform-element',

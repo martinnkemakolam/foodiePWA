@@ -1,5 +1,5 @@
 import cms from './cms.pug'
-import elementCreator from "../../../elementCreator"
+import elementCreator from "../../../elementCreator.js"
 
 elementCreator({
     name: "cms-element",

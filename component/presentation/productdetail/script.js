@@ -1,4 +1,4 @@
-import elementCreator from "../../../elementCreator"
+import elementCreator from "../../../elementCreator.js"
 import productdetail from './productdetail.pug'
 
 elementCreator({
