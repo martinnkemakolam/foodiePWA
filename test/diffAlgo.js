@@ -19,30 +19,32 @@ let state = {
 
 let stateManager=()=>{
     let subscribtion = []
-    let callSubscription=({computedState, reference})=>{
-        let checkDifference = (state, computedState)=>{
-            let stringState = JSON.stringify(state)
+    let callSubscription=({computedState})=>{
+        let checkDifference = ({computedState, stateLn, ele, val})=>{
+            let stringState = JSON.stringify(stateLn)
             let stringComputed = JSON.stringify(computedState)
-            console.log(stringState, stringComputed)
-            if(stringState === stringComputed){
-                console.log('dif')
-            }else{
-                console.log('nahh')
+            if(stringState !== stringComputed){
+                state = val
+                ele.render(state)
             }
         }
-        console.log('t')
-        reference.forEach((arr)=>{
-            let currentObj
-            let stateRef
-            console.log('th')
-            arr.forEach((val, id)=>{
-                if (id === 0) {
-                    currentObj = computedState[val]
-                    stateRef = state[val]
-                }
-                if (id === arr.length - 1) {
-                    checkDifference(currentObj, stateRef)
-                }
+        subscribtion.forEach((ele)=>{
+            ele.reference.forEach((arr)=>{
+                let currentObj
+                let stateRef
+                arr.forEach((val, id)=>{
+                    if (id === 0) {
+                        currentObj = computedState[val]
+                        stateRef = state[val]
+                    }
+                    if (id === arr.length - 1) {
+                        checkDifference({computedState: currentObj, stateLn: stateRef, ele: ele, val: computedState})
+                    }
+                    
+                    stateRef = stateRef[val]
+                    currentObj = currentObj[val]
+
+                })
             })
         })
     }
@@ -55,16 +57,15 @@ let stateManager=()=>{
             subscribtion.push(arg)
         },
         controller:{
-            changeValue1:(payload, reference)=>{
+            changeValue1:(payload)=>{
                 let newState = computedState()
-                newState.value1 = 'new val 1'
-                newState.value2 = 'new val 2'
-                newState.nested.value1 = 'new val 2'
-                state.value1 = 'new val 1'
-                callSubscription({computedState: newState, reference: [['nested', 'value1']]})
+                newState.value1 = payload
+                callSubscription({computedState: newState})
             },
-            changeValue2:(payload, reference)=>{
-                callSubscription(newValue)
+            changeValue2:(payload)=>{
+                let newState = computedState()
+                newState.value2 = payload
+                callSubscription({computedState: newState})
             }
 
         }
@@ -74,19 +75,19 @@ let {controller, subscriber} = stateManager()
 let templateDiv=(state)=>{
     return `
     <div data-func>
-        ${state}
+        ${state.value1}
     </div>
     `
 }
 let templateDiv2=(state)=>{
     return `
     <div data-fun2>
-        ${state}
+        ${state.vale2}
     </div>
     `
 }
 
-window.elementCreator = ({name,atr = [],pugFunc,func = [],state})=>{
+window.elementCreator = ({name,atr = [],pugFunc,func = [], reference})=>{
     class test extends window.HTMLElement {
         constructor(){
             super()
@@ -103,9 +104,9 @@ window.elementCreator = ({name,atr = [],pugFunc,func = [],state})=>{
         attributeChangedCallback(name, oldValue, newValue){
             this.value[name] = newValue
         }
-        lastValueOfStar = state
-        render(computedState){
-            let pugHtml = pugFunc(computedState)
+        reference = reference || []
+        render(stateVal){
+            let pugHtml = pugFunc(stateVal)
             this.innerHTML = pugHtml
             func.forEach(({event,callback})=>{
                 this.addEventListener(event, callback, false)
@@ -134,7 +135,7 @@ describe('Rerendering test', () => {
                     }
                 }
             }], 
-            state: state.value1
+            reference: [['value1']]
         })
         window.elementCreator({
             name: 'second-element',
@@ -144,15 +145,15 @@ describe('Rerendering test', () => {
                 event: 'click',
                 callback: function (e) {
                     if('fun2' in e.target.dataset) {
-                        controller.changeValue2('new val 2')
+                        // controller.changeValue2('new val 2')
+                        controller.changeValue1('changed from 2')
                     }
                 },
             }],
-            state: state.value2
+            reference: [['value2']]
         })
     })
     it('should create a custom element with a render method', () => {
-        // console.log(window.document.querySelector('test-element').innerHTML.length)
         assert.equal(true, (window.document.querySelector('test-element').innerHTML.length>3 && window.document.querySelector('second-element').innerHTML.length>3))
     })
     it('should call the click func and cause change in state', ()=>{
@@ -163,9 +164,12 @@ describe('Rerendering test', () => {
         let stringObj = JSON.stringify(state)
         let newState = JSON.parse(stringObj)
         newState.value1 = 'new computed value 1'
-        // console.log(newState, state)
         assert.notEqual(newState.value1, state.value1)
     })
     it('should check for change between state used in element and the new computed value of state and rerender', ()=>{
+        let beforeStateChange = window.document.querySelector('test-element').innerHTML
+        window.document.querySelector('second-element').querySelector('div').click()
+        let ele = window.document.querySelector('test-element').innerHTML
+        assert.notEqual(ele, beforeStateChange)
     })
 })
