@@ -4,5 +4,6 @@ import cardHolder from "./cardHolder.pug"
 
 elementCreator({
     name: 'holder-element',
-    pugFunc: cardHolder
+    pugFunc: cardHolder,
+    ref: [['product']]
 })

@@ -57,8 +57,8 @@ let model = {
     },
     showFooter: false,
 }
-// 'foodsrc', 'name', 'detail', 'price', 'count'
- let checkoutPrice=(model)=>{
+
+let checkoutPrice=(model)=>{
     let sum = 0
     model.product.forEach((ele)=>{
         sum = sum + +ele.count * +ele.price 
@@ -67,114 +67,137 @@ let model = {
     return {model}
 }
 
-let render = ()=>{
-    // loop through all elements and call a render method\
-    let count = 0
-    // function lopper(ele) {
-    //     count++
-    //     if (ele.hasChildNodes()){
-    //         if (ele.render && count > 1) {
-    //             ele.render()
-    //         }
-    //         ele.childNodes.forEach(e => lopper(e))
-    //     }else{
-    //         if (ele.render) {
-    //             ele.render()
-    //         }
-    //         return
-    //     }
-    // }
-    function renderPage() {
-        renderPage.pages = ['add-page', 'cms-page', 'cart-page', 'product-page', 'dynamicproduct-page']
-        renderPage.pages.forEach((page)=>{
-            let isAvailable = document.querySelector(page)
-            if (isAvailable) {
-                isAvailable.render()
-            }else{
-                return
-            }
-        })
-    }
-    renderPage()
+let subscribtion = []
 
+export let subscriber =(arg)=>{
+    subscribtion.push(arg)
 }
+
+let callSubscription=({computedState})=>{
+    let checkDifference = ({computedState, stateLn, ele, val})=>{
+        let stringState = JSON.stringify(stateLn)
+        let stringComputed = JSON.stringify(computedState)
+        if(stringState !== stringComputed){
+            model = val
+            ele.render()
+        }
+    }
+    subscribtion.forEach((ele)=>{
+        console.log(ele, subscribtion)
+        ele.reference.forEach((arr)=>{
+            let currentObj
+            let stateRef
+            arr.forEach((val, id)=>{
+                if (id === 0) {
+                    currentObj = computedState[val]
+                    stateRef = state[val]
+                }
+                if (id === arr.length - 1) {
+                    checkDifference({computedState: currentObj, stateLn: stateRef, ele: ele, val: computedState})
+                }
+                
+                stateRef = stateRef[val]
+                currentObj = currentObj[val]
+
+            })
+        })
+    })
+}
+
+let computedState =()=>{
+    let stringObj = JSON.stringify(model)
+    return JSON.parse(stringObj)
+}
+
 
 export let view =()=> Object.freeze(checkoutPrice(model))
  
 
 export let controlller = {
     addToCart: (arg)=>{
-        model.cart.push(arg)
-        render()
+        let newModel = computedState()
+        newModel.cart.push(arg)
+        callSubscription({computedState: newModel})
     },
     editProductCount: (increment, uid)=>{
         let currentProduct = model.product.find((value, index)=> +value.uid === +uid)
-        console.log(uid, currentProduct, model.product)
         if (currentProduct){
             if (increment) {
-                currentProduct.count = +currentProduct.count + 1
+                let newModel = computedState()
+                newModel.count = +currentProduct.count + 1
+                callSubscription({computedState: newModel})
             }else{
-                currentProduct.count = +currentProduct.count - 1
+                let newModel = computedState()
+                newModel.count = +currentProduct.count - 1
+                callSubscription({computedState: newModel})
             }
         }
-        render()
     },
     removeFromCart: (uid)=>{
         let currentProduct = model.product.find((value, index)=> value.uid === uid)
         if (currentProduct) {
-            currentProduct.count = 0
+            let newModel = computedState()
+            newModel.count = 0
+            callSubscription({computedState: newModel})
         }
-        render()
     },
     showOverlay: ()=>{
-        model.showOverlay = !model.showOverlay
-        render()
+        let newModel = computedState()
+        newModel.showOverlay = !model.showOverlay
+        callSubscription({computedState: newModel})
     },
     switchForm: ()=>{
-        model.loginForm = !model.loginForm
-        render()
+        let newModel = computedState()
+        newModel.loginForm = !model.loginForm
+        callSubscription({computedState: newModel})
     },
     addProduct: (payload)=>{
-        //post data to api
-        model.product.push({
+        let newModel = computedState()
+        newModel.product.push({
             ...payload, count: 0, uid: Math.floor(Math.random() * 1000) 
         })
+        callSubscription({computedState: newModel})
     },
     editProduct: (payload)=>{
+        let newModel = computedState()
         let uid = payload.uid
-        model.product = model.product.map((ele)=>{
+        newModel.product = newModel.product.map((ele)=>{
             if (ele.uid === uid) {
                 return payload
             }else{
                 return ele
             }
         })
-        render()
+        callSubscription({computedState: newModel})
     },
     deleteProduct: (uid)=>{
-        model.product = model.product.filter((ele)=> ele.uid !== uid)
-        render()
+        let newModel = computedState()
+        newModel.product = newModel.product.filter((ele)=> ele.uid !== uid)
+        callSubscription({computedState: newModel})
     },
     showBanner: ()=>{
-        model.showFooter = true
-        render()
+        let newModel = computedState()
+        newModel.showFooter = true
+        callSubscription({computedState: newModel})
     },
     hideBanner: ()=>{
-        model.showFooter = false
-        render()
+        let newModel = computedState()
+        newModel.showFooter = false
+        callSubscription({computedState: newModel})
     },
     showNotifications: (title, msg, src)=>{
-        model.notification.show = true
-        model.notification.title = title
-        model.notification.msg = msg
-        model.notification.src = src
-        render()
+        let newModel = computedState()
+        newModel.notification.show = true
+        newModel.notification.title = title
+        newModel.notification.msg = msg
+        newModel.notification.src = src
+        callSubscription()
         setTimeout(()=>{
-            model.notification.show = false
-            model.notification.title = ""
-            model.notification.msg = ""
-            model.notification.src = ""
-            render()
+            newModel.notification.show = false
+            newModel.notification.title = ""
+            newModel.notification.msg = ""
+            newModel.notification.src = ""
+            callSubscription({computedState: newModel})
         }, 2000)
     }
 }

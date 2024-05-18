@@ -1,5 +1,5 @@
-import { view } from "./stateManager.js"
-export default function elementCreator({name,atr = [],pugFunc,func = []}) {
+import { subscriber, view } from "./stateManager.js"
+export default function elementCreator({name,atr = [],pugFunc,func = [], ref}) {
     class test extends HTMLElement {
         constructor(){
             super()
@@ -16,6 +16,7 @@ export default function elementCreator({name,atr = [],pugFunc,func = []}) {
         attributeChangedCallback(name, oldValue, newValue){
             this.value[name] = newValue
         }
+        reference= ref || [[]]
         render(){
             let virtualDom = this.cloneNode(true)
             let pugHtml = pugFunc({prop: this.value, state: view(), url: document.location.hash})
@@ -30,4 +31,5 @@ export default function elementCreator({name,atr = [],pugFunc,func = []}) {
         }
     }
     customElements.define(name, test)
+    subscriber(document.querySelector(name))
 }

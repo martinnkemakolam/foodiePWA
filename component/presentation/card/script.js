@@ -14,5 +14,5 @@ elementCreator({
                 controlller.showNotifications('Added to cart', `${this.value.name + ' at $'+ this.value.price} has been added to your cart`, this.value.src)
             }
         }
-    }],
+    }]
 })

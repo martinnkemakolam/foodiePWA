@@ -3,5 +3,6 @@ import notification from './notification.pug'
 
 elementCreator({
     name: "notification-element",
-    pugFunc: notification
+    pugFunc: notification,
+    ref: [['notification', 'show'], ['notification', 'src'], ['notification', 'title'], ['notification', 'msg']]
 })

@@ -14,5 +14,6 @@ elementCreator({
                 }
             }
         }
-    ]
+    ],
+    ref: [['sum']]
 })

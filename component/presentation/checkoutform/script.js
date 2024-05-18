@@ -3,5 +3,6 @@ import elementCreator from "../../../elementCreator.js";
 
 elementCreator({
     name: 'checkoutform-element',
-    pugFunc: checkoutform
+    pugFunc: checkoutform,
+    ref: [['sum']]
 })

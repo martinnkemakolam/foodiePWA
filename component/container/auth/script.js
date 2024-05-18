@@ -12,5 +12,6 @@ elementCreator({
                 controlller.switchForm(this)
             }
         }
-    }]
+    }],
+    ref: [['loginForm']]
 })

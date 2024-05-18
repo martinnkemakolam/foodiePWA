@@ -2,5 +2,6 @@ import elementCreator from "../../../elementCreator.js";
 import table from './table.pug'
 elementCreator({
     name: 'table-element',
-    pugFunc: table
+    pugFunc: table,
+    ref: [['product']]
 })

@@ -27,5 +27,6 @@ elementCreator({
                 controlller.showOverlay(document.querySelector('overlay-element'))
             }
         }
-    }]
+    }],
+    ref: [['isAuthenticated'], ['isLoggedIn']]
 })
