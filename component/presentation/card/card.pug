@@ -1,12 +1,12 @@
-div.food
-    img(src= prop.src).product
-    div(class="h-[250px] overflow-hidden")
-        h1= prop.name
-        p(class="text-ellipsis overflow-hidden")= prop.detail
-    div.bottom
-        a(href=`.#/product/${prop.uid}`) view product 
-        div.cartBtn
-            h2= prop.price
-            button(data-addtocart class="px-4 py-2")
-                //- img( width="30px" height="30px" src="./images/icons/cart.png" data-addtocart)
-                p(data-addtocart) Add to cart
+div(class="relative").food
+    img(src= prop.src class="mx-auto w-full h-full")
+    div(class="absolute bottom-0 bg-[#cef4ceee] w-full h-100px right-0 px-[20px] py-[20px] flex flex-col justify-between")
+        div(class="h-[250px]").detail
+            h1= prop.name
+            p(class="text-ellipsis overflow-hidden")= prop.detail
+        div(class="w-full flex items-center justify-between")
+            a(href=`.#/product/${prop.uid}` class="w-full") view product 
+            div.cartBtn
+                h2= prop.price
+                button(data-addtocart class="px-4 py-2")
+                    p(data-addtocart) Add to cart

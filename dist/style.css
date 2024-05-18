@@ -14,9 +14,6 @@ body{
 h1, p{
     margin: 0;
 }
-.a{
-    @apply decoration-none
-}
 .header{
     display: flex;
     align-items: center;
@@ -56,6 +53,11 @@ h1, p{
 }
 .header .searchbar select{
     padding: 10px 20px;
+}
+#app{
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 select option{
     font-size: 20px;
@@ -104,21 +106,23 @@ select option{
     text-transform: capitalize;
     font-size: 35px;
     font-weight: 500;
+    height: 100%;
     color: var(--text-H1);
 }
 .foodGrid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    justify-content: center;
-    /* margin-top: 50px; */
-    gap: 40px;
+    justify-items: center;
+    gap: 80px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     background-color: white;
     max-width: 2000px;
 }
+
 .foodGrid .food{
     display: flex;
     flex-direction: column;
@@ -132,10 +136,11 @@ select option{
     overflow: hidden;
     padding: 20px;
     box-sizing: border-box;
+    margin-right: auto;
 }
-.food .product{
-    width: 300px;
-    height: 250px;
+.foodGrid .food:hover .detail{
+    display: flex;
+    flex-direction: column;
 }
 .food h1{
     font-size: 30px;
@@ -158,16 +163,12 @@ select option{
     text-align: center;
     
 }
-.food .bottom{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
-}
 .food .cartBtn{
     display: flex;
     gap: 5px;
+}
+.food .detail:first-child{
+    display: none;
 }
 .amount{
     display: flex;
@@ -310,6 +311,9 @@ td{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-width: 2000px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
     padding: 20px;
     border-top-right-radius: 30px;
@@ -553,7 +557,12 @@ footer{
     border: 1px solid #333;
     /* opacity: 0.7; */
 }
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
+    .foodGrid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
     section{
         padding: 0;
     }

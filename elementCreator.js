@@ -20,16 +20,10 @@ export default function elementCreator({name,atr = [],pugFunc,func = []}) {
             let virtualDom = this.cloneNode(true)
             let pugHtml = pugFunc({prop: this.value, state: view(), url: document.location.hash})
             virtualDom.innerHTML = pugHtml
-            if (virtualDom.innerHTML === this.innerHTML) {
-                // console.log('also called',this)
-                return
-            }else{
-                // console.log('called', this)
-                this.innerHTML = virtualDom.innerHTML
-                func.forEach(({event,callback})=>{
-                    this.addEventListener(event, callback, false)
-                })
-            }
+            this.innerHTML = virtualDom.innerHTML
+            func.forEach(({event,callback})=>{
+                this.addEventListener(event, callback, false)
+            })
         }
         connectedCallback(){
             this.render()

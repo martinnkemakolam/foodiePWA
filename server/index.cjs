@@ -8,8 +8,8 @@ let app = express();
 // Middleware
 app.use(bodyParser())
 app.set('port', 900)
-app.all('*', (req, res, next)=>{
-    res.send({data: 'Our data'})
+app.get('/product', (req, res, next)=>{
+    res.send({data: []})
 })
 
 let server = http.createServer(app)

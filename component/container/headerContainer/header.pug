@@ -1,6 +1,6 @@
 - var activeStyle = "px-[5px] py-[2px] bg-[#eee] text-[#123411] rounded"
-div(class="bg-[#123411]")
-    div(class="flex justify-between items-center text-[#aaa] py-[20px]")
+div(class="bg-[#123411] max-w-[2000px] mx-auto")
+    div(class="flex justify-between items-center text-[#aaa]  py-[20px]")
         div
             p Logo
         div(class="flex gap-4 items-center")
@@ -21,11 +21,14 @@ div(class="bg-[#123411]")
                 a(href="./#/orders" class=activeStyle) Orders
             else
                 a(href="./#/orders") Orders
-        div(class="")
+        div
             if !state.model.isLoggedin && url !== '#/cms'
                 button(data-login) Signin/Signup
             if url === '#/cms' && state.model.isAuthenticated
                 div
                     a(href="./#/cms/add") Add a product
-    div
-    //- search bar
+    div(class="flex w-full px-[20px] gap-[20px] py-[10px] border rounded overflow-auto")
+        div(class=activeStyle + " w-fit") Text 1
+        div(class=activeStyle + " w-fit") Text 1
+        div(class=activeStyle + " w-fit") Text 1
+        div(class=activeStyle + " w-fit") Text 1
