@@ -11,5 +11,6 @@ elementCreator({
                     controlller.showOverlay(this)
                 }
             }
-        }]
+        }],
+    ref: [['showOverlay', 'isLoggedin']]
 })

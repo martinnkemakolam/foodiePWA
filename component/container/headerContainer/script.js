@@ -28,5 +28,5 @@ elementCreator({
             }
         }
     }],
-    ref: [['isAuthenticated'], ['isLoggedIn']]
+    ref: [['isLoggedIn']]
 })

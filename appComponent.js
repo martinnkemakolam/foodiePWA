@@ -1,7 +1,8 @@
 import {router} from "./router.js"
 import { controlller } from "./stateManager.js"
-import('./unitComponent.js')
+import ele from './unitComponent.js'
 
+let el = ele
 let route = router()
 class app extends HTMLElement{
     connectedCallback(){

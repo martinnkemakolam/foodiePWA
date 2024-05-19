@@ -74,31 +74,51 @@ export let subscriber =(arg)=>{
 }
 
 let callSubscription=({computedState})=>{
+    if (computedState === undefined) {
+        throw Error(`callSubscription function must be caled with a computedState`)
+    }
     let checkDifference = ({computedState, stateLn, ele, val})=>{
         let stringState = JSON.stringify(stateLn)
         let stringComputed = JSON.stringify(computedState)
+        console.log('reached')
+        console.log(stringState, stringComputed)
         if(stringState !== stringComputed){
             model = val
+            console.log('cause rerender in: ',ele)
             ele.render()
         }
     }
     subscribtion.forEach((ele)=>{
-        console.log(ele, subscribtion)
-        ele.reference.forEach((arr)=>{
+        // console.log(ele, subscribtion)
+        let element = document.querySelector(ele)
+        // console.log(element, ele)
+        if (element === null) {
+            // console.log(`doesn't exist ${ele}`)
+            return
+        }
+        // console.log(`exist ${ele}`)
+        element.reference.forEach((arr)=>{
             let currentObj
             let stateRef
             arr.forEach((val, id)=>{
                 if (id === 0) {
+                    // console.log(model[val])
                     currentObj = computedState[val]
-                    stateRef = state[val]
+                    stateRef = model[val]
+                    console.log(ele,currentObj, stateRef, val)
+                    if (id === arr.length - 1) {
+                        checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
+                        return
+                    }
+                    return
                 }
                 if (id === arr.length - 1) {
-                    checkDifference({computedState: currentObj, stateLn: stateRef, ele: ele, val: computedState})
+                    checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
+                    return
                 }
-                
+                // console.log('state ref: ', stateRef)
                 stateRef = stateRef[val]
                 currentObj = currentObj[val]
-
             })
         })
     })
@@ -143,12 +163,14 @@ export let controlller = {
     },
     showOverlay: ()=>{
         let newModel = computedState()
-        newModel.showOverlay = !model.showOverlay
+        newModel.showOverlay = !newModel.showOverlay
         callSubscription({computedState: newModel})
     },
     switchForm: ()=>{
         let newModel = computedState()
+        console.log(newModel.loginForm, newModel)
         newModel.loginForm = !model.loginForm
+        console.log(newModel.loginForm, newModel)
         callSubscription({computedState: newModel})
     },
     addProduct: (payload)=>{
@@ -191,8 +213,9 @@ export let controlller = {
         newModel.notification.title = title
         newModel.notification.msg = msg
         newModel.notification.src = src
-        callSubscription()
+        callSubscription({computedState: newModel})
         setTimeout(()=>{
+            let newModel = computedState()
             newModel.notification.show = false
             newModel.notification.title = ""
             newModel.notification.msg = ""

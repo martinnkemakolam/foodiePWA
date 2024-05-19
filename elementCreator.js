@@ -31,5 +31,5 @@ export default function elementCreator({name,atr = [],pugFunc,func = [], ref}) {
         }
     }
     customElements.define(name, test)
-    subscriber(document.querySelector(name))
+    subscriber(name)
 }
