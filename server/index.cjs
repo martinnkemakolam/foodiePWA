@@ -1,29 +1,49 @@
-const express = require('express');
-const webpush = require('web-push');
-let bodyParser = require('body-parser');
 let http = require('http');
+let login = require('./paths/login.cjs');
+let getBody = require('./utility/getBody.cjs');
+const {dbConnection, getDb} = require("./utility/databaseUtil.cjs");
+const signup = require('./paths/signup.cjs');
 
-let app = express();
+dbConnection((err)=>{
+    if(err){
+        console.error(err)
+        return
+    }
+    console.log('running')
 
-// Middleware
-app.use(bodyParser())
-app.set('port', 900)
-app.get('/product', (req, res, next)=>{
-    res.send({data: []})
-})
+    let server = http.createServer(async(req, res)=>{
+        //MiddleWare
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        res.setHeader("Access-Control-Max-Age", 3600)
+    
+        if(req.method === 'OPTIONS'){
+            res.end()
+        }
 
-let server = http.createServer(app)
-function LoadServer(){
-    server.listen(app.get('port'),()=>{
-        console.log('listening on port', app.get('port'));
+        
+        //db
+        let db = getDb()
+
+
+        //Routes
+        login(req, res, db)
+        signup(req, res, db)
+
     })
-}
-function closeServer(){
-    server.close()
-}
-if (require.main === module) {
-    LoadServer()
-}else{
-    exports.boot = LoadServer
-    exports.shutdown = closeServer
-}
+    function LoadServer(){
+        server.listen(3080,()=>{
+            console.log('listening on port', 3080);
+        })
+    }
+    function closeServer(){
+        server.close()
+    }
+    if (require.main === module) {
+        LoadServer()
+    }else{
+        exports.boot = LoadServer
+        exports.shutdown = closeServer
+    }
+})

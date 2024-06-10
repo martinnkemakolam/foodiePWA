@@ -23,6 +23,6 @@ div
                 input(type="checkbox")
                 p I've read and agreed with the terms and conditions
         if state.model.loginForm
-            button Sign in
+            button(data-signin) Sign in
         else
-            button Sign up
+            button(data-signUp) Sign up
