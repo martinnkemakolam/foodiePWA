@@ -1,6 +1,5 @@
 let http = require('http');
 let login = require('./paths/login.cjs');
-let getBody = require('./utility/getBody.cjs');
 const {dbConnection, getDb} = require("./utility/databaseUtil.cjs");
 const signup = require('./paths/signup.cjs');
 

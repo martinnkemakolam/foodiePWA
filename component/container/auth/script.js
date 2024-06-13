@@ -9,24 +9,25 @@ elementCreator({
         event: 'click',
         callback: function(e){
             e.preventDefault();
+            let value = {
+                email: this.querySelector('input[type="email"]').value,
+                password: this.querySelector('input[type="password"]').value
+            }
             if('toggle' in e.target.dataset){
                 controlller.switchForm(this)
             }if ('signin' in e.target.dataset) {
+                if (value.password.length < 5 || value.email.length < 5) {
+                    return   
+                }
                 fetch('http://localhost:3080/api/login', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        data: 'My data'
-                    })
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify(value)
                 }).then(async(res)=>{
                     let text = await res.text()
                     console.log(res, text)
                 })
             }if ('signup' in e.target.dataset) {
-                let value = {
-                    email: this.querySelector('input[type="email"]').value,
-                    password: this.querySelector('input[type="password"]').value
-                }
                 if (value.password.length < 5 || value.email.length < 5) {
                     return   
                 }
