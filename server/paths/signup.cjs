@@ -2,6 +2,7 @@ let checkPathAndMethod = require("../utility/checkPathAndMethod.cjs")
 let bcrypt = require('bcryptjs')
 let mail = require('nodemailer')
 let getBody = require("../utility/getBody.cjs")
+const  respnse = require("../utility/respnse.cjs")
 module.exports = (req, res, db)=>{
     checkPathAndMethod(req, 'POST', '/api/signup', async()=>{
         let body = await getBody(req)
@@ -24,21 +25,14 @@ module.exports = (req, res, db)=>{
                 password: encrpthedPassword
             }
             let result = await db.collection('unverifieduser').insertOne(dataToAdd)
-            res.writeHead(200, {
-                "Content-Type": "application/json"
-            })
-            res.end(JSON.stringify({
+            respnse(res, 200, {
                 result: result,
                 success: true
-            }))
-        }catch(e){
-            res.writeHead(400, {
-                "Content-Type": "application/json"
             })
-            res.end(JSON.stringify({
-                error: `Error adding user`,
+        }catch(e){
+            respnse(res, 400, {
                 errorMessage: e.message
-            }))
+            })
         }
     })
 }

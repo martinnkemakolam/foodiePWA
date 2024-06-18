@@ -1,63 +1,54 @@
 const bcrypt = require('bcryptjs')
 let checkPathAndMethod = require('../utility/checkPathAndMethod.cjs')
 const getBody = require('../utility/getBody.cjs')
+const JWT = require('jsonwebtoken')
+const respnse = require('../utility/respnse.cjs')
+
+
 module.exports =(req, res, db)=>{
     console.log('ran')
     checkPathAndMethod(req, 'POST', '/api/login', async()=>{
         console.log('ran')
         let body = await getBody(req)
-        //get the password from body and mail
         let password = body.password
         let email = body.email
-
-        //hash and salt password
-
-        //check across db for match
         try {
             console.log(password, email)
             let mongoResponse = await db.collection('unverifieduser').findOne({email: email})   
             bcrypt.compare(password, mongoResponse.password, (err, result) => {
                 if (err) {
-                    res.writeHead( 500, {
-                        'Content-Type': 'application/json',
-                        'X-Powered-By': 'bacon',
+                    respnse(res, 500, {
+                        errorMessage: err.message
                     })
-                    res.end(JSON.stringify({
-                        error: 'Internal Server Error'
-                    }))
                     return
                 }
-                console.log(mongoResponse.password, result)
+                // console.log(mongoResponse.password, result)
                 if (result) {
-                    res.writeHead( 200, {
-                        'Content-Type': 'application/json',
-                        'X-Powered-By': 'bacon',
+                    // console.log(mongoResponse._id)
+                    let payload = {
+                        userId: mongoResponse._id,
+                        isAdmin: mongoResponse.email === "nkemakolam.martin@gmail.com" ? true : false
+                    }
+                    let token = JWT.sign(payload, 'FoodiePWA', {
+                        expiresIn: "3h"
                     })
-                    res.end(JSON.stringify({
+                    respnse(res, 200, {
                         ...mongoResponse,
                         password: password,
-                        authObj: true
-                    }))   
+                        token: token
+                    })   
                 }else{
-                    res.writeHead( 400, {
-                        'Content-Type': 'application/json',
-                        'X-Powered-By': 'bacon',
-                    })
-                    res.end(JSON.stringify({
+                    respnse(res, 400, {
                         email: email,
                         password: password,
-                        authObj: false
-                    }))
+                        token: false
+                    })
                 }
             })
         } catch (error) {
-            res.writeHead( 400, {
-                'Content-Type': 'application/json',
-                'X-Powered-By': 'bacon',
+            respnse(res, 500, {
+                errorMessage: error.message
             })
-            res.end(JSON.stringify({
-                error: error.message
-            }))    
         }
     })
 }

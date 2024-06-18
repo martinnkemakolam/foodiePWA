@@ -2,6 +2,8 @@ let http = require('http');
 let login = require('./paths/login.cjs');
 const {dbConnection, getDb} = require("./utility/databaseUtil.cjs");
 const signup = require('./paths/signup.cjs');
+const getAllProducts = require('./paths/getAllProducts.cjs');
+
 
 dbConnection((err)=>{
     if(err){
@@ -29,7 +31,7 @@ dbConnection((err)=>{
         //Routes
         login(req, res, db)
         signup(req, res, db)
-
+        getAllProducts(req, res, db)
     })
     function LoadServer(){
         server.listen(3080,()=>{
