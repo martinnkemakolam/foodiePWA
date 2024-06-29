@@ -2,7 +2,7 @@ const checkPathAndMethod = require("../utility/checkPathAndMethod.cjs")
 const respnse = require("../utility/respnse.cjs")
 
 module.exports =(req, res, db)=>{
-    checkPathAndMethod(req, 'GET', '/getAllTags', async()=>{
+    checkPathAndMethod(req, 'GET', '/api/getAllTags', async()=>{
         try{
             let result = await db.collection('tags').find().toArray()
             respnse(res, 200, result)

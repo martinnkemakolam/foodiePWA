@@ -1,3 +1,4 @@
+let getSingleProduct = require('./paths/getSingleProduct.cjs')
 let http = require('http');
 // let URL = require('node:url');
 let login = require('./paths/login.cjs');
@@ -42,6 +43,7 @@ dbConnection((err)=>{
         getAllProducts(req, res, db)
         getAllTags(req, res, db)
         getProductsByTag(req, res, db)
+        getSingleProduct(req, res, db)
     })
     function LoadServer(){
         server.listen(3080,()=>{
