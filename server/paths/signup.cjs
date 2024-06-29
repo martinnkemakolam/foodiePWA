@@ -1,8 +1,8 @@
 let checkPathAndMethod = require("../utility/checkPathAndMethod.cjs") 
 let bcrypt = require('bcryptjs')
-let mail = require('nodemailer')
 let getBody = require("../utility/getBody.cjs")
 const  respnse = require("../utility/respnse.cjs")
+
 module.exports = (req, res, db)=>{
     checkPathAndMethod(req, 'POST', '/api/signup', async()=>{
         let body = await getBody(req)
