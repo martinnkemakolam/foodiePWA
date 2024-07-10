@@ -3,5 +3,6 @@ import dynproduct from './product[id].pug'
 
 elementCreator({
     name: "dynamicproduct-page",
-    pugFunc: dynproduct
+    pugFunc: dynproduct,
+    ref: [['product']]
 })

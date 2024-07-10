@@ -4,8 +4,8 @@ import getBody from "../utility/getBody.cjs"
 const checkPathAndMethod = require("../utility/checkPathAndMethod.cjs")
 const respnse = require("../utility/respnse.cjs")
 
-module.exports =(req, res, db)=>{
-    checkPathAndMethod(req, 'DELETE', '/api/deleteProduct', async()=>{
+module.exports =(req, res, db)=>(
+    checkPathAndMethod({req, method:'DELETE', acceptedPath:'/api/deleteProduct', cb:async()=>{
         let body = await getBody(req)
         try{
             let param = {
@@ -22,5 +22,5 @@ module.exports =(req, res, db)=>{
         }catch(e){
             respnse(res, 400, {errorMessage: e.message})
         }
-    })
-}
+    }}) 
+)

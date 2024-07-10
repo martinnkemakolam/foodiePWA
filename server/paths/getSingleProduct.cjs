@@ -1,10 +1,10 @@
-import { ObjectId } from "mongodb"
+const { ObjectId } = require("mongodb")
 
 const checkPathAndMethod = require("../utility/checkPathAndMethod.cjs")
 const respnse = require("../utility/respnse.cjs")
 
-module.exports =(req, res, db)=>{
-    checkPathAndMethod(req, 'GET', '/api/getSingleProduct', async()=>{
+module.exports =(req, res, db)=>(
+    checkPathAndMethod({req, method:'GET', acceptedPath:'/api/getSingleProduct', cb:async()=>{
         try{
             let param = {
                 product_id: req.params.get('product_id')
@@ -20,5 +20,4 @@ module.exports =(req, res, db)=>{
         }catch(e){
             respnse(res, 400, {errorMessage: e.message})
         }
-    })
-}
+    }}) )

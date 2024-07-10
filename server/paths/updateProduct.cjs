@@ -4,8 +4,8 @@ import getBody from "../utility/getBody.cjs"
 const checkPathAndMethod = require("../utility/checkPathAndMethod.cjs")
 const respnse = require("../utility/respnse.cjs")
 
-module.exports =(req, res, db)=>{
-    checkPathAndMethod(req, 'UPDATE', '/api/updateProduct', async()=>{
+module.exports =(req, res, db)=>(
+    checkPathAndMethod({req, method:'UPDATE', acceptedPath:'/api/updateProduct', cb: async()=>{
         let body = await getBody(req)
         let upadate = {
             title: body.tittle,
@@ -31,5 +31,5 @@ module.exports =(req, res, db)=>{
         }catch(e){
             respnse(res, 400, {errorMessage: e.message})
         }
-    })
-}
+    }}) 
+)

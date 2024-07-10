@@ -1,3 +1,4 @@
+- let value = state.model.product.find((ele)=>+ele.uid === +prop.uid).count
 div(class="relative").food
     img(src= prop.src class="mx-auto w-full h-full")
     div(class="absolute bottom-0 bg-[#cef4ceee] w-full h-100px right-0 px-[20px] py-[20px] flex flex-col justify-between")
@@ -10,3 +11,4 @@ div(class="relative").food
                 h2= prop.price
                 button(data-addtocart class="px-4 py-2")
                     p(data-addtocart) Add to cart
+                    h1= value

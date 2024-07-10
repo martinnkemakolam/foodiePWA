@@ -3,8 +3,8 @@ let bcrypt = require('bcryptjs')
 let getBody = require("../utility/getBody.cjs")
 const  respnse = require("../utility/respnse.cjs")
 
-module.exports = (req, res, db)=>{
-    checkPathAndMethod(req, 'POST', '/api/signup', async()=>{
+module.exports = (req, res, db)=>(
+    checkPathAndMethod({req,method:'POST', acceptedPath: '/api/signup', cb:async()=>{
         let body = await getBody(req)
         // get email and password from body
 
@@ -34,5 +34,5 @@ module.exports = (req, res, db)=>{
                 errorMessage: e.message
             })
         }
-    })
-}
+    }}) 
+)

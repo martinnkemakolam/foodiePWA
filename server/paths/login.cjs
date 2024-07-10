@@ -5,10 +5,8 @@ const JWT = require('jsonwebtoken')
 const respnse = require('../utility/respnse.cjs')
 
 
-module.exports =(req, res, db)=>{
-    console.log('ran')
-    checkPathAndMethod(req, 'POST', '/api/login', async()=>{
-        console.log('ran')
+module.exports =(req, res, db)=>(
+    checkPathAndMethod({req, method: 'POST', acceptedPath:'/api/login', cb: async()=>{
         let body = await getBody(req)
         let password = body.password
         let email = body.email
@@ -50,5 +48,5 @@ module.exports =(req, res, db)=>{
                 errorMessage: error.message
             })
         }
-    })
-}
+    }}) 
+)

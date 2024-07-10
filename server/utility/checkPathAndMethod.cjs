@@ -1,7 +1,11 @@
-module.exports = (req,method, acceptedPath,cb)=>{
+module.exports = ({req,method, acceptedPath, auth, cb})=>{
     // console.log('runn', req.url, req.method)
     if (req.method === method && req.path === acceptedPath){
-        // console.log('runnn')
-        cb()
+        if(auth){
+            cb()
+        }else{
+            cb()
+        }
+        return false
     }
 }

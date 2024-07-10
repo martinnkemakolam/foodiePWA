@@ -1,3 +1,5 @@
+// Our model
+
 let model = {
     product: [
         {
@@ -77,48 +79,55 @@ let callSubscription=({computedState})=>{
     if (computedState === undefined) {
         throw Error(`callSubscription function must be caled with a computedState`)
     }
-    let checkDifference = ({computedState, stateLn, ele, val})=>{
+
+
+    const checkDifference = ({computedState, stateLn, ele, val})=>{
         let stringState = JSON.stringify(stateLn)
         let stringComputed = JSON.stringify(computedState)
-        console.log('reached')
-        console.log(stringState, stringComputed)
+        // console.log('reached')
+        // console.log(stringState, stringComputed)
         if(stringState !== stringComputed){
             model = val
-            console.log('cause rerender in: ',ele)
             ele.render()
         }
     }
+
     subscribtion.forEach((ele)=>{
-        // console.log(ele, subscribtion)
-        let element = document.querySelector(ele)
-        // console.log(element, ele)
-        if (element === null) {
-            // console.log(`doesn't exist ${ele}`)
-            return
-        }
-        // console.log(`exist ${ele}`)
-        element.reference.forEach((arr)=>{
-            let currentObj
-            let stateRef
-            arr.forEach((val, id)=>{
-                if (id === 0) {
-                    // console.log(model[val])
-                    currentObj = computedState[val]
-                    stateRef = model[val]
-                    console.log(ele,currentObj, stateRef, val)
+        let element = document.querySelectorAll(ele)
+        element.forEach((element)=>{
+            if (element === null) {
+                return
+            } 
+            element.reference.forEach((arr)=>{
+                let currentObj
+                let stateRef
+                arr.forEach((val, id)=>{
+                    if (id === 0) {
+                        currentObj = computedState[val]
+                        stateRef = model[val]
+                        if (id === arr.length - 1) {
+                            if(element?.selector?.length > 0){
+                                console.log('ran')
+                                currentObj = element.selector[0](computedState, element)
+                                stateRef = element.selector[0](model, element)
+                            }
+                            checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
+                            return
+                        }
+                        return
+                    }
                     if (id === arr.length - 1) {
+                        if(element?.selector?.length > 0){
+                            console.log('ran')
+                            currentObj = element.selector[0](computedState, element)
+                            stateRef = element.selector[0](model, element)
+                        }
                         checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
                         return
                     }
-                    return
-                }
-                if (id === arr.length - 1) {
-                    checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
-                    return
-                }
-                // console.log('state ref: ', stateRef)
-                stateRef = stateRef[val]
-                currentObj = currentObj[val]
+                    stateRef = stateRef[val]
+                    currentObj = currentObj[val]
+                })
             })
         })
     })
@@ -131,25 +140,44 @@ let computedState =()=>{
 
 
 export let view =()=> Object.freeze(checkoutPrice(model))
- 
+
+
+window.globalState = view()
+
 
 export let controlller = {
-    addToCart: (arg)=>{
-        let newModel = computedState()
-        newModel.cart.push(arg)
-        callSubscription({computedState: newModel})
-    },
     editProductCount: (increment, uid)=>{
-        let currentProduct = model.product.find((value, index)=> +value.uid === +uid)
+        let newModel = computedState()
+        let currentProduct = newModel.product.find((value)=> +value.uid === +uid)
         if (currentProduct){
             if (increment) {
-                let newModel = computedState()
-                newModel.count = +currentProduct.count + 1
+                currentProduct.count = +currentProduct.count + 1
+                let newProduct = newModel.product.map((prod)=>{
+                    if (prod.uid === currentProduct.uid) {
+                        return currentProduct
+                    }else{
+                        return prod
+                    }
+                })
+                newModel.product = newProduct
+                console.log(newModel)
                 callSubscription({computedState: newModel})
             }else{
-                let newModel = computedState()
-                newModel.count = +currentProduct.count - 1
-                callSubscription({computedState: newModel})
+                if(+currentProduct.count === 0){
+                    return
+                }else{
+                    currentProduct.count = +currentProduct.count - 1
+                    let newProduct = newModel.product.map((prod)=>{
+                        if (prod.uid === currentProduct.uid) {
+                            return currentProduct
+                        }else{
+                            return prod
+                        }
+                    })
+                    newModel.product = newProduct
+                    console.log(newModel)
+                    callSubscription({computedState: newModel})
+                }
             }
         }
     },

@@ -3,8 +3,8 @@ let bcrypt = require('bcryptjs')
 let getBody = require("../utility/getBody.cjs")
 const  respnse = require("../utility/respnse.cjs")
 
-module.exports = (req, res, db)=>{
-    checkPathAndMethod(req, 'POST', '/api/signup', async()=>{
+module.exports = (req, res, db)=>(
+    checkPathAndMethod({req, method:'POST', auth:'/api/signup', cb:async()=>{
         let body = await getBody(req)
         try{
             let dataToAdd = {
@@ -24,5 +24,5 @@ module.exports = (req, res, db)=>{
                 errorMessage: e.message
             })
         }
-    })
-}
+    }}) 
+)

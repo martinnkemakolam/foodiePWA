@@ -24,5 +24,6 @@ elementCreator({
                 }
             }
         }
-    ]
+    ],
+    ref: [["product", "count"]]
 })
