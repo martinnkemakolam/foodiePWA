@@ -24,9 +24,13 @@ elementCreator({
         event: 'click',
         callback: function(e){
             if('login' in e.target.dataset) {
-                controlller.showOverlay(document.querySelector('overlay-element'))
+                controlller.showOverlay()
+            }
+            if (e.target.dataset.btn === 'logout') {
+                controlller.logout()
+                controlller.showNotifications('Logout', "you've successfully logged out", './images/icons/success.png')
             }
         }
     }],
-    ref: [['isLoggedIn']]
+    ref: [["authObject"]]
 })

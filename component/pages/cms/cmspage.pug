@@ -2,7 +2,7 @@ section(class="bg-[#123411] flex flex-col px-[40px] gap-[20px]")
     notification-element
     overlay-element
     header-element
-    if state.model.isAuthenticated
+    if state.model.authObject.email
         cmsholder-element
     else
         signin-element

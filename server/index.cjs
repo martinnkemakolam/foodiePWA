@@ -11,16 +11,18 @@ const getAllTags = require('./paths/getAllTags.cjs');
 const getProductsByTag= require('./paths/getProductsByTag.cjs');
 
 
+// Observer for all routes
 const observer = {
     routes: [],
     addRoute:(route)=> {
+        // Adds routes to the routes array and returns the object
         observer.routes.push(route)
         return observer
     },
     callAllRoutes:(req, res, db)=>{
+        // Loops through all the routes and calls them with (req, res, db) arguments, routes return false or undefined.
         const value = observer.routes.every(route=>{
             const routeValue = route(req, res, db)
-            console.log(routeValue, 'routevalue')
             if (typeof routeValue === "undefined") {
                 return true
             }
@@ -68,7 +70,7 @@ dbConnection((err)=>{
         console.log(req.params, req.href, req.path)
         let matchedRoute = observer.callAllRoutes(req, res, db)
         if (matchedRoute){
-            console.log(matchedRoute, 'general val 2')
+            // causes server to crash from time to time, I don't know why tho 
             respnse(res, 404, "No route found")
         }
     })

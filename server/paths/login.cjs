@@ -11,7 +11,6 @@ module.exports =(req, res, db)=>(
         let password = body.password
         let email = body.email
         try {
-            console.log(password, email)
             let mongoResponse = await db.collection('unverifieduser').findOne({email: email})   
             bcrypt.compare(password, mongoResponse.password, (err, result) => {
                 if (err) {
@@ -33,7 +32,8 @@ module.exports =(req, res, db)=>(
                     respnse(res, 200, {
                         ...mongoResponse,
                         password: password,
-                        token: token
+                        token: token,
+                        role: mongoResponse.email === "nkemakolam.martin@gmail.com" ? "admin" : "user"
                     })   
                 }else{
                     respnse(res, 400, {

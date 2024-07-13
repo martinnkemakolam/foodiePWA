@@ -1,6 +1,11 @@
 // Our model
 
 let model = {
+    authObject: {
+        email: null,
+        token: null,
+        role: null,
+    },
     product: [
         {
         name: 'Burger 1',
@@ -46,8 +51,6 @@ let model = {
         ]
     }
     ],
-    isLoggedin: false,
-    isAuthenticated: true,
     loginForm: false,
     showOverlay: false,
     sum: 0,
@@ -107,7 +110,6 @@ let callSubscription=({computedState})=>{
                         stateRef = model[val]
                         if (id === arr.length - 1) {
                             if(element?.selector?.length > 0){
-                                console.log('ran')
                                 currentObj = element.selector[0](computedState, element)
                                 stateRef = element.selector[0](model, element)
                             }
@@ -194,13 +196,6 @@ export let controlller = {
         newModel.showOverlay = !newModel.showOverlay
         callSubscription({computedState: newModel})
     },
-    switchForm: ()=>{
-        let newModel = computedState()
-        console.log(newModel.loginForm, newModel)
-        newModel.loginForm = !model.loginForm
-        console.log(newModel.loginForm, newModel)
-        callSubscription({computedState: newModel})
-    },
     addProduct: (payload)=>{
         let newModel = computedState()
         newModel.product.push({
@@ -250,5 +245,24 @@ export let controlller = {
             newModel.notification.src = ""
             callSubscription({computedState: newModel})
         }, 2000)
+    },
+    changeFetchState: (done)=>{
+        let newModel = computedState()
+        newModel.isFetching = done
+        callSubscription({computedState: newModel})
+    },
+    addAuthObject: ({payload})=>{
+        let newModel = computedState()
+        newModel.authObject.email = payload.email
+        newModel.authObject.token = payload.token
+        newModel.authObject.role = payload.role
+        callSubscription({computedState: newModel})
+    },
+    logout:()=>{
+        let newModel = computedState()
+        newModel.authObject.email = null
+        newModel.authObject.token = null
+        newModel.authObject.role = null
+        callSubscription({computedState: newModel})
     }
 }

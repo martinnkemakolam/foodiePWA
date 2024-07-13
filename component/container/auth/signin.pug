@@ -1,12 +1,12 @@
 
 div
-    if state.model.loginForm
+    if privateState.loginForm
         p Don't have an account?
         span(data-toggle) Sign up.
     else
         p Already have an account?
         span(data-toggle) Sign in.
-if state.model.loginForm
+if privateState.loginForm
     h1 Sign in
 else
     h1 Sign up
@@ -17,12 +17,18 @@ div
             input(type="email")
         div
             p Password:
-            input(type="password") 
-        if state.model.loginForm
+            input(type="password", value="") 
+            
             div
                 input(type="checkbox")
                 p I've read and agreed with the terms and conditions
-        if state.model.loginForm
-            button(data-signin) Sign in
+        if privateState.loginForm
+            if privateState.isLoading
+                button Loading...
+            else 
+                button(data-signin) Sign in
         else
-            button(data-signUp) Sign up
+            if privateState.isLoading
+                button Loading...
+            else 
+                button(data-signup) Sign up

@@ -1,14 +1,19 @@
+- var isUser = state.model.authObject.role === 'user'
+- var isLoggedIn = state.model.authObject.email
 - var activeStyle = "px-[5px] py-[2px] bg-[#eee] text-[#123411] rounded"
 div(class="bg-[#123411] max-w-[2000px] mx-auto")
+
     div(class="flex justify-between items-center text-[#aaa]  py-[20px]")
+
         div
             p Logo
+
         div(class="flex gap-4 items-center")
             if (url === ("#/" || "#"))
                 a(href="./#/" class=activeStyle) Product
             else
                 a(href="./#/") Product
-            if state.model.isAuthenticated
+            if !isUser && isLoggedIn
                 if (url === ('#/cms' || '#/cms/'))
                     a(href="./#/cms" class=activeStyle) CMS
                 else
@@ -21,14 +26,22 @@ div(class="bg-[#123411] max-w-[2000px] mx-auto")
                 a(href="./#/orders" class=activeStyle) Orders
             else
                 a(href="./#/orders") Orders
+
         div
-            if !state.model.isLoggedin && url !== '#/cms'
+            if !isLoggedIn && url !== '#/cms'
                 button(data-login) Signin/Signup
-            if url === '#/cms' && state.model.isAuthenticated
+            else
+                button(data-btn = "logout") Log out
+            if url === '#/cms' && isUser
                 div
                     a(href="./#/cms/add") Add a product
+    
     div(class="flex w-full px-[20px] gap-[20px] py-[10px] border rounded overflow-auto")
+
         div(class=activeStyle + " w-fit") Text 1
+
         div(class=activeStyle + " w-fit") Text 1
+
         div(class=activeStyle + " w-fit") Text 1
+        
         div(class=activeStyle + " w-fit") Text 1

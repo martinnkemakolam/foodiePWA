@@ -1,5 +1,19 @@
 import { subscriber, view } from "./stateManager.js"
-export default function elementCreator({name,atr = [],pugFunc,func = [], ref, selector}) {
+
+// function createProxy(target) {
+//     return new Proxy(target, {
+//         set(target, property, value, receiver) {
+//             console.log(target, property, value, receiver)y
+//             if (value && typeof value === 'object') {
+//                 console.log(target, property, value, receiver)
+//                 value = createProxy(value);
+//             }
+//             console.log(target, property, value, receiver)
+//             return Reflect.set(target, property, value, receiver);
+//         }
+//     });
+// }
+export default function elementCreator({name,atr = [],pugFunc,func = [], ref, selector,  privateState= {}}) {
     class test extends HTMLElement {
         constructor(){
             super()
@@ -8,6 +22,28 @@ export default function elementCreator({name,atr = [],pugFunc,func = [], ref, se
         value = {
             param: undefined 
         }
+        privateValue = {
+            isLoading: false,
+            ...privateState,
+        }
+        // privateValue2 = createProxy({
+        //     isLoading: false,
+        //     nest: {
+        //         value: {
+        //             boy: ''
+        //         }
+        //     },
+        //     ...privateState,
+        // })
+        setState=(watchValue, newValue)=>{
+            // sets privateValue and causes a rerender, doesn't support nested routes
+            let oldValue = this.privateValue[watchValue]
+            if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
+                this.privateValue[watchValue] = newValue
+                this.render()
+            }
+        }
+
         populateValue=(()=>{
             atr.forEach((name)=>{
                 this.value[name] = ''
@@ -19,9 +55,8 @@ export default function elementCreator({name,atr = [],pugFunc,func = [], ref, se
         }
         reference= ref || [[]]
         render(){
-            console.log(this.selector)
             let virtualDom = this.cloneNode(true)
-            let pugHtml = pugFunc({prop: this.value, state: view(), url: document.location.hash})
+            let pugHtml = pugFunc({prop: this.value, state: view(), url: document.location.hash, privateState: this.privateValue})
             virtualDom.innerHTML = pugHtml
             this.innerHTML = virtualDom.innerHTML
             func.forEach(({event,callback})=>{
