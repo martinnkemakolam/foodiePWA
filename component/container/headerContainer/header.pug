@@ -36,12 +36,17 @@ div(class="bg-[#123411] max-w-[2000px] mx-auto")
                 div
                     a(href="./#/cms/add") Add a product
     
-    div(class="flex w-full px-[20px] gap-[20px] py-[10px] border rounded overflow-auto")
+    if privateState.tags.length > 0
+        div(class="flex w-full px-[20px] gap-[20px] py-[10px] border rounded overflow-auto")
+            each value, index in privateState.tags
+                div(class=activeStyle + " w-fit")= value.tag_name
 
-        div(class=activeStyle + " w-fit") Text 1
 
-        div(class=activeStyle + " w-fit") Text 1
 
-        div(class=activeStyle + " w-fit") Text 1
+        //- div(class=activeStyle + " w-fit") Text 1
+
+        //- div(class=activeStyle + " w-fit") Text 1
+
+        //- div(class=activeStyle + " w-fit") Text 1
         
-        div(class=activeStyle + " w-fit") Text 1
+        //- div(class=activeStyle + " w-fit") Text 1

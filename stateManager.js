@@ -7,49 +7,6 @@ let model = {
         role: null,
     },
     product: [
-        {
-        name: 'Burger 1',
-        foodsrc: './images/burger1.webp',
-        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-        price: '10',
-        count: '0',
-        uid: '001',
-        review: [
-        ]
-
-     }, 
-     {
-        name: 'Burger 2',
-        foodsrc: './images/burger1.webp',
-        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-        price: '30',
-        count: '0',
-        uid: '002',
-        review: [
-        ]
-    }, {
-        name: 'Burger 3',
-        foodsrc: './images/burger1.webp',
-        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-        price: '15',
-        count: '0',
-        uid: '003',
-        review: [{
-            name: "Dummy user",
-            review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.",
-            star: 3,
-            
-        }]
-    },{
-        name: 'Burger 12',
-        foodsrc: './images/burger1.webp',
-        detail: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti veritatis consequatur expedita non iste eveniet accusantium alias aliquid officia illum.',
-        price: '15',
-        count: '0',
-        uid: '0012',
-        review: [
-        ]
-    }
     ],
     loginForm: false,
     showOverlay: false,
@@ -150,14 +107,14 @@ window.globalState = view()
 
 
 export let controlller = {
-    editProductCount: (increment, uid)=>{
+    editProductCount: (increment, id)=>{
         let newModel = computedState()
-        let currentProduct = newModel.product.find((value)=> +value.uid === +uid)
+        let currentProduct = newModel.product.find((value)=> value._id === id)
         if (currentProduct){
             if (increment) {
-                currentProduct.count = +currentProduct.count + 1
+                currentProduct.count = currentProduct.count + 1
                 let newProduct = newModel.product.map((prod)=>{
-                    if (prod.uid === currentProduct.uid) {
+                    if (prod._id === currentProduct._id) {
                         return currentProduct
                     }else{
                         return prod
@@ -167,12 +124,12 @@ export let controlller = {
                 console.log(newModel)
                 callSubscription({computedState: newModel})
             }else{
-                if(+currentProduct.count === 0){
+                if(currentProduct.count === 0){
                     return
                 }else{
                     currentProduct.count = +currentProduct.count - 1
                     let newProduct = newModel.product.map((prod)=>{
-                        if (prod.uid === currentProduct.uid) {
+                        if (prod._id === currentProduct._id) {
                             return currentProduct
                         }else{
                             return prod
@@ -198,11 +155,11 @@ export let controlller = {
         newModel.showOverlay = !newModel.showOverlay
         callSubscription({computedState: newModel})
     },
-    addProduct: (payload)=>{
+    addProduct: ({payload})=>{
         let newModel = computedState()
-        newModel.product.push({
-            ...payload, count: 0, uid: Math.floor(Math.random() * 1000) 
-        })
+        console.log(payload)
+        newModel.product = payload.map((ele)=>({...ele, count: 0}))
+        console.log(newModel)
         callSubscription({computedState: newModel})
     },
     editProduct: (payload)=>{

@@ -1,4 +1,4 @@
-- let val = state.model.product.filter(e=> +e.uid === +prop.param)
+- let val = state.model.product.filter(e=> e._id === prop.param)
 section(class="bg-[#123411] flex flex-col px-[40px] gap-[20px]")
     notification-element
     overlay-element
@@ -31,4 +31,5 @@ section(class="bg-[#123411] flex flex-col px-[40px] gap-[20px]")
                     input(type="number", placeholder="Add stars") 
     else
         h1 Product doesn't exist 
-    footer-element
+    if state.model.showFooter
+        footer-element

@@ -1,7 +1,10 @@
-div.foodGrid
+div.foodGrid(class="h-[100%]")
     slot(name="test")
-    if state.model.product.length > 0
-        each value, index in state.model.product
-            card-element(price= value.price, name= value.name ,count= value.count, src= value.foodsrc, detail= value.detail, uid= value.uid)
-    else
-        div No product currently available
+    if privateState.isLoading
+        div Loading...
+    else 
+        if state.model.product.length > 0
+            each value, index in state.model.product
+                card-element(price= value.price, name= value.name ,count= value.count, src= value.foodsrc, detail= value.detail, id= value._id)
+        else
+            div No product currently available

@@ -1,14 +1,14 @@
-- let value = state.model.product.find((ele)=>+ele.uid === +prop.uid).count
+- let value = state.model.product.find((ele)=>ele._id === prop.id)
 div(class="relative").food
-    img(src= prop.src class="mx-auto w-full h-full")
+    img(src="./images/burger1.webp" class="mx-auto w-full h-full")
     div(class="absolute bottom-0 bg-[#cef4ceee] w-full h-100px right-0 px-[20px] py-[20px] flex flex-col justify-between")
         div(class="h-[250px]").detail
             h1= prop.name
             p(class="text-ellipsis overflow-hidden")= prop.detail
         div(class="w-full flex items-center justify-between")
-            a(href=`.#/product/${prop.uid}` class="w-full") view product 
+            a(href=`.#/product/${prop.id}` class="w-full") view product 
             div.cartBtn
                 h2= prop.price
                 button(data-addtocart class="px-4 py-2")
                     p(data-addtocart) Add to cart
-                    h1= value
+                    h1= value.count
