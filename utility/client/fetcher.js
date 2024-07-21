@@ -1,5 +1,6 @@
 let base
 let header
+let lastResponse
 export default async ({url, method, headers, body}, controlObj)=>{
     try {
         controlObj.setState("isLoading", true)
@@ -34,6 +35,9 @@ export default async ({url, method, headers, body}, controlObj)=>{
     }
 }
 
+export const makePersistent = ()=>{
+    
+}
 export const addBase=(baseURL)=>{
     base = baseURL
 }

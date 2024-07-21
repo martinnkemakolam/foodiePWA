@@ -39,6 +39,10 @@ navigator.serviceWorker.register('sw.js')
 
 let promptObj;
 
+
+
+
+
 window.addEventListener('beforeinstallprompt', (e)=>{
     e.preventDefault()
     promptObj = e

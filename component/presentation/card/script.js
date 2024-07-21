@@ -13,6 +13,7 @@ elementCreator({
         event: 'click',
         callback: function (e) {
             if('addtocart' in e.target.dataset) {
+                console.log(this.value.uid)
                 controlller.editProductCount(true, this.value.uid)
                 controlller.showNotifications('Added to cart', `${this.value.name + ' at $'+ this.value.price} has been added to your cart`, this.value.src)
             }

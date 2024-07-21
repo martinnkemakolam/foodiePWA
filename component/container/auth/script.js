@@ -40,7 +40,7 @@ elementCreator({
                     // Check validity of input object
                     return
                 }
-                let data = await fetcher({url: `/api/signup`, headers: {'Content-Type': 'application/json'}, method: 'POST', body: value}, this)
+                let data = await fetcher({url: `/api/signup`, headers: {'Content-Type': 'application/json'}, method: 'POST', body: value}, this, true)
                 if (data?.ok) {
                     this.setState('loginForm', true)
                     controlller.showNotifications('Account', "Created successfully", "./images/icons/success.png")

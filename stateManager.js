@@ -91,6 +91,7 @@ let callSubscription=({computedState})=>{
         // console.log(stringState, stringComputed)
         if(stringState !== stringComputed){
             model = val
+            console.log("this is",ele)
             ele.render()
         }
     }
@@ -100,7 +101,8 @@ let callSubscription=({computedState})=>{
         element.forEach((element)=>{
             if (element === null) {
                 return
-            } 
+            }
+            console.log(element)
             element.reference.forEach((arr)=>{
                 let currentObj
                 let stateRef
@@ -252,6 +254,7 @@ export let controlller = {
         callSubscription({computedState: newModel})
     },
     addAuthObject: ({payload})=>{
+        window.localStorage.setItem("auth", JSON.stringify(payload))
         let newModel = computedState()
         newModel.authObject.email = payload.email
         newModel.authObject.token = payload.token

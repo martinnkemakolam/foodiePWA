@@ -13,7 +13,10 @@ import { subscriber, view } from "./stateManager.js"
 //         }
 //     });
 // }
+
+
 export default function elementCreator({name,atr = [],pugFunc,func = [], ref, selector,  privateState= {}}) {
+    
     class test extends HTMLElement {
         constructor(){
             super()
@@ -26,6 +29,9 @@ export default function elementCreator({name,atr = [],pugFunc,func = [], ref, se
             isLoading: false,
             ...privateState,
         }
+        loadedEvent = new Event('loaded')
+        
+        
         // privateValue2 = createProxy({
         //     isLoading: false,
         //     nest: {
@@ -35,8 +41,14 @@ export default function elementCreator({name,atr = [],pugFunc,func = [], ref, se
         //     },
         //     ...privateState,
         // })
+
+
         setState=(watchValue, newValue)=>{
+
+            
             // sets privateValue and causes a rerender, doesn't support nested routes
+
+
             let oldValue = this.privateValue[watchValue]
             if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
                 this.privateValue[watchValue] = newValue
@@ -55,16 +67,24 @@ export default function elementCreator({name,atr = [],pugFunc,func = [], ref, se
         }
         reference= ref || [[]]
         render(){
-            let virtualDom = this.cloneNode(true)
+
+            // const shadow = this.attachShadow({mode: "open"})
+            // let pugHtml = pugFunc({prop: this.value, state: view(), url: document.location.hash, privateState: this.privateValue})
+            // shadow.innerHTML = pugHtml
+            // func.forEach(({event,callback})=>{
+            //     shadow.addEventListener(event, callback.bind(this), false)
+            // })
+
+
             let pugHtml = pugFunc({prop: this.value, state: view(), url: document.location.hash, privateState: this.privateValue})
-            virtualDom.innerHTML = pugHtml
-            this.innerHTML = virtualDom.innerHTML
+            this.innerHTML = pugHtml
             func.forEach(({event,callback})=>{
                 this.addEventListener(event, callback, false)
             })
         }
         connectedCallback(){
             this.render()
+            this.dispatchEvent(this.loadedEvent)
         }
     }
     customElements.define(name, test)
