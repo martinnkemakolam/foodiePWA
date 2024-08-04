@@ -7,7 +7,7 @@ import cardHolder from "./cardHolder.pug"
 elementCreator({
     name: 'holder-element',
     pugFunc: cardHolder,
-    // privateState: {loaded: 0},
+    selector: [(model)=>model.product],
     func: [
         {
             event: 'loaded',
@@ -24,5 +24,5 @@ elementCreator({
             }
         }
     ],
-    ref: [['product']]
+    // ref: [['product']]
 })

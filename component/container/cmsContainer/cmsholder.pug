@@ -1,6 +1,6 @@
 div.holder
     if state.model.product.length > 0
         each value, index in state.model.product
-            cms-element(imgsrc= value.foodsrc, name= value.name, extra= value.detail, price= value.price, uid= value.uid)
+            cms-element(imgsrc= value.foodsrc, name= value.name, extra= value.detail, price= value.price, uid= value._id)
     else
         div No product currently in cms

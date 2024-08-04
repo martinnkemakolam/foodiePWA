@@ -4,5 +4,6 @@ import notification from './notification.pug'
 elementCreator({
     name: "notification-element",
     pugFunc: notification,
-    ref: [['notification', 'show']]
+    selector: [(model)=> model.notification]
+    // ref: [['notification', 'show']]
 })

@@ -9,5 +9,6 @@ section
             .right
                 form-element(name= val[0].name, detail= val[0].detail, price= val[0].price, imgsrc= val[0].foodsrc, uid= val[0].uid, edit= "true")
     else
-        h1 Product doesn't exist 
+        h1 Product doesn't exist
+if state.model.showFooter
     footer-element

@@ -50,5 +50,5 @@ elementCreator({
             }
         }
     }],
-    ref: [['loginForm'], ['isFetching']]
+    // ref: [['loginForm'], ['isFetching']]
 })

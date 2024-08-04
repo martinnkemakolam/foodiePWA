@@ -15,5 +15,6 @@ elementCreator({
             }
         }
     ],
-    ref: [['sum']]
+    // ref: [['sum']]
+    selector: [(model)=> model.sum]
 })

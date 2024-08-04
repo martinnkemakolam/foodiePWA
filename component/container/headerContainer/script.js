@@ -7,6 +7,7 @@ elementCreator({
     name: 'header-element',
     atr: [],
     pugFunc: header,
+    selector: [(model)=> model.authObject.email, (model)=> model.authObject.role],
     privateState: {
         tags: []
     },
@@ -50,5 +51,5 @@ elementCreator({
             }
         }
     }],
-    ref: [["authObject"]]
+    // ref: [["authObject"]]
 })

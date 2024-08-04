@@ -3,5 +3,6 @@ import order from './order.pug'
 
 elementCreator({
     name: 'order-page',
-    pugFunc: order
+    pugFunc: order,
+    selector: [(model)=>model.order, (model)=>model.showFooter]
 })

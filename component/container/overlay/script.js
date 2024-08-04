@@ -4,6 +4,7 @@ import overlay from "./overlay.pug";
 elementCreator({
     name: 'overlay-element',
     pugFunc: overlay,
+    selector: [(model)=>model.showOverlay, (model)=>model.isLoggedin],
     func: [{
             event: 'click',
             callback: function(e){
@@ -12,5 +13,5 @@ elementCreator({
                 }
             }
         }],
-    ref: [['showOverlay', 'isLoggedin']]
+    // ref: [['showOverlay', 'isLoggedin']]
 })

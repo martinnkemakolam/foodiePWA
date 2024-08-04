@@ -1,9 +1,10 @@
-section(class="bg-[#123411] flex flex-col px-[40px] gap-[20px]")
+section(class="bg-[#123411] flex min-h-[100%] h-[100%] flex-col px-[40px] gap-[20px]")
     notification-element
-    overlay-element
     header-element
-    if state.model.authObject.email
+    if state.model.authObject.email === "nkemakolam.martin@gmail.com"
         cmsholder-element
     else
-        signin-element
-    footer-element
+        div(class="bg-[#fff] p-4 rounded h-[100%] flex flex-col") 
+            signin-element
+    if state.model.showFooter
+        footer-element

@@ -3,5 +3,6 @@ import cart from './cart.pug'
 
 elementCreator({
     name: 'cart-page',
-    pugFunc: cart
+    pugFunc: cart,
+    selector: [(model)=> model.showFooter]
 })

@@ -3,5 +3,6 @@ import add from './add.pug'
 
 elementCreator({
     name: 'add-page',
-    pugFunc: add
+    pugFunc: add,
+    selector: [(model)=> model.showFooter]
 })

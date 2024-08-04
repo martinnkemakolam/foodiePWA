@@ -3,5 +3,6 @@ import product from './product.pug'
 
 elementCreator({
     name: 'product-page',
-    pugFunc: product
+    pugFunc: product,
+    selector: [(model, ele)=> model.showFooter]
 })

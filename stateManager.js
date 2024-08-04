@@ -1,5 +1,3 @@
-// Our model
-
 let model = {
     authObject: {
         email: null,
@@ -48,7 +46,7 @@ let callSubscription=({computedState})=>{
         // console.log(stringState, stringComputed)
         if(stringState !== stringComputed){
             model = val
-            console.log("this is",ele)
+            console.log("this element rerendered ",ele)
             ele.render()
         }
     }
@@ -59,36 +57,39 @@ let callSubscription=({computedState})=>{
             if (element === null) {
                 return
             }
-            console.log(element)
-            element.reference.forEach((arr)=>{
-                let currentObj
-                let stateRef
-                arr.forEach((val, id)=>{
-                    if (id === 0) {
-                        currentObj = computedState[val]
-                        stateRef = model[val]
-                        if (id === arr.length - 1) {
-                            if(element?.selector?.length > 0){
-                                currentObj = element.selector[0](computedState, element)
-                                stateRef = element.selector[0](model, element)
-                            }
-                            checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
-                            return
-                        }
-                        return
-                    }
-                    if (id === arr.length - 1) {
-                        if(element?.selector?.length > 0){
-                            console.log('ran')
-                            currentObj = element.selector[0](computedState, element)
-                            stateRef = element.selector[0](model, element)
-                        }
-                        checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
-                        return
-                    }
-                    stateRef = stateRef[val]
-                    currentObj = currentObj[val]
-                })
+            // element.reference.forEach((arr)=>{
+            //     let currentObj
+            //     let stateRef
+            //     arr.forEach((val, id)=>{
+            //         if (id === 0) {
+            //             currentObj = computedState[val]
+            //             stateRef = model[val]
+            //             if (id === arr.length - 1) {
+            //                 if(element?.selector?.length > 0){
+            //                     currentObj = element.selector[0](computedState, element)
+            //                     stateRef = element.selector[0](model, element)
+            //                     console.log(currentObj, stateRef)
+            //                 }
+            //                 checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
+            //                 return
+            //             }
+            //             return
+            //         }
+            //         if (id === arr.length - 1) {
+            //             if(element?.selector?.length > 0){
+            //                 console.log('ran')
+            //                 currentObj = element.selector[0](computedState, element)
+            //                 stateRef = element.selector[0](model, element)
+            //             }
+            //             checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
+            //             return
+            //         }
+            //         stateRef = stateRef[val]
+            //         currentObj = currentObj[val]
+            //     })
+            // })
+            element.selector.forEach((select, id)=>{
+                checkDifference({computedState: select(computedState, element), stateLn: select(model, element), ele: element, val: computedState})
             })
         })
     })
@@ -103,7 +104,7 @@ let computedState =()=>{
 export let view =()=> Object.freeze(checkoutPrice(model))
 
 
-window.globalState = view()
+// window.globalState = view()
 
 
 export let controlller = {
