@@ -37,57 +37,21 @@ let callSubscription=({computedState})=>{
     if (computedState === undefined) {
         throw Error(`callSubscription function must be caled with a computedState`)
     }
-
-
     const checkDifference = ({computedState, stateLn, ele, val})=>{
         let stringState = JSON.stringify(stateLn)
         let stringComputed = JSON.stringify(computedState)
-        // console.log('reached')
-        // console.log(stringState, stringComputed)
         if(stringState !== stringComputed){
             model = val
-            console.log("this element rerendered ",ele)
             ele.render()
         }
     }
-
     subscribtion.forEach((ele)=>{
         let element = document.querySelectorAll(ele)
         element.forEach((element)=>{
             if (element === null) {
                 return
             }
-            // element.reference.forEach((arr)=>{
-            //     let currentObj
-            //     let stateRef
-            //     arr.forEach((val, id)=>{
-            //         if (id === 0) {
-            //             currentObj = computedState[val]
-            //             stateRef = model[val]
-            //             if (id === arr.length - 1) {
-            //                 if(element?.selector?.length > 0){
-            //                     currentObj = element.selector[0](computedState, element)
-            //                     stateRef = element.selector[0](model, element)
-            //                     console.log(currentObj, stateRef)
-            //                 }
-            //                 checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
-            //                 return
-            //             }
-            //             return
-            //         }
-            //         if (id === arr.length - 1) {
-            //             if(element?.selector?.length > 0){
-            //                 console.log('ran')
-            //                 currentObj = element.selector[0](computedState, element)
-            //                 stateRef = element.selector[0](model, element)
-            //             }
-            //             checkDifference({computedState: currentObj, stateLn: stateRef, ele: element, val: computedState})
-            //             return
-            //         }
-            //         stateRef = stateRef[val]
-            //         currentObj = currentObj[val]
-            //     })
-            // })
+            
             element.selector.forEach((select, id)=>{
                 checkDifference({computedState: select(computedState, element), stateLn: select(model, element), ele: element, val: computedState})
             })

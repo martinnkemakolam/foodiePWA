@@ -8,7 +8,7 @@ elementCreator({
     name: 'card-element',
     pugFunc: card,
     atr: ['src', 'name', 'detail', 'count', 'id', 'price'],
-    selector: [(state, ref)=> state.product.find((product)=> product._id === ref.value.id).count],
+    selector: [(model, ref)=> model.product.find((product)=> product._id === ref.value.id).count],
     func: [{
         event: 'click',
         callback: function (e) {

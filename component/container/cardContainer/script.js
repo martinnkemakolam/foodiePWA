@@ -23,6 +23,5 @@ elementCreator({
                 }
             }
         }
-    ],
-    // ref: [['product']]
+    ]
 })

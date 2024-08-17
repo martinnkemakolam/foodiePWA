@@ -50,5 +50,4 @@ elementCreator({
             }
         }
     }],
-    // ref: [['loginForm'], ['isFetching']]
 })
